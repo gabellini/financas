@@ -13,36 +13,65 @@
 </head>
 <body class="text-slate-100">
   <div class="max-w-[1440px] mx-auto px-4 py-6 xl:px-8 space-y-6">
-    <header id="appHeader" class="glass-panel px-4 py-4 lg:px-6 lg:py-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-slate-950 grid place-items-center font-bold tracking-tight shadow-lg">AF</div>
-        <div>
-          <h1 class="text-xl md:text-2xl font-extrabold text-slate-100">Capitalismo, Finanças e Empreendedorismo</h1>
-          <p class="text-sm text-slate-400">Linha do tempo interativa (Plano Real → hoje) + slides • 1h</p>
+    <header id="appHeader" class="glass-panel px-4 py-4 lg:px-6 lg:py-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+      <div class="header-brand flex items-center gap-3 w-full lg:w-auto">
+        <div class="header-brand__badge">AF</div>
+        <div class="min-w-0">
+          <h1 class="header-title text-lg sm:text-xl font-extrabold text-slate-100">Capitalismo, Finanças e Empreendedorismo</h1>
+          <p class="header-subtitle text-xs sm:text-sm text-slate-400">Linha do tempo interativa (Plano Real → hoje) + slides • 1h</p>
         </div>
       </div>
-      <div class="flex flex-col gap-3 w-full lg:w-auto">
-        <button id="toggleHeaderMenu" class="btn flex items-center justify-center gap-2 lg:hidden" aria-expanded="false" aria-controls="headerControls">
-          ☰ <span class="text-sm font-semibold">Ações</span>
-        </button>
+      <div class="header-actions flex flex-col gap-2 w-full lg:w-auto">
+        <div class="flex justify-end lg:hidden">
+          <button id="toggleHeaderMenu" class="btn btn-header" aria-expanded="false" aria-controls="headerControls">
+            <span class="btn-header__icon" aria-hidden="true">☰</span>
+            <span class="btn-header__label">Menu rápido</span>
+          </button>
+        </div>
         <nav id="headerControls" class="header-controls hidden lg:flex" aria-label="Controles principais">
-          <div class="header-controls__group" role="group" aria-label="Controle de reprodução">
-            <button id="btnPlay" class="btn btn-header">▶️ Reproduzir</button>
-            <button id="btnPause" class="btn btn-header">⏸️ Pausar</button>
-            <button id="btnReset" class="btn btn-header">⟲ Reiniciar</button>
-          </div>
-          <div class="header-controls__group" role="group" aria-label="Velocidade da linha do tempo">
-            <span class="header-speed-label">Velocidade</span>
-            <select id="speed" class="header-speed-select">
-              <option value="1000">1 ano/seg</option>
-              <option value="2000">1 ano/2s</option>
-              <option value="500">2 anos/seg</option>
-              <option value="10000">~1h (demo lenta)</option>
-            </select>
-          </div>
-          <div class="header-controls__group" role="group" aria-label="Ações adicionais">
-            <a href="quizz.php" class="btn btn-header">🎯 Quiz</a>
-            <button id="btnHideHeader" class="btn btn-header" title="Ocultar cabeçalho">⬆ Ocultar</button>
+          <div class="header-controls__surface">
+            <div class="header-controls__section" role="group" aria-label="Controle de reprodução">
+              <span class="header-section-title">Linha do tempo</span>
+              <div class="header-controls__group header-controls__group--fluid">
+                <button id="btnPlay" class="btn btn-header">
+                  <span class="btn-header__icon" aria-hidden="true">▶️</span>
+                  <span class="btn-header__label">Reproduzir</span>
+                </button>
+                <button id="btnPause" class="btn btn-header">
+                  <span class="btn-header__icon" aria-hidden="true">⏸️</span>
+                  <span class="btn-header__label">Pausar</span>
+                </button>
+                <button id="btnReset" class="btn btn-header">
+                  <span class="btn-header__icon" aria-hidden="true">⟲</span>
+                  <span class="btn-header__label">Reiniciar</span>
+                </button>
+              </div>
+            </div>
+            <div class="header-controls__section" role="group" aria-label="Velocidade da linha do tempo">
+              <span class="header-section-title">Ritmo</span>
+              <div class="header-controls__group">
+                <label class="header-speed-label" for="speed">Velocidade</label>
+                <select id="speed" class="header-speed-select">
+                  <option value="1000">1 ano/seg</option>
+                  <option value="2000">1 ano/2s</option>
+                  <option value="500">2 anos/seg</option>
+                  <option value="10000">~1h (demo lenta)</option>
+                </select>
+              </div>
+            </div>
+            <div class="header-controls__section" role="group" aria-label="Ações adicionais">
+              <span class="header-section-title">Ferramentas</span>
+              <div class="header-controls__group header-controls__group--stack">
+                <a href="quizz.php" class="btn btn-header">
+                  <span class="btn-header__icon" aria-hidden="true">🎯</span>
+                  <span class="btn-header__label">Quiz</span>
+                </a>
+                <button id="btnHideHeader" class="btn btn-header" title="Ocultar cabeçalho">
+                  <span class="btn-header__icon" aria-hidden="true">⬆</span>
+                  <span class="btn-header__label">Ocultar</span>
+                </button>
+              </div>
+            </div>
           </div>
         </nav>
       </div>
