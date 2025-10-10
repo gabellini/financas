@@ -173,6 +173,7 @@
             <option value="10000">~1h (demo lenta)</option>
           </select>
         </div>
+        <a href="quizz.php" class="btn">🎯 Quiz</a>
         <button id="btnDados" class="btn">🛠️ Dados</button>
         <button id="btnHideHeader" class="btn" title="Ocultar cabeçalho">⬆ Ocultar</button>
       </div>
