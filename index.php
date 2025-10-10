@@ -312,13 +312,13 @@
         titulo: "1) Roteiro da aula 🌐",
         conteudo: `
           <div class="space-y-4">
-            <p>Vamos conectar <strong>história econômica</strong>, <strong>finanças pessoais</strong> e <strong>empreendedorismo</strong> de 1994 a 2025.</p>
+            <p>Vamos decifrar <strong>o que é dinheiro</strong>, entender como <strong>inflação e juros</strong> afetam a sua vida e montar a base para falar de <strong>investimentos e empreendedorismo</strong>.</p>
             <ul class="list-disc ml-5 space-y-2">
-              <li>Plano Real e a virada contra a inflação.</li>
-              <li>Como juros e preços mexem com seu bolso.</li>
-              <li>Estratégias de investimento e geração de renda.</li>
+              <li>Origem do dinheiro e por que ele ainda manda no jogo.</li>
+              <li>Como proteger o poder de compra em um país de inflação.</li>
+              <li>Transformar tempo, estudo e investimento em renda crescente.</li>
             </ul>
-            <p class="text-sm text-slate-500">Use os controles para acompanhar os dados em tempo real enquanto apresentamos os slides.</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> quanto antes você entende as regras do capitalismo, mais rápido consegue jogar bem.</p>
           </div>
         `
       },
@@ -327,274 +327,275 @@
         conteudo: `
           <div class="space-y-4">
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>1994:</strong> Plano Real estabiliza preços após hiperinflação.</li>
-              <li><strong>2000-2010:</strong> crédito em expansão, consumo em alta.</li>
-              <li><strong>2014-2016:</strong> recessão, inflação acima de 10% em 2015.</li>
-              <li><strong>2020-2022:</strong> choque da pandemia, juros mínimos → máximos.</li>
-              <li><strong>2023-2025:</strong> foco em inflação controlada e retomada do emprego.</li>
+              <li><strong>1994:</strong> Plano Real acaba com a hiperinflação dos pais e avós.</li>
+              <li><strong>2000-2010:</strong> crédito bombando, consumo em alta, empregos formais crescendo.</li>
+              <li><strong>2014-2016:</strong> recessão dura, inflação passa dos 10%.</li>
+              <li><strong>2020-2022:</strong> pandemia: preços de comida e tecnologia disparam.</li>
+              <li><strong>2023-2025:</strong> esforço para estabilizar inflação e recuperar renda.</li>
             </ul>
-            <p>Essa cronologia explica as curvas que você vê no painel ao lado.</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> entender o passado recente ajuda a interpretar os gráficos e escolher atitudes inteligentes para o futuro.</p>
           </div>
         `
       },
       {
-        titulo: "3) Para que serve o dinheiro? 💵",
+        titulo: "3) Como o dinheiro nasceu? 🪙",
         conteudo: `
           <div class="space-y-4">
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Meio de troca:</strong> facilita compras sem escambo.</li>
-              <li><strong>Unidade de conta:</strong> precifica produtos e salários.</li>
-              <li><strong>Reserva de valor:</strong> permite guardar poder de compra.</li>
+              <li><strong>Escambo:</strong> trocar objetos direto era difícil (como pagar com uma vaca?).</li>
+              <li><strong>Metais e moedas:</strong> itens raros e aceitos por todos simplificaram as trocas.</li>
+              <li><strong>Papel-moeda e bancos:</strong> recibos representando valor guardado com segurança.</li>
+              <li><strong>Era digital:</strong> cartões, Pix, cripto e saldo em apps.</li>
             </ul>
-            <p><strong>Exemplo:</strong> seu salário é pago em reais porque todos aceitam, conseguem comparar preços e confiam que não perderá valor rapidamente.</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> dinheiro é uma tecnologia social criada para facilitar acordos — e pode mudar de formato sempre que surgir algo mais eficiente.</p>
           </div>
         `
       },
       {
-        titulo: "4) O que sustenta o valor da moeda? 🛡️",
+        titulo: "4) Dinheiro = acordo coletivo 💬",
+        conteudo: `
+          <div class="space-y-4">
+            <p>O real vale porque <strong>todos confiam</strong> que ele será aceito amanhã.</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Instituições:</strong> Banco Central, Tesouro e bancos privados garantem o fluxo.</li>
+              <li><strong>Regras:</strong> leis e contratos protegem quem guarda ou investe.</li>
+              <li><strong>Digitalização:</strong> hoje você paga com QR Code — mas a lógica do acordo permanece.</li>
+            </ul>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> se o valor depende da confiança coletiva, seu comportamento como consumidor, investidor e cidadão influencia o sistema.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "5) Para que serve o dinheiro? 💵",
         conteudo: `
           <div class="space-y-4">
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Estabilidade fiscal:</strong> governo gasta dentro do orçamento.</li>
-              <li><strong>Banco Central independente:</strong> controla a inflação com juros.</li>
-              <li><strong>Confiança coletiva:</strong> todos acreditam que o dinheiro vale algo amanhã.</li>
+              <li><strong>Meio de troca:</strong> você compra comida, game pass ou passagem sem negociar toda vez.</li>
+              <li><strong>Unidade de conta:</strong> preços e salários são comparáveis em reais.</li>
+              <li><strong>Reserva de valor:</strong> guardar para realizar sonhos (faculdade, intercâmbio, empreendimento).</li>
             </ul>
-            <p>Quando um desses pilares falha, a moeda perde força e os preços disparam.</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> trate cada gasto como uma decisão entre o agora e oportunidades futuras que o dinheiro pode comprar.</p>
           </div>
         `
       },
       {
-        titulo: "5) Inflação: inimiga silenciosa 📈",
+        titulo: "6) Dinheiro compra tempo de vida ⏳",
         conteudo: `
           <div class="space-y-4">
-            <p>Inflação é o aumento <strong>persistente</strong> dos preços. Você sente no mercado, no aluguel e no transporte.</p>
+            <p>Quando você recebe salário ou paga por um serviço, está trocando <strong>horas de vida</strong>.</p>
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>IPCA:</strong> indicador oficial medido pelo IBGE.</li>
-              <li><strong>Poder de compra:</strong> com a mesma renda você leva menos produtos pra casa.</li>
-              <li><strong>Exemplo real:</strong> Big Mac passou de ~R$3 (2000) para ~R$28 (2025).</li>
+              <li><strong>Salário:</strong> preço da sua hora, definido por habilidades e demanda.</li>
+              <li><strong>Consumo:</strong> cada compra gasta horas de trabalho que você precisou para juntar aquele dinheiro.</li>
+              <li><strong>Investimento:</strong> faz o dinheiro trabalhar por você para comprar tempo livre no futuro.</li>
             </ul>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> calcule quantas horas de trabalho cada sonho custa — fica mais fácil priorizar o que importa.</p>
           </div>
         `
       },
       {
-        titulo: "6) Choques inflacionários na história recente 🔥",
+        titulo: "7) Mais-valia e venda do tempo 💼",
         conteudo: `
           <div class="space-y-4">
+            <p>Nas empresas, o valor produzido é maior que o salário pago. A diferença é a <strong>mais-valia</strong>, que financia lucros, reinvestimentos e riscos.</p>
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>1999:</strong> câmbio flutuante → dólar dispara → preços sobem.</li>
-              <li><strong>2002:</strong> incerteza eleitoral → IPCA 12,5%.</li>
-              <li><strong>2015:</strong> crise política e tarifária → IPCA 10,7%.</li>
-              <li><strong>2021:</strong> pandemia + commodities → IPCA 10%.</li>
+              <li><strong>Como empregado:</strong> busque bônus, participação nos resultados e reputação para capturar parte desse valor.</li>
+              <li><strong>Como futuro empreendedor:</strong> entender custos e trabalho ajuda a montar preços justos.</li>
+              <li><strong>Como cidadão:</strong> consciência de classe e negociação coletiva influenciam salários.</li>
             </ul>
-            <p>Observe no gráfico como o salário mínimo precisou subir para compensar o impacto.</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> dominar a lógica da mais-valia permite decidir se você quer vender tempo, participar dos lucros ou criar o próprio negócio.</p>
           </div>
         `
       },
       {
-        titulo: "7) Por que os preços sobem? 💡",
-        conteudo: `
-          <div class="grid gap-3 md:grid-cols-2">
-            <div>
-              <h3 class="font-semibold">Pressões de demanda</h3>
-              <ul class="list-disc ml-5 space-y-1">
-                <li>Crescimento rápido dos salários.</li>
-                <li>Crédito fácil e juros baixos.</li>
-                <li>Consumo maior que a produção.</li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="font-semibold">Pressões de oferta</h3>
-              <ul class="list-disc ml-5 space-y-1">
-                <li>Alta de energia e insumos importados.</li>
-                <li>Quebras de safra e logística cara.</li>
-                <li>Expectativas negativas de empresários.</li>
-              </ul>
-            </div>
-          </div>
-        `
-      },
-      {
-        titulo: "8) Juros: o preço do tempo ⏳",
+        titulo: "8) Inflação na vida real 📈",
         conteudo: `
           <div class="space-y-4">
-            <p>Juros remuneram quem <strong>adiou consumo</strong> e punem quem adiantou com crédito.</p>
+            <p>Inflação é o aumento contínuo dos preços. Você sente no lanche, na passagem de ônibus e na mensalidade do cursinho.</p>
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Selic:</strong> taxa básica definida pelo COPOM.</li>
-              <li><strong>Spread bancário:</strong> juros cobrados em empréstimos = Selic + risco + custos.</li>
-              <li><strong>Exemplo:</strong> comprar uma TV no cartão 12× com juros transforma R$ 3.000 em R$ 3.960.</li>
+              <li><strong>IPCA:</strong> pesquisa do IBGE que mede a média dos aumentos.</li>
+              <li><strong>Perda de poder de compra:</strong> com a mesma mesada você leva menos coisas.</li>
+              <li><strong>Dados reais:</strong> o Big Mac saiu de ~R$ 3 (2000) para ~R$ 28 (2025) — 9 Big Macs viraram 1.</li>
             </ul>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> acompanhar inflação ensina a ajustar metas: sonhos custam mais a cada ano se você não se proteger.</p>
           </div>
         `
       },
       {
-        titulo: "9) Selic x CDI x inflação 🏦",
+        titulo: "9) Choques inflacionários recentes 🔥",
         conteudo: `
           <div class="space-y-4">
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Selic meta:</strong> âncora para o custo do dinheiro.</li>
-              <li><strong>CDI:</strong> taxa entre bancos que remunera CDBs e fundos DI.</li>
-              <li><strong>Inflação:</strong> parâmetro para definir se o juro real é positivo.</li>
+              <li><strong>1999:</strong> câmbio liberado faz o dólar disparar.</li>
+              <li><strong>2002:</strong> incerteza eleitoral leva o IPCA a 12,5%.</li>
+              <li><strong>2015:</strong> reajuste de energia e crise política elevam preços.</li>
+              <li><strong>2021:</strong> pandemia + falta de insumos + combustíveis caros.</li>
             </ul>
-            <p>Em 2023, Selic 13,75% − IPCA 4,6% ⇒ <strong>juro real ≈ 8,8%</strong> ao ano.</p>
+            <p>Veja no gráfico como salários e custos de vida tentam acompanhar esses choques.</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> quanto mais você conhece a história dos preços, mais rápido reage quando um novo choque aparece.</p>
           </div>
         `
       },
       {
-        titulo: "10) Rendimento nominal x real 🧮",
+        titulo: "10) Como se defender da inflação 🛡️",
         conteudo: `
           <div class="space-y-4">
-            <p>Foque no poder de compra, não apenas no número mostrado no extrato.</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Negocie reajustes:</strong> salários, mesadas e preços precisam acompanhar o IPCA.</li>
+              <li><strong>Revise contratos:</strong> alugueis e mensalidades geralmente têm índices de reajuste.</li>
+              <li><strong>Invista em ativos indexados:</strong> IPCA+, fundos imobiliários, ações de setores essenciais.</li>
+            </ul>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> proteger o poder de compra hoje é o primeiro passo para sobrar dinheiro para empreender amanhã.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "11) Juros: o aluguel do dinheiro 💳",
+        conteudo: `
+          <div class="space-y-4">
+            <p>Juros são o preço cobrado para usar dinheiro que não é seu ou a recompensa por emprestar.</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Selic:</strong> taxa básica definida pelo Banco Central (o COPOM é o comitê que decide, tipo a diretoria).</li>
+              <li><strong>Crédito caro:</strong> cartão rotativo ou cheque especial podem dobrar a dívida em poucos meses.</li>
+              <li><strong>Crédito saudável:</strong> usar parcelamento consciente para estudar ou montar um negócio.</li>
+            </ul>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> entender juros antes de usar crédito evita armadilhas e prepara você para negociar taxas melhores.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "12) Selic, CDI e inflação sem mistério 🏦",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Selic:</strong> âncora que influencia todos os juros do mercado.</li>
+              <li><strong>CDI:</strong> taxa que os bancos usam entre si e que rende seus CDBs.</li>
+              <li><strong>Inflação:</strong> se ela for maior que o rendimento, o ganho é falso.</li>
+            </ul>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> acompanhar essas três siglas é saber se o dinheiro está correndo a seu favor ou contra você.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "13) Juro real na prática 🧮",
+        conteudo: `
+          <div class="space-y-4">
+            <p>Ganhar 10% quando os preços sobem 8% significa só 1,85% de ganho real.</p>
             <ul class="list-disc ml-5 space-y-2">
               <li><strong>Fórmula:</strong> (1 + rendimento) ÷ (1 + inflação) − 1.</li>
               <li><strong>Exemplo:</strong> CDB 10% com IPCA 5% ⇒ ganho real 4,76%.</li>
-              <li><strong>Atenção:</strong> se inflação > rendimento, você está perdendo dinheiro.</li>
+              <li><strong>Sinal de alerta:</strong> se a inflação supera o rendimento, você está andando para trás.</li>
             </ul>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> faça as contas em ganho real sempre — essa habilidade vale ouro em qualquer profissão.</p>
           </div>
         `
       },
       {
-        titulo: "11) Renda fixa no Brasil 💰",
+        titulo: "14) Investir é dar missão ao dinheiro 🎯",
+        conteudo: `
+          <div class="space-y-4">
+            <p>Guardar sem objetivo vira saldo parado; investir conecta o dinheiro a metas claras.</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Curto prazo:</strong> reserva de emergência e oportunidades.</li>
+              <li><strong>Médio prazo:</strong> cursos, intercâmbio, capital para negócio.</li>
+              <li><strong>Longo prazo:</strong> independência financeira e aposentadoria.</li>
+            </ul>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> dinheiro com propósito motiva disciplina e escolhas inteligentes.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "15) Ferramentas para proteger poder de compra 🛡️",
         conteudo: `
           <div class="space-y-4">
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Poupança:</strong> simples, mas geralmente abaixo da inflação.</li>
-              <li><strong>CDB / LCI / LCA:</strong> remuneram um % do CDI, com ou sem imposto.</li>
-              <li><strong>Tesouro Direto:</strong> prefixado, Selic ou IPCA+; ideal para metas específicas.</li>
+              <li><strong>Tesouro IPCA+ e NTN-B:</strong> acompanham a inflação automaticamente.</li>
+              <li><strong>Ativos reais:</strong> imóveis, FIIs, commodities e negócios produtivos.</li>
+              <li><strong>Câmbio e diversificação global:</strong> quando o real perde força, ativos em dólar seguram o valor.</li>
             </ul>
-            <p>Dica: combine liquidez (Tesouro Selic) com metas longas (Tesouro IPCA+).</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> combine diferentes proteções para não depender de uma aposta só.</p>
           </div>
         `
       },
       {
-        titulo: "12) Entendendo o Tesouro IPCA+ 📜",
+        titulo: "16) Risco x retorno sem mistério ⚖️",
         conteudo: `
           <div class="space-y-4">
-            <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Pagamento:</strong> juros reais fixos + variação do IPCA.</li>
-              <li><strong>Uso ideal:</strong> aposentadoria, faculdade dos filhos, metas acima de 5 anos.</li>
-              <li><strong>Exemplo:</strong> investir R$ 10 mil a IPCA + 5% pode virar ~R$ 26 mil em 10 anos se a inflação média for 4%.</li>
-            </ul>
-            <p>Observe no painel a curva de CDB vs inflação para contextualizar.</p>
-          </div>
-        `
-      },
-      {
-        titulo: "13) Renda variável: onde está o crescimento 📊",
-        conteudo: `
-          <div class="space-y-4">
-            <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Ações:</strong> participação nos lucros e dividendos.</li>
-              <li><strong>Fundos imobiliários:</strong> renda mensal com imóveis profissionais.</li>
-              <li><strong>ETFs / BDRs:</strong> diversificação instantânea e acesso a empresas globais.</li>
-            </ul>
-            <p><strong>Exemplo histórico:</strong> Ibovespa multiplicou ~5× entre 2003 e 2010, mas caiu 50% em 2008.</p>
-          </div>
-        `
-      },
-      {
-        titulo: "14) Risco x Retorno ⚖️",
-        conteudo: `
-          <div class="space-y-4">
-            <p>Retornos altos costumam vir acompanhados de <strong>volatilidade</strong>.</p>
+            <p>Quanto maior a chance de oscilar, maior o retorno esperado — mas também o estresse.</p>
             <div class="grid gap-3 md:grid-cols-2">
               <div class="rounded-xl bg-slate-100 p-4">
-                <h3 class="font-semibold">Riscos a considerar</h3>
+                <h3 class="font-semibold">Principais riscos</h3>
                 <ul class="list-disc ml-5 space-y-1">
-                  <li>Mercado: oscilações de preço.</li>
-                  <li>Crédito: calote do emissor.</li>
-                  <li>Liquidez: dificuldade de vender rápido.</li>
+                  <li>Mercado: preço sobe e desce o tempo todo.</li>
+                  <li>Crédito: quem pegou seu dinheiro pode não pagar.</li>
+                  <li>Liquidez: dificuldade de resgatar rápido.</li>
                 </ul>
               </div>
               <div class="rounded-xl bg-slate-100 p-4">
-                <h3 class="font-semibold">Como mitigar</h3>
+                <h3 class="font-semibold">Como lidar</h3>
                 <ul class="list-disc ml-5 space-y-1">
-                  <li>Diversificar ativos e prazos.</li>
-                  <li>Manter reserva de emergência.</li>
-                  <li>Respeitar seu perfil de risco.</li>
+                  <li>Diversifique ativos e prazos.</li>
+                  <li>Tenha reserva para emergências.</li>
+                  <li>Escolha investimentos que combinem com seu objetivo.</li>
                 </ul>
               </div>
             </div>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> aceitar um risco só faz sentido quando o retorno esperado conecta com o seu projeto de vida.</p>
           </div>
         `
       },
       {
-        titulo: "15) Diversificação prática 🧺",
+        titulo: "17) Dinheiro trabalhando em conjunto 🧺",
         conteudo: `
           <div class="space-y-4">
-            <p>Exemplo de carteira equilibrada para objetivos de médio prazo:</p>
+            <p>Exemplo de carteira equilibrada para jovens que querem crescer sem se expor demais:</p>
             <ul class="list-disc ml-5 space-y-2">
-              <li>40% em Tesouro Selic / CDB liquidez diária (reserva).</li>
-              <li>30% em Tesouro IPCA+ / debêntures incentivadas (proteção real).</li>
-              <li>20% em ações brasileiras / FIIs (renda e crescimento).</li>
-              <li>10% em ETFs globais / dólar (proteção cambial).</li>
+              <li>40% em reserva líquida (Tesouro Selic, CDB de liquidez diária).</li>
+              <li>30% em ativos indexados à inflação (Tesouro IPCA+, debêntures incentivadas).</li>
+              <li>20% em ações brasileiras e FIIs para renda e aprendizado.</li>
+              <li>10% em ETFs globais ou dólar para ver o mundo além das fronteiras.</li>
             </ul>
-            <p>Ajuste as proporções conforme idade, renda e tolerância ao risco.</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> diversificar cedo reduz medo de oscilações e cria repertório para empreender com dados.</p>
           </div>
         `
       },
       {
-        titulo: "16) Trabalho e capital humano 🧑‍🏭",
+        titulo: "18) Trabalho bem feito chama oportunidade 💡",
         conteudo: `
           <div class="space-y-4">
+            <p>Mesmo ganhando pouco no início, entregar excelência aumenta a chance de promoções e convites melhores.</p>
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Oferta x demanda:</strong> áreas com profissionais escassos pagam mais.</li>
-              <li><strong>Upskilling:</strong> cursos, idiomas e tecnologia elevam seu valor.</li>
-              <li><strong>Networking:</strong> amplia oportunidades e reduz tempo de desemprego.</li>
+              <li><strong>Reputação:</strong> quem cumpre promessa vira referência rápida.</li>
+              <li><strong>Portfólio:</strong> projetos bem feitos contam sua história profissional.</li>
+              <li><strong>Aprendizado contínuo:</strong> erros viram upgrade quando você analisa o que podia melhorar.</li>
             </ul>
-            <p>Compare a evolução do salário mínimo com os custos de vida para dimensionar a necessidade de renda adicional.</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> trabalhar mal porque paga pouco te prende no mesmo lugar; trabalhar bem te coloca no radar de quem paga melhor.</p>
           </div>
         `
       },
       {
-        titulo: "17) Entendendo a mais-valia 💼",
+        titulo: "19) Como aumentar o valor da sua hora 🧑‍🏭",
         conteudo: `
           <div class="space-y-4">
-            <p>Mais-valia é a diferença entre o valor produzido pelo trabalhador e o salário que ele recebe.</p>
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Perspectiva do capital:</strong> margem necessária para reinvestir e remunerar o risco.</li>
-              <li><strong>Perspectiva do trabalhador:</strong> buscar participação nos resultados, bônus ou sociedade.</li>
-              <li><strong>Empreendedorismo:</strong> usar habilidades para capturar parte dessa diferença como dono.</li>
+              <li><strong>Exclusividade:</strong> desenvolva habilidades raras (ex.: programação, design 3D, idiomas).</li>
+              <li><strong>Combinação única:</strong> junte paixões (finanças + audiovisual = conteúdo valioso).</li>
+              <li><strong>Rede de contatos:</strong> quanto mais gente sabe o que você faz, mais oportunidades aparecem.</li>
             </ul>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> preço alto não vem do acaso, mas da sua capacidade de resolver problemas que poucos resolvem.</p>
           </div>
         `
       },
       {
-        titulo: "18) Empreender em ciclos econômicos 🚀",
+        titulo: "20) Da renda ao investimento e ao negócio 🚀",
         conteudo: `
           <div class="space-y-4">
+            <p>Usar bem o salário é a ponte para investir e, mais tarde, empreender.</p>
             <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Expansão:</strong> crédito farto → foque em escala e marketing.</li>
-              <li><strong>Recessão:</strong> custos apertados → destaque eficiência e valor essencial.</li>
-              <li><strong>Alta de juros:</strong> priorize caixa e negocie prazos com fornecedores.</li>
+              <li><strong>Organize-se:</strong> orçamento mostra quanto sobra para investir todo mês.</li>
+              <li><strong>Capital semente:</strong> reserve parte dos investimentos para testar ideias.</li>
+              <li><strong>Reinvestimento:</strong> lucros do negócio voltam para crescer ou diversificar.</li>
             </ul>
-            <p>Exemplo: negócios digitais cresceram durante a pandemia; restaurantes se adaptaram com delivery.</p>
-          </div>
-        `
-      },
-      {
-        titulo: "19) Indicadores que todo empreendedor monitora 📊",
-        conteudo: `
-          <div class="space-y-4">
-            <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Ticket médio:</strong> receita ÷ número de vendas.</li>
-              <li><strong>Margem de contribuição:</strong> quanto sobra para pagar despesas fixas.</li>
-              <li><strong>Giro de caixa:</strong> tempo entre pagar fornecedores e receber clientes.</li>
-              <li><strong>Ponto de equilíbrio:</strong> volume mínimo para não ter prejuízo.</li>
-            </ul>
-            <p>Use o painel de dados para ilustrar como inflação e juros impactam custos e preços.</p>
-          </div>
-        `
-      },
-      {
-        titulo: "20) Proteções contra inflação 🛡️",
-        conteudo: `
-          <div class="space-y-4">
-            <ul class="list-disc ml-5 space-y-2">
-              <li><strong>Indexados ao IPCA:</strong> Tesouro IPCA+, NTN-B, debêntures incentivadas.</li>
-              <li><strong>Ativos reais:</strong> imóveis, FIIs, commodities agrícolas.</li>
-              <li><strong>Câmbio:</strong> dólar, ouro, fundos globais para crises internas.</li>
-            </ul>
-            <p><strong>Checklist:</strong> revise sua carteira anualmente e rebalanceie se o IPCA fugir da meta (3,0% ± 1,5 p.p.).</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> empreendedorismo começa quando você decide que uma parte da renda bancará seus próprios projetos.</p>
           </div>
         `
       },
@@ -603,11 +604,11 @@
         conteudo: `
           <div class="space-y-4">
             <ul class="list-disc ml-5 space-y-2">
-              <li>Controle de gastos e orçamento consciente.</li>
-              <li>Planejamento de metas de curto, médio e longo prazo.</li>
-              <li>Conhecimento de produtos financeiros para escolher melhor.</li>
+              <li><strong>Controle:</strong> saiba para onde vai cada real.</li>
+              <li><strong>Planejamento:</strong> defina metas de curto, médio e longo prazo.</li>
+              <li><strong>Curiosidade:</strong> aprenda produtos financeiros novos, mesmo que não use agora.</li>
             </ul>
-            <p>Quanto mais você entende o sistema, menos depende de terceiros para tomar decisões.</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> conhecimento vira liberdade porque você não depende de dicas aleatórias para tomar decisões.</p>
           </div>
         `
       },
@@ -619,9 +620,9 @@
               <li><strong>Diagnóstico:</strong> liste receitas, gastos e dívidas.</li>
               <li><strong>Fundação:</strong> monte reserva de emergência e quite dívidas caras.</li>
               <li><strong>Construção:</strong> invista com metas claras (IPCA+, renda variável, dólar).</li>
-              <li><strong>Escala:</strong> busque novas fontes de renda (freelas, negócios, investimentos em si).</li>
+              <li><strong>Escala:</strong> transforme conhecimento em novas fontes de renda (freelas, negócios, sociedade).</li>
             </ol>
-            <p>Revisite o plano a cada 6 meses e ajuste conforme a economia e seus objetivos mudarem.</p>
+            <p class="text-sm text-slate-500"><strong>Insight:</strong> revisar esse plano a cada semestre mantém você no controle da própria evolução.</p>
           </div>
         `
       }
