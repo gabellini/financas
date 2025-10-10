@@ -147,7 +147,7 @@
 <body class="bg-slate-50 text-slate-900">
   <div class="max-w-[1280px] mx-auto p-4">
     <!-- Header -->
-    <header class="flex items-center justify-between gap-4 mb-4">
+    <header id="appHeader" class="flex items-center justify-between gap-4 mb-4">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-2xl bg-slate-900 text-white grid place-items-center font-bold">AF</div>
         <div>
@@ -169,8 +169,13 @@
           </select>
         </div>
         <button id="btnDados" class="btn">🛠️ Dados</button>
+        <button id="btnHideHeader" class="btn" title="Ocultar cabeçalho">⬆ Ocultar</button>
       </div>
     </header>
+
+    <div id="headerReturn" class="hidden flex justify-end mb-4">
+      <button id="btnShowHeader" class="btn" title="Mostrar cabeçalho">⬇ Mostrar cabeçalho</button>
+    </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <!-- Painel Esquerdo -->
@@ -546,6 +551,17 @@
       document.getElementById('btnPlay').addEventListener('click', () => togglePlay(true));
       document.getElementById('btnPause').addEventListener('click', () => togglePlay(false));
       document.getElementById('btnReset').addEventListener('click', resetTudo);
+
+      const header = document.getElementById('appHeader');
+      const headerReturn = document.getElementById('headerReturn');
+      document.getElementById('btnHideHeader').addEventListener('click', () => {
+        header.classList.add('hidden');
+        headerReturn.classList.remove('hidden');
+      });
+      document.getElementById('btnShowHeader').addEventListener('click', () => {
+        header.classList.remove('hidden');
+        headerReturn.classList.add('hidden');
+      });
 
       document.getElementById('nextSlide').addEventListener('click', () => { slideIdx = (slideIdx + 1) % slides.length; renderSlide(slideIdx); });
       document.getElementById('prevSlide').addEventListener('click', () => { slideIdx = (slideIdx - 1 + slides.length) % slides.length; renderSlide(slideIdx); });
