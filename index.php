@@ -308,146 +308,324 @@
   <script>
     // ======= Slides (20+) =======
     const slides = [
-  {
-    titulo: "1) O que é dinheiro? 💵",
-    conteudo: `
-      <p>Dinheiro é uma <strong>ferramenta de troca</strong>. Ele permite comprar bens e serviços sem precisar trocar algo diretamente.</p>
-      <p>Para ter valor, o dinheiro precisa ser <strong>aceito por todos</strong> e <strong>escasso</strong>. O governo controla sua emissão e o Banco Central cuida da estabilidade da moeda.</p>
-      <p>Exemplo: se o governo imprime demais, o dinheiro perde valor — é o início da inflação.</p>
-    `
-  },
-  {
-    titulo: "2) Inflação 📈",
-    conteudo: `
-      <p>Inflação é o aumento <strong>geral e contínuo dos preços</strong>. Ela reduz o poder de compra do seu dinheiro.</p>
-      <p>Exemplo: se o Big Mac custava R$5 e hoje custa R$25, o mesmo dinheiro compra menos — você empobreceu sem perceber.</p>
-      <p>O índice mais conhecido é o <strong>IPCA</strong>, calculado pelo IBGE. Ele mede a variação média de uma cesta de produtos e serviços.</p>
-    `
-  },
-  {
-    titulo: "3) Causas da inflação 💡",
-    conteudo: `
-      <ul class="list-disc ml-5">
-        <li><strong>Demanda maior que a oferta:</strong> muita gente comprando e poucos produtos disponíveis.</li>
-        <li><strong>Custos de produção sobem:</strong> energia, insumos ou salário aumentam.</li>
-        <li><strong>Expectativa:</strong> empresas sobem preços “por medo” da inflação futura.</li>
-        <li><strong>Política monetária frouxa:</strong> juros muito baixos e crédito fácil.</li>
-      </ul>
-    `
-  },
-  {
-    titulo: "4) Juros: o preço do dinheiro ⏳",
-    conteudo: `
-      <p>Juros são o <strong>preço do tempo</strong>. Quando você pega dinheiro emprestado, paga juros; quando empresta (investe), recebe juros.</p>
-      <p>Juros altos desestimulam o consumo e controlam a inflação. Juros baixos estimulam o consumo e o investimento.</p>
-      <p>No Brasil, a taxa básica é a <strong>Selic</strong>, definida pelo Banco Central.</p>
-    `
-  },
-  {
-    titulo: "5) Selic e CDI 🏦",
-    conteudo: `
-      <p><strong>Selic</strong> é a taxa de juros oficial. O <strong>CDI</strong> é a taxa de referência entre bancos e segue a Selic de perto.</p>
-      <p>Quando você investe em um <strong>CDB</strong>, ele rende um percentual do CDI. Por isso, entender juros é entender quanto seu dinheiro pode crescer.</p>
-    `
-  },
-  {
-    titulo: "6) Renda fixa 💰",
-    conteudo: `
-      <p>Renda fixa é quando você já sabe (ou consegue prever) quanto vai ganhar. Exemplos:</p>
-      <ul class="list-disc ml-5">
-        <li><strong>Poupança:</strong> baixo rendimento, mas simples e com liquidez.</li>
-        <li><strong>CDB:</strong> empresta dinheiro ao banco e recebe juros (geralmente % do CDI).</li>
-        <li><strong>Tesouro Direto:</strong> empresta dinheiro ao governo. É o investimento mais seguro do país.</li>
-      </ul>
-      <p>Mesmo com segurança, é importante <strong>rendimento real</strong> — ganhar acima da inflação.</p>
-    `
-  },
-  {
-    titulo: "7) Rendimento real 🧮",
-    conteudo: `
-      <p>O que importa não é o quanto o investimento paga, mas o quanto <strong>sobra depois da inflação</strong>.</p>
-      <p>Exemplo: se seu CDB rende 10% e a inflação é 5%, seu ganho real é de 4,76%.</p>
-      <p>Rendimento real = ((1 + rendimento) / (1 + inflação)) − 1</p>
-    `
-  },
-  {
-    titulo: "8) Renda variável 📊",
-    conteudo: `
-      <p>Na renda variável, o retorno depende do mercado. Você pode ganhar muito — ou perder.</p>
-      <ul class="list-disc ml-5">
-        <li><strong>Ações:</strong> pedaços de empresas.</li>
-        <li><strong>Fundos imobiliários:</strong> cotas de investimentos em imóveis.</li>
-        <li><strong>ETFs:</strong> fundos que replicam índices, como o Ibovespa.</li>
-      </ul>
-      <p>Ideal para quem pensa no longo prazo e aceita oscilações.</p>
-    `
-  },
-  {
-    titulo: "9) Risco e diversificação ⚖️",
-    conteudo: `
-      <p>Todo investimento tem risco. A estratégia é <strong>não colocar todos os ovos na mesma cesta</strong>.</p>
-      <p>Diversificar = reduzir o impacto de uma perda isolada.</p>
-      <p>Uma carteira equilibrada mistura renda fixa, variável e reserva de emergência.</p>
-    `
-  },
-  {
-    titulo: "10) Oferta e demanda no trabalho 🧑‍🏭",
-    conteudo: `
-      <p>O mercado de trabalho também segue <strong>oferta e demanda</strong>:</p>
-      <ul class="list-disc ml-5">
-        <li>Se há poucos profissionais qualificados → salário sobe.</li>
-        <li>Se há muitos → salário cai.</li>
-      </ul>
-      <p>Investir em capacitação é uma forma de “subir de preço” no mercado.</p>
-    `
-  },
-  {
-    titulo: "11) Mais-valia 💼",
-    conteudo: `
-      <p><strong>Mais-valia</strong> é o conceito criado por Karl Marx: a diferença entre o valor que o trabalhador produz e o que recebe.</p>
-      <p>Se você gera R$10.000 em valor para a empresa e recebe R$3.000, a diferença (R$7.000) é o lucro do capital.</p>
-      <p>Entender isso ajuda a pensar em como <strong>capturar parte do valor que você gera</strong> — seja negociando melhor ou empreendendo.</p>
-    `
-  },
-  {
-    titulo: "12) Política monetária e Banco Central 🏛️",
-    conteudo: `
-      <p>O Banco Central regula o volume de dinheiro e os juros para controlar a inflação.</p>
-      <ul class="list-disc ml-5">
-        <li>Se os preços sobem, ele <strong>aumenta juros</strong> → crédito mais caro → consumo cai.</li>
-        <li>Se a economia desacelera, ele <strong>baixa juros</strong> → crédito barato → economia aquece.</li>
-      </ul>
-    `
-  },
-  {
-    titulo: "13) Câmbio e dólar 💵🌎",
-    conteudo: `
-      <p>O valor do dólar afeta tudo: combustível, alimentos, eletrônicos. Isso porque o Brasil importa muitos produtos.</p>
-      <p>Quando o dólar sobe, a inflação tende a subir também. Investidores buscam proteção com <strong>dólar, ouro ou fundos cambiais</strong>.</p>
-    `
-  },
-  {
-    titulo: "14) PIB e crescimento econômico 📊",
-    conteudo: `
-      <p>PIB é o <strong>Produto Interno Bruto</strong>: soma de tudo que o país produz. Quando cresce, o país gera mais empregos e renda.</p>
-      <p>Crescimento sustentável depende de investimento, produtividade e estabilidade.</p>
-    `
-  },
-  {
-    titulo: "15) Como não perder para a inflação 🛡️",
-    conteudo: `
-      <p>1️⃣ Tenha uma reserva de emergência (3–6 meses de gastos).<br>2️⃣ Invista o que sobrar em aplicações que superem a inflação (CDB, Tesouro IPCA, fundos).<br>3️⃣ Evite deixar dinheiro parado em conta.</p>
-      <p>Dinheiro sem rentabilidade é dinheiro perdendo valor.</p>
-    `
-  },
-  {
-    titulo: "16) Educação financeira é liberdade 🗝️",
-    conteudo: `
-      <p>Aprender a lidar com o dinheiro é ganhar <strong>liberdade de escolha</strong>.</p>
-      <p>Quem entende juros, inflação e investimento não depende de sorte — constrói seu próprio caminho.</p>
-    `
-  }
-];
+      {
+        titulo: "1) Roteiro da aula 🌐",
+        conteudo: `
+          <div class="space-y-4">
+            <p>Vamos conectar <strong>história econômica</strong>, <strong>finanças pessoais</strong> e <strong>empreendedorismo</strong> de 1994 a 2025.</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li>Plano Real e a virada contra a inflação.</li>
+              <li>Como juros e preços mexem com seu bolso.</li>
+              <li>Estratégias de investimento e geração de renda.</li>
+            </ul>
+            <p class="text-sm text-slate-500">Use os controles para acompanhar os dados em tempo real enquanto apresentamos os slides.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "2) Linha do tempo 1994 → 2025 ⏱️",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>1994:</strong> Plano Real estabiliza preços após hiperinflação.</li>
+              <li><strong>2000-2010:</strong> crédito em expansão, consumo em alta.</li>
+              <li><strong>2014-2016:</strong> recessão, inflação acima de 10% em 2015.</li>
+              <li><strong>2020-2022:</strong> choque da pandemia, juros mínimos → máximos.</li>
+              <li><strong>2023-2025:</strong> foco em inflação controlada e retomada do emprego.</li>
+            </ul>
+            <p>Essa cronologia explica as curvas que você vê no painel ao lado.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "3) Para que serve o dinheiro? 💵",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Meio de troca:</strong> facilita compras sem escambo.</li>
+              <li><strong>Unidade de conta:</strong> precifica produtos e salários.</li>
+              <li><strong>Reserva de valor:</strong> permite guardar poder de compra.</li>
+            </ul>
+            <p><strong>Exemplo:</strong> seu salário é pago em reais porque todos aceitam, conseguem comparar preços e confiam que não perderá valor rapidamente.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "4) O que sustenta o valor da moeda? 🛡️",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Estabilidade fiscal:</strong> governo gasta dentro do orçamento.</li>
+              <li><strong>Banco Central independente:</strong> controla a inflação com juros.</li>
+              <li><strong>Confiança coletiva:</strong> todos acreditam que o dinheiro vale algo amanhã.</li>
+            </ul>
+            <p>Quando um desses pilares falha, a moeda perde força e os preços disparam.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "5) Inflação: inimiga silenciosa 📈",
+        conteudo: `
+          <div class="space-y-4">
+            <p>Inflação é o aumento <strong>persistente</strong> dos preços. Você sente no mercado, no aluguel e no transporte.</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>IPCA:</strong> indicador oficial medido pelo IBGE.</li>
+              <li><strong>Poder de compra:</strong> com a mesma renda você leva menos produtos pra casa.</li>
+              <li><strong>Exemplo real:</strong> Big Mac passou de ~R$3 (2000) para ~R$28 (2025).</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        titulo: "6) Choques inflacionários na história recente 🔥",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>1999:</strong> câmbio flutuante → dólar dispara → preços sobem.</li>
+              <li><strong>2002:</strong> incerteza eleitoral → IPCA 12,5%.</li>
+              <li><strong>2015:</strong> crise política e tarifária → IPCA 10,7%.</li>
+              <li><strong>2021:</strong> pandemia + commodities → IPCA 10%.</li>
+            </ul>
+            <p>Observe no gráfico como o salário mínimo precisou subir para compensar o impacto.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "7) Por que os preços sobem? 💡",
+        conteudo: `
+          <div class="grid gap-3 md:grid-cols-2">
+            <div>
+              <h3 class="font-semibold">Pressões de demanda</h3>
+              <ul class="list-disc ml-5 space-y-1">
+                <li>Crescimento rápido dos salários.</li>
+                <li>Crédito fácil e juros baixos.</li>
+                <li>Consumo maior que a produção.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-semibold">Pressões de oferta</h3>
+              <ul class="list-disc ml-5 space-y-1">
+                <li>Alta de energia e insumos importados.</li>
+                <li>Quebras de safra e logística cara.</li>
+                <li>Expectativas negativas de empresários.</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      {
+        titulo: "8) Juros: o preço do tempo ⏳",
+        conteudo: `
+          <div class="space-y-4">
+            <p>Juros remuneram quem <strong>adiou consumo</strong> e punem quem adiantou com crédito.</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Selic:</strong> taxa básica definida pelo COPOM.</li>
+              <li><strong>Spread bancário:</strong> juros cobrados em empréstimos = Selic + risco + custos.</li>
+              <li><strong>Exemplo:</strong> comprar uma TV no cartão 12× com juros transforma R$ 3.000 em R$ 3.960.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        titulo: "9) Selic x CDI x inflação 🏦",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Selic meta:</strong> âncora para o custo do dinheiro.</li>
+              <li><strong>CDI:</strong> taxa entre bancos que remunera CDBs e fundos DI.</li>
+              <li><strong>Inflação:</strong> parâmetro para definir se o juro real é positivo.</li>
+            </ul>
+            <p>Em 2023, Selic 13,75% − IPCA 4,6% ⇒ <strong>juro real ≈ 8,8%</strong> ao ano.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "10) Rendimento nominal x real 🧮",
+        conteudo: `
+          <div class="space-y-4">
+            <p>Foque no poder de compra, não apenas no número mostrado no extrato.</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Fórmula:</strong> (1 + rendimento) ÷ (1 + inflação) − 1.</li>
+              <li><strong>Exemplo:</strong> CDB 10% com IPCA 5% ⇒ ganho real 4,76%.</li>
+              <li><strong>Atenção:</strong> se inflação > rendimento, você está perdendo dinheiro.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        titulo: "11) Renda fixa no Brasil 💰",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Poupança:</strong> simples, mas geralmente abaixo da inflação.</li>
+              <li><strong>CDB / LCI / LCA:</strong> remuneram um % do CDI, com ou sem imposto.</li>
+              <li><strong>Tesouro Direto:</strong> prefixado, Selic ou IPCA+; ideal para metas específicas.</li>
+            </ul>
+            <p>Dica: combine liquidez (Tesouro Selic) com metas longas (Tesouro IPCA+).</p>
+          </div>
+        `
+      },
+      {
+        titulo: "12) Entendendo o Tesouro IPCA+ 📜",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Pagamento:</strong> juros reais fixos + variação do IPCA.</li>
+              <li><strong>Uso ideal:</strong> aposentadoria, faculdade dos filhos, metas acima de 5 anos.</li>
+              <li><strong>Exemplo:</strong> investir R$ 10 mil a IPCA + 5% pode virar ~R$ 26 mil em 10 anos se a inflação média for 4%.</li>
+            </ul>
+            <p>Observe no painel a curva de CDB vs inflação para contextualizar.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "13) Renda variável: onde está o crescimento 📊",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Ações:</strong> participação nos lucros e dividendos.</li>
+              <li><strong>Fundos imobiliários:</strong> renda mensal com imóveis profissionais.</li>
+              <li><strong>ETFs / BDRs:</strong> diversificação instantânea e acesso a empresas globais.</li>
+            </ul>
+            <p><strong>Exemplo histórico:</strong> Ibovespa multiplicou ~5× entre 2003 e 2010, mas caiu 50% em 2008.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "14) Risco x Retorno ⚖️",
+        conteudo: `
+          <div class="space-y-4">
+            <p>Retornos altos costumam vir acompanhados de <strong>volatilidade</strong>.</p>
+            <div class="grid gap-3 md:grid-cols-2">
+              <div class="rounded-xl bg-slate-100 p-4">
+                <h3 class="font-semibold">Riscos a considerar</h3>
+                <ul class="list-disc ml-5 space-y-1">
+                  <li>Mercado: oscilações de preço.</li>
+                  <li>Crédito: calote do emissor.</li>
+                  <li>Liquidez: dificuldade de vender rápido.</li>
+                </ul>
+              </div>
+              <div class="rounded-xl bg-slate-100 p-4">
+                <h3 class="font-semibold">Como mitigar</h3>
+                <ul class="list-disc ml-5 space-y-1">
+                  <li>Diversificar ativos e prazos.</li>
+                  <li>Manter reserva de emergência.</li>
+                  <li>Respeitar seu perfil de risco.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        titulo: "15) Diversificação prática 🧺",
+        conteudo: `
+          <div class="space-y-4">
+            <p>Exemplo de carteira equilibrada para objetivos de médio prazo:</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li>40% em Tesouro Selic / CDB liquidez diária (reserva).</li>
+              <li>30% em Tesouro IPCA+ / debêntures incentivadas (proteção real).</li>
+              <li>20% em ações brasileiras / FIIs (renda e crescimento).</li>
+              <li>10% em ETFs globais / dólar (proteção cambial).</li>
+            </ul>
+            <p>Ajuste as proporções conforme idade, renda e tolerância ao risco.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "16) Trabalho e capital humano 🧑‍🏭",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Oferta x demanda:</strong> áreas com profissionais escassos pagam mais.</li>
+              <li><strong>Upskilling:</strong> cursos, idiomas e tecnologia elevam seu valor.</li>
+              <li><strong>Networking:</strong> amplia oportunidades e reduz tempo de desemprego.</li>
+            </ul>
+            <p>Compare a evolução do salário mínimo com os custos de vida para dimensionar a necessidade de renda adicional.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "17) Entendendo a mais-valia 💼",
+        conteudo: `
+          <div class="space-y-4">
+            <p>Mais-valia é a diferença entre o valor produzido pelo trabalhador e o salário que ele recebe.</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Perspectiva do capital:</strong> margem necessária para reinvestir e remunerar o risco.</li>
+              <li><strong>Perspectiva do trabalhador:</strong> buscar participação nos resultados, bônus ou sociedade.</li>
+              <li><strong>Empreendedorismo:</strong> usar habilidades para capturar parte dessa diferença como dono.</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        titulo: "18) Empreender em ciclos econômicos 🚀",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Expansão:</strong> crédito farto → foque em escala e marketing.</li>
+              <li><strong>Recessão:</strong> custos apertados → destaque eficiência e valor essencial.</li>
+              <li><strong>Alta de juros:</strong> priorize caixa e negocie prazos com fornecedores.</li>
+            </ul>
+            <p>Exemplo: negócios digitais cresceram durante a pandemia; restaurantes se adaptaram com delivery.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "19) Indicadores que todo empreendedor monitora 📊",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Ticket médio:</strong> receita ÷ número de vendas.</li>
+              <li><strong>Margem de contribuição:</strong> quanto sobra para pagar despesas fixas.</li>
+              <li><strong>Giro de caixa:</strong> tempo entre pagar fornecedores e receber clientes.</li>
+              <li><strong>Ponto de equilíbrio:</strong> volume mínimo para não ter prejuízo.</li>
+            </ul>
+            <p>Use o painel de dados para ilustrar como inflação e juros impactam custos e preços.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "20) Proteções contra inflação 🛡️",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li><strong>Indexados ao IPCA:</strong> Tesouro IPCA+, NTN-B, debêntures incentivadas.</li>
+              <li><strong>Ativos reais:</strong> imóveis, FIIs, commodities agrícolas.</li>
+              <li><strong>Câmbio:</strong> dólar, ouro, fundos globais para crises internas.</li>
+            </ul>
+            <p><strong>Checklist:</strong> revise sua carteira anualmente e rebalanceie se o IPCA fugir da meta (3,0% ± 1,5 p.p.).</p>
+          </div>
+        `
+      },
+      {
+        titulo: "21) Educação financeira é liberdade 🗝️",
+        conteudo: `
+          <div class="space-y-4">
+            <ul class="list-disc ml-5 space-y-2">
+              <li>Controle de gastos e orçamento consciente.</li>
+              <li>Planejamento de metas de curto, médio e longo prazo.</li>
+              <li>Conhecimento de produtos financeiros para escolher melhor.</li>
+            </ul>
+            <p>Quanto mais você entende o sistema, menos depende de terceiros para tomar decisões.</p>
+          </div>
+        `
+      },
+      {
+        titulo: "22) Plano de ação em 4 passos ✅",
+        conteudo: `
+          <div class="space-y-4">
+            <ol class="list-decimal ml-5 space-y-2">
+              <li><strong>Diagnóstico:</strong> liste receitas, gastos e dívidas.</li>
+              <li><strong>Fundação:</strong> monte reserva de emergência e quite dívidas caras.</li>
+              <li><strong>Construção:</strong> invista com metas claras (IPCA+, renda variável, dólar).</li>
+              <li><strong>Escala:</strong> busque novas fontes de renda (freelas, negócios, investimentos em si).</li>
+            </ol>
+            <p>Revisite o plano a cada 6 meses e ajuste conforme a economia e seus objetivos mudarem.</p>
+          </div>
+        `
+      }
+    ];
 
     function renderSlide(idx) {
       const el = document.getElementById('slides');
