@@ -4,26 +4,104 @@
 }
 
 body {
-  background: #020817;
+  background: radial-gradient(120% 140% at 0% 0%, rgba(16, 185, 129, 0.08), transparent 55%),
+    radial-gradient(140% 120% at 110% -10%, rgba(59, 130, 246, 0.08), transparent 60%),
+    #020817;
   color: #e2e8f0;
   min-height: 100vh;
 }
 
-.btn {
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.75rem;
+.glass-panel {
+  background: linear-gradient(140deg, rgba(15, 23, 42, 0.92), rgba(2, 6, 23, 0.9));
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 1.75rem;
+  box-shadow: 0 18px 44px rgba(2, 8, 23, 0.55);
+  backdrop-filter: blur(18px);
+}
+
+.glass-panel > .border-b {
+  border-color: rgba(51, 65, 85, 0.6);
+}
+
+.header-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+.header-controls__group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 1024px) {
+  .header-controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.1rem;
+    width: auto;
+  }
+
+  .header-controls__group {
+    flex-wrap: nowrap;
+  }
+}
+
+.header-speed-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.header-speed-select {
+  border-radius: 9999px;
   border: 1px solid rgba(148, 163, 184, 0.35);
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(15, 23, 42, 0.75);
+  color: #e2e8f0;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.header-speed-select:focus {
+  outline: none;
+  border-color: rgba(16, 185, 129, 0.65);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18);
+}
+
+.btn {
+  padding: 0.55rem 0.9rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: linear-gradient(160deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));
   color: #e2e8f0;
   font-weight: 600;
-  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
 }
 
 .btn:hover,
 .btn:focus-visible {
-  background: rgba(30, 41, 59, 0.95);
+  background: linear-gradient(160deg, rgba(15, 118, 110, 0.4), rgba(30, 41, 59, 0.95));
   border-color: rgba(16, 185, 129, 0.65);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(2, 8, 23, 0.45);
   outline: none;
+}
+
+.btn-header {
+  font-size: 0.85rem;
+  padding-inline: 1.1rem;
 }
 
 .btn-icon {
@@ -115,6 +193,58 @@ body {
 .btn-muted:focus-visible {
   background: rgba(71, 85, 105, 0.5);
   border-color: rgba(148, 163, 184, 0.55);
+}
+
+.metric-card {
+  position: relative;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(71, 85, 105, 0.55);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(2, 8, 23, 0.88));
+  box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.08), 0 18px 30px rgba(2, 8, 23, 0.45);
+  overflow: hidden;
+}
+
+.metric-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 120% at 0% 0%, rgba(59, 130, 246, 0.08), transparent 60%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.metric-card .kpi,
+.metric-card .text-xs,
+.metric-card .text-lg {
+  position: relative;
+  z-index: 1;
+}
+
+.chart-card {
+  position: relative;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(71, 85, 105, 0.45);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(2, 6, 23, 0.92));
+  padding: 1rem;
+  box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.08), 0 22px 34px rgba(2, 8, 23, 0.4);
+  display: flex;
+}
+
+.chart-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 120% at 100% 0%, rgba(16, 185, 129, 0.08), transparent 55%);
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.chart-card canvas {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  flex: 1 1 auto;
 }
 
 .tag {

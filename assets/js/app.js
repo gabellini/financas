@@ -40,21 +40,37 @@ function atualizarKPIs() {
 }
 
 function initChart() {
-  const ctx = document.getElementById('chart');
-  if (!ctx) return;
+  const canvas = document.getElementById('chart');
+  if (!canvas) return;
   if (chart) chart.destroy();
+
+  const toRGBA = (hex, alpha = 1) => {
+    const clean = hex.replace('#', '');
+    const bigint = parseInt(clean, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
 
   const datasetStyles = [
     { label: 'Salário (R$)', data: state.series.salario, color: '#38bdf8' },
     { label: 'Cesta (R$)', data: state.series.cesta, color: '#f59e0b' },
-    { label: 'Big Mac (R$)', data: state.series.bigmac, color: '#f97316' },
+    { label: 'Big Mac (R$)', data: state.series.bigmac, color: '#f97316', dashed: [6, 4] },
     { label: 'Carro (R$)', data: state.series.carro, color: '#a855f7', axis: 'yCar' },
-    { label: 'Poupança (R$)', data: state.series.poupanca, color: '#0ea5e9', axis: 'yInv' },
+    { label: 'Poupança (R$)', data: state.series.poupanca, color: '#0ea5e9', axis: 'yInv', dashed: [4, 3] },
     { label: 'CDB (R$)', data: state.series.cdb, color: '#22c55e', axis: 'yInv' },
-    { label: 'Bolsa (R$)', data: state.series.bolsa, color: '#ef4444', axis: 'yInv' }
+    { label: 'Bolsa (R$)', data: state.series.bolsa, color: '#ef4444', axis: 'yInv', dashed: [5, 4] }
   ];
 
-  chart = new Chart(ctx, {
+  const textColor = '#cbd5f5';
+  const gridColor = 'rgba(148, 163, 184, 0.14)';
+  const zeroLineColor = 'rgba(148, 163, 184, 0.28)';
+  const axisTitleColor = '#94a3b8';
+
+  Chart.defaults.font.family = "'Inter', 'Segoe UI', sans-serif";
+
+  chart = new Chart(canvas, {
     type: 'line',
     data: {
       labels: state.series.anos,
@@ -62,56 +78,132 @@ function initChart() {
         label: item.label,
         data: item.data,
         yAxisID: item.axis || 'y',
-        borderWidth: 2,
+        borderWidth: 2.5,
         borderColor: item.color,
-        backgroundColor: item.color,
-        tension: 0.25,
+        backgroundColor: toRGBA(item.color, 0.18),
+        tension: 0.32,
         spanGaps: true,
-        pointRadius: 0
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        borderCapStyle: 'round',
+        borderJoinStyle: 'round',
+        fill: false,
+        segment: item.dashed ? { borderDash: item.dashed } : undefined
       }))
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          top: 18,
+          right: 18,
+          bottom: 12,
+          left: 8
+        }
+      },
       plugins: {
         legend: {
           position: 'bottom',
+          align: 'center',
           labels: {
-            color: '#cbd5f5'
+            color: textColor,
+            usePointStyle: true,
+            pointStyle: 'circle',
+            boxWidth: 9,
+            padding: 18,
+            font: {
+              size: 12,
+              weight: '600'
+            }
           }
         },
         tooltip: {
           mode: 'index',
           intersect: false,
-          titleColor: '#f8fafc',
-          bodyColor: '#e2e8f0',
           backgroundColor: 'rgba(15, 23, 42, 0.92)',
           borderColor: 'rgba(14, 165, 233, 0.35)',
-          borderWidth: 1
+          borderWidth: 1,
+          titleColor: '#f8fafc',
+          bodyColor: '#e2e8f0',
+          titleFont: {
+            weight: '700'
+          },
+          bodyFont: {
+            weight: '500'
+          },
+          padding: 12,
+          callbacks: {
+            label: (ctx) => {
+              const value = ctx.parsed.y;
+              if (value == null) return ctx.dataset.label;
+              return `${ctx.dataset.label}: R$ ${Number(value).toLocaleString('pt-BR', {
+                maximumFractionDigits: value >= 1000 ? 0 : 2
+              })}`;
+            }
+          }
         }
       },
       interaction: { mode: 'index', intersect: false },
       scales: {
         x: {
-          ticks: { color: '#cbd5f5' },
-          grid: { color: 'rgba(51, 65, 85, 0.4)' }
+          ticks: {
+            color: textColor,
+            maxRotation: 0,
+            autoSkipPadding: 16
+          },
+          grid: {
+            color: gridColor,
+            drawBorder: false
+          },
+          title: {
+            display: true,
+            text: 'Ano',
+            color: axisTitleColor,
+            padding: { top: 12 },
+            font: {
+              size: 12,
+              weight: '600'
+            }
+          }
         },
         y: {
           type: state.escalaLog ? 'logarithmic' : 'linear',
           position: 'left',
           ticks: {
-            color: '#cbd5f5',
+            color: textColor,
             callback: (v) => `R$ ${Number(v).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`
           },
-          grid: { color: 'rgba(51, 65, 85, 0.4)' }
+          grid: {
+            color: (ctx) => (ctx.tick.value === 0 ? zeroLineColor : gridColor),
+            drawBorder: false
+          },
+          title: {
+            display: true,
+            text: 'Consumo e salário',
+            color: axisTitleColor,
+            font: {
+              size: 12,
+              weight: '600'
+            }
+          }
         },
         yCar: {
           type: state.escalaLog ? 'logarithmic' : 'linear',
           position: 'right',
-          grid: { drawOnChartArea: false },
           ticks: {
-            color: '#cbd5f5',
+            color: textColor,
             callback: (v) => `R$ ${Number(v).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`
+          },
+          grid: { drawOnChartArea: false },
+          title: {
+            display: true,
+            text: 'Bens duráveis',
+            color: axisTitleColor,
+            font: {
+              size: 12,
+              weight: '600'
+            }
           }
         },
         yInv: {
@@ -287,24 +379,39 @@ function boot() {
   });
 
   const dlg = document.getElementById('dlgDados');
-  document.getElementById('btnDados').addEventListener('click', () => dlg.showModal());
-  document.getElementById('btnImport').addEventListener('click', () => {
-    try {
-      const obj = JSON.parse(document.getElementById('areaJson').value);
-      if (!obj.anos) throw new Error('JSON deve conter a chave "anos".');
-      state.series = obj;
-      state.i = 0;
-      initChart();
-      atualizarKPIs();
-      atualizarChartAteI();
-      document.getElementById('modoTag').textContent = 'Dados importados (reais)';
-    } catch (err) {
-      alert(`Falha ao importar JSON: ${err.message}`);
+  if (dlg) {
+    const btnDados = document.getElementById('btnDados');
+    if (btnDados) {
+      btnDados.addEventListener('click', () => dlg.showModal());
     }
-  });
-  document.getElementById('btnExport').addEventListener('click', () => {
-    document.getElementById('areaJson').value = JSON.stringify(state.series, null, 2);
-  });
+
+    const areaJson = document.getElementById('areaJson');
+    const btnImport = document.getElementById('btnImport');
+    const btnExport = document.getElementById('btnExport');
+
+    if (btnImport && areaJson) {
+      btnImport.addEventListener('click', () => {
+        try {
+          const obj = JSON.parse(areaJson.value);
+          if (!obj.anos) throw new Error('JSON deve conter a chave "anos".');
+          state.series = obj;
+          state.i = 0;
+          initChart();
+          atualizarKPIs();
+          atualizarChartAteI();
+          document.getElementById('modoTag').textContent = 'Dados importados (reais)';
+        } catch (err) {
+          alert(`Falha ao importar JSON: ${err.message}`);
+        }
+      });
+    }
+
+    if (btnExport && areaJson) {
+      btnExport.addEventListener('click', () => {
+        areaJson.value = JSON.stringify(state.series, null, 2);
+      });
+    }
+  }
 
   setupHeaderMenu();
 }

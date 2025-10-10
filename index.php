@@ -11,9 +11,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 </head>
-<body class="bg-slate-950 text-slate-100">
+<body class="text-slate-100">
   <div class="max-w-[1440px] mx-auto px-4 py-6 xl:px-8 space-y-6">
-    <header id="appHeader" class="bg-slate-900/60 border border-slate-800 backdrop-blur rounded-3xl px-4 py-4 lg:px-6 lg:py-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between shadow-lg">
+    <header id="appHeader" class="glass-panel px-4 py-4 lg:px-6 lg:py-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-slate-950 grid place-items-center font-bold tracking-tight shadow-lg">AF</div>
         <div>
@@ -25,27 +25,26 @@
         <button id="toggleHeaderMenu" class="btn flex items-center justify-center gap-2 lg:hidden" aria-expanded="false" aria-controls="headerControls">
           ☰ <span class="text-sm font-semibold">Ações</span>
         </button>
-        <div id="headerControls" class="hidden flex-col gap-2 lg:flex lg:flex-row lg:flex-wrap lg:items-center lg:justify-end">
-          <div class="flex flex-wrap items-center gap-2">
-            <button id="btnPlay" class="btn">▶️ Reproduzir</button>
-            <button id="btnPause" class="btn">⏸️ Pausar</button>
-            <button id="btnReset" class="btn">⟲ Reiniciar</button>
+        <nav id="headerControls" class="header-controls hidden lg:flex" aria-label="Controles principais">
+          <div class="header-controls__group" role="group" aria-label="Controle de reprodução">
+            <button id="btnPlay" class="btn btn-header">▶️ Reproduzir</button>
+            <button id="btnPause" class="btn btn-header">⏸️ Pausar</button>
+            <button id="btnReset" class="btn btn-header">⟲ Reiniciar</button>
           </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <label for="speed" class="text-xs uppercase tracking-wide text-slate-400">Velocidade</label>
-            <select id="speed" class="border border-slate-700 bg-slate-950 text-sm text-slate-100 rounded-lg px-2 py-1 focus:border-emerald-400 focus:ring focus:ring-emerald-400/30 focus:outline-none">
+          <div class="header-controls__group" role="group" aria-label="Velocidade da linha do tempo">
+            <span class="header-speed-label">Velocidade</span>
+            <select id="speed" class="header-speed-select">
               <option value="1000">1 ano/seg</option>
               <option value="2000">1 ano/2s</option>
               <option value="500">2 anos/seg</option>
               <option value="10000">~1h (demo lenta)</option>
             </select>
           </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <a href="quizz.php" class="btn">🎯 Quiz</a>
-            <button id="btnDados" class="btn">🛠️ Dados</button>
-            <button id="btnHideHeader" class="btn" title="Ocultar cabeçalho">⬆ Ocultar</button>
+          <div class="header-controls__group" role="group" aria-label="Ações adicionais">
+            <a href="quizz.php" class="btn btn-header">🎯 Quiz</a>
+            <button id="btnHideHeader" class="btn btn-header" title="Ocultar cabeçalho">⬆ Ocultar</button>
           </div>
-        </div>
+        </nav>
       </div>
     </header>
 
@@ -57,7 +56,7 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:[grid-template-columns:minmax(0,1.2fr)_minmax(0,0.8fr)] gap-5 xl:gap-7">
-      <section class="bg-slate-900/60 border border-slate-800 backdrop-blur rounded-3xl shadow-lg p-4 lg:p-6 space-y-5">
+      <section class="glass-panel p-4 lg:p-6 space-y-5">
         <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div class="space-y-2">
             <div class="text-xs uppercase tracking-wide text-slate-400">Ano</div>
@@ -88,30 +87,30 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-3 space-y-1">
+          <div class="metric-card p-3 space-y-1">
             <div class="kpi">💼 Salário mínimo</div>
             <div class="text-lg font-bold leading-tight text-slate-100"><span id="kpiSalario">—</span></div>
             <div class="text-xs text-slate-400">poder de compra vs. cesta: <span id="kpiPoderCompra">—</span></div>
           </div>
-          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-3 space-y-1">
+          <div class="metric-card p-3 space-y-1">
             <div class="kpi">📈 Inflação (acum. desde 1994)</div>
             <div class="text-lg font-bold leading-tight text-slate-100"><span id="kpiInflacao">—</span></div>
             <div class="text-xs text-slate-400">IPCA oficial (IBGE)</div>
           </div>
-          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-3 space-y-1">
+          <div class="metric-card p-3 space-y-1">
             <div class="kpi">🧺 Cesta básica – SP</div>
             <div class="text-lg font-bold leading-tight text-slate-100"><span id="kpiCesta">—</span></div>
             <div class="text-xs text-slate-400">🚗 carro: <span id="kpiCarro">—</span> · 🍔 Big Mac: <span id="kpiBigmac">—</span></div>
           </div>
-          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-3 space-y-1">
+          <div class="metric-card p-3 space-y-1">
             <div class="kpi">🏦 Invest. R$1.000 — Poupança</div>
             <div class="text-lg font-bold leading-tight text-slate-100"><span id="kpiPoupanca">—</span></div>
           </div>
-          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-3 space-y-1">
+          <div class="metric-card p-3 space-y-1">
             <div class="kpi">💳 Invest. R$1.000 — CDB (100% CDI)</div>
             <div class="text-lg font-bold leading-tight text-slate-100"><span id="kpiCDB">—</span></div>
           </div>
-          <div class="border border-slate-800 bg-slate-900/70 rounded-2xl p-3 space-y-1">
+          <div class="metric-card p-3 space-y-1">
             <div class="kpi">📊 Invest. R$1.000 — Bolsa</div>
             <div class="text-lg font-bold leading-tight text-slate-100"><span id="kpiBolsa">—</span></div>
           </div>
@@ -122,11 +121,11 @@
         </div>
 
         <div class="mt-4 text-xs text-slate-400 space-y-1">
-          <p><strong>Fontes:</strong> IPCA anual (IBGE/Ipeadata); Salário mínimo (decretos/IPEA); Big Mac (The Economist Big Mac Index — BRL, pontos e interpolação); Cesta básica SP (PROCON/DIEESE — âncoras e interpolação); Carro (VW Gol 1.0 0 km – âncoras e interpolação). Investimentos: CDB calculado como 100% CDI anual composto; Poupança média; Bolsa simulada. Você pode importar séries reais de CDI/Ibovespa no botão <em>🛠️ Dados</em>.</p>
+          <p><strong>Fontes:</strong> IPCA anual (IBGE/Ipeadata); Salário mínimo (decretos/IPEA); Big Mac (The Economist Big Mac Index — BRL, pontos e interpolação); Cesta básica SP (PROCON/DIEESE — âncoras e interpolação); Carro (VW Gol 1.0 0 km – âncoras e interpolação). Investimentos: CDB calculado como 100% CDI anual composto; Poupança média; Bolsa simulada.</p>
         </div>
       </section>
 
-      <section class="bg-slate-900/60 border border-slate-800 backdrop-blur rounded-3xl shadow-lg flex flex-col overflow-hidden">
+      <section class="glass-panel flex flex-col overflow-hidden">
         <div class="p-4 border-b border-slate-800/80 flex items-center justify-between">
           <div class="flex items-center gap-2">
             <button id="prevSlide" class="btn">←</button>
