@@ -15,6 +15,11 @@
     .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.5rem; border-radius: 9999px; background: #f1f5f9; color: #334155; }
     .kpi { font-size: 0.875rem; color: #475569; display:flex; align-items:center; gap:.5rem }
     .kpi strong { color: #0f172a; }
+    .btn-icon { width: 2.75rem; height: 2.75rem; border-radius: 9999px; border: 1px solid rgba(15,23,42,0.12); background: white; display: grid; place-items: center; box-shadow: 0 8px 20px rgba(15,23,42,0.12); position: relative; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .btn-icon:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(15,23,42,0.18); }
+    .btn-icon:focus-visible { outline: 3px solid rgba(16,185,129,0.5); outline-offset: 2px; }
+    .btn-icon span { position: absolute; top: 110%; left: 50%; transform: translate(-50%, -4px); background: rgba(15,23,42,0.92); color: white; font-size: 0.75rem; padding: 0.35rem 0.6rem; border-radius: 0.5rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; }
+    .btn-icon:hover span, .btn-icon:focus-visible span { opacity: 1; transform: translate(-50%, 2px); }
   </style>
   <script>
     // ======= DADOS REAIS (com interpolação onde faltou) =======
@@ -145,7 +150,7 @@
   </script>
 </head>
 <body class="bg-slate-50 text-slate-900">
-  <div class="max-w-[1280px] mx-auto p-4">
+  <div class="max-w-[1440px] mx-auto px-4 py-4 xl:px-8">
     <!-- Header -->
     <header id="appHeader" class="flex items-center justify-between gap-4 mb-4">
       <div class="flex items-center gap-3">
@@ -173,11 +178,14 @@
       </div>
     </header>
 
-    <div id="headerReturn" class="hidden flex justify-end mb-4">
-      <button id="btnShowHeader" class="btn" title="Mostrar cabeçalho">⬇ Mostrar cabeçalho</button>
+    <div id="headerReturn" class="hidden fixed top-4 right-4 z-40">
+      <button id="btnShowHeader" class="btn-icon" aria-label="Mostrar cabeçalho">
+        ⬇
+        <span>Mostrar cabeçalho</span>
+      </button>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:[grid-template-columns:minmax(0,1.2fr)_minmax(0,0.8fr)] gap-4 xl:gap-6">
       <!-- Painel Esquerdo -->
       <section class="bg-white rounded-2xl shadow p-4 lg:p-6">
         <div class="flex items-end justify-between">
@@ -580,7 +588,7 @@
   </script>
 
   <!-- ======= Referências ======= -->
-  <footer class="max-w-[1280px] mx-auto p-4 text-xs text-slate-500">
+  <footer class="max-w-[1440px] mx-auto px-4 py-4 xl:px-8 text-xs text-slate-500">
     <ul class="list-disc ml-5 space-y-1">
       <li>IPCA anual (IBGE/Ipeadata) — acumulado calculado no app.</li>
       <li>Salário mínimo: decretos/IPEA (série nominal 1994–2025).</li>
