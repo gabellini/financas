@@ -58,7 +58,7 @@ function initChart() {
     { label: 'Cesta (R$)', data: state.series.cesta, color: '#f59e0b' },
     { label: 'Big Mac (R$)', data: state.series.bigmac, color: '#f97316', dashed: [6, 4] },
     { label: 'Carro (R$)', data: state.series.carro, color: '#a855f7', axis: 'yCar' },
-    { label: 'Poupança (R$)', data: state.series.poupanca, color: '#0ea5e9', axis: 'yInv', dashed: [4, 3] },
+    { label: 'Poupança (R$)', data: state.series.poupanca, color: '#14b8a6', axis: 'yInv', dashed: [4, 3] },
     { label: 'CDB (R$)', data: state.series.cdb, color: '#22c55e', axis: 'yInv' },
     { label: 'Bolsa (R$)', data: state.series.bolsa, color: '#ef4444', axis: 'yInv', dashed: [5, 4] }
   ];
