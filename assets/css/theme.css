@@ -1,0 +1,228 @@
+:root {
+  color-scheme: dark;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #020817;
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+.btn {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.65);
+  color: #e2e8f0;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(16, 185, 129, 0.65);
+  outline: none;
+}
+
+.btn-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.8);
+  color: #e2e8f0;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 20px rgba(2, 8, 23, 0.45);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-icon:hover,
+.btn-icon:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(2, 8, 23, 0.55);
+  outline: none;
+}
+
+.btn-icon span {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translate(-50%, -4px);
+  background: rgba(15, 23, 42, 0.92);
+  color: #e2e8f0;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-icon:hover span,
+.btn-icon:focus-visible span {
+  opacity: 1;
+  transform: translate(-50%, 2px);
+}
+
+.btn-amber {
+  border-color: rgba(251, 191, 36, 0.45);
+  background: rgba(251, 191, 36, 0.18);
+  color: #fde68a;
+}
+
+.btn-amber:hover,
+.btn-amber:focus-visible {
+  background: rgba(251, 191, 36, 0.3);
+  border-color: rgba(251, 191, 36, 0.6);
+}
+
+.btn-emerald {
+  border-color: rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.18);
+  color: #6ee7b7;
+}
+
+.btn-emerald:hover,
+.btn-emerald:focus-visible {
+  background: rgba(16, 185, 129, 0.3);
+  border-color: rgba(16, 185, 129, 0.65);
+}
+
+.btn-indigo {
+  border-color: rgba(129, 140, 248, 0.45);
+  background: rgba(99, 102, 241, 0.18);
+  color: #c7d2fe;
+}
+
+.btn-indigo:hover,
+.btn-indigo:focus-visible {
+  background: rgba(99, 102, 241, 0.3);
+  border-color: rgba(129, 140, 248, 0.6);
+}
+
+.btn-muted {
+  border-color: rgba(148, 163, 184, 0.4);
+  background: rgba(71, 85, 105, 0.35);
+  color: #e2e8f0;
+}
+
+.btn-muted:hover,
+.btn-muted:focus-visible {
+  background: rgba(71, 85, 105, 0.5);
+  border-color: rgba(148, 163, 184, 0.55);
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #2dd4bf;
+}
+
+.slides p {
+  line-height: 1.6;
+}
+
+.slides h2 {
+  font-weight: 800;
+}
+
+.kpi {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.kpi strong {
+  color: #f8fafc;
+}
+
+.option-btn {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.65);
+  color: #e2e8f0;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.option-btn:hover:not([disabled]) {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.option-btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.option-btn[data-state="correct"] {
+  background: rgba(22, 163, 74, 0.25);
+  border-color: rgba(34, 197, 94, 0.55);
+  color: #bbf7d0;
+}
+
+.option-btn[data-state="wrong"] {
+  background: rgba(220, 38, 38, 0.22);
+  border-color: rgba(248, 113, 113, 0.6);
+  color: #fecaca;
+}
+
+.feedback {
+  font-weight: 600;
+}
+
+.feedback[data-state="correct"] {
+  color: #34d399;
+}
+
+.feedback[data-state="wrong"] {
+  color: #f87171;
+}
+
+.feedback[data-state="skip"] {
+  color: #94a3b8;
+}
+
+.dialog-panel {
+  background: rgba(15, 23, 42, 0.98);
+  color: #e2e8f0;
+}
+
+.dialog-panel textarea {
+  background: rgba(2, 6, 23, 0.75);
+  color: #e2e8f0;
+}
+
+.prose ul > li::marker,
+.prose ol > li::marker {
+  color: #38bdf8;
+}
+
+.chart-card canvas {
+  background: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.6);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}

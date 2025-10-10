@@ -333,194 +333,51 @@ shuffle($questions);
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quiz Quem Quer Ser um Milionário - Aula Interativa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/theme.css" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .option-btn[disabled] { cursor: not-allowed; }
-  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
-  <div class="max-w-4xl mx-auto px-4 py-6">
-    <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <div class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <header class="bg-slate-900/60 border border-slate-800 backdrop-blur rounded-3xl px-4 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shadow-lg">
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white grid place-items-center font-bold">AF</div>
+        <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-slate-950 grid place-items-center font-bold tracking-tight shadow-lg">AF</div>
         <div>
-          <h1 class="text-2xl font-extrabold">Quiz Quem Quer Ser um Milionário</h1>
-          <p class="text-sm text-slate-600">35 perguntas sobre capitalismo, finanças e empreendedorismo</p>
+          <h1 class="text-2xl font-extrabold text-slate-100">Quiz Quem Quer Ser um Milionário</h1>
+          <p class="text-sm text-slate-400">35 perguntas sobre capitalismo, finanças e empreendedorismo</p>
         </div>
       </div>
-      <a href="index.php" class="btn inline-flex items-center justify-center px-4 py-2 rounded-xl border border-slate-200 bg-white shadow-sm text-sm font-semibold hover:shadow transition">⬅ Voltar à aula</a>
+      <a href="index.php" class="btn">⬅ Voltar à aula</a>
     </header>
 
-    <section class="bg-white rounded-3xl shadow-lg p-6 space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <div>
-          <span class="inline-flex items-center gap-2 text-xs uppercase tracking-wide font-semibold text-slate-500">Pergunta <span id="questionNumber" class="text-slate-900">1</span> / 35</span>
-          <h2 id="questionText" class="text-xl font-bold text-slate-900 mt-2"></h2>
+    <section class="bg-slate-900/60 border border-slate-800 backdrop-blur rounded-3xl shadow-lg p-6 space-y-6">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div class="space-y-2">
+          <span class="inline-flex items-center gap-2 text-xs uppercase tracking-wide font-semibold text-slate-400">Pergunta <span id="questionNumber" class="text-slate-100">1</span> / 35</span>
+          <h2 id="questionText" class="text-xl font-bold text-slate-100"></h2>
         </div>
         <div class="flex flex-wrap items-center gap-2">
-          <button id="lifelineOne" class="px-3 py-2 rounded-xl border border-amber-200 bg-amber-100 text-amber-900 text-sm font-semibold hover:bg-amber-200 transition">🧠 Eliminar 1</button>
-          <button id="lifelineTwo" class="px-3 py-2 rounded-xl border border-emerald-200 bg-emerald-100 text-emerald-900 text-sm font-semibold hover:bg-emerald-200 transition">🎯 Eliminar 2</button>
-          <button id="skipQuestion" class="px-3 py-2 rounded-xl border border-indigo-200 bg-indigo-100 text-indigo-900 text-sm font-semibold hover:bg-indigo-200 transition">⏭ Pular</button>
-          <button id="nextQuestion" class="px-3 py-2 rounded-xl border border-slate-200 bg-slate-100 text-slate-700 text-sm font-semibold hover:bg-slate-200 transition" disabled>Próxima pergunta</button>
+          <button id="lifelineOne" class="btn btn-amber">🧠 Eliminar 1</button>
+          <button id="lifelineTwo" class="btn btn-emerald">🎯 Eliminar 2</button>
+          <button id="skipQuestion" class="btn btn-indigo">⏭ Pular</button>
+          <button id="nextQuestion" class="btn btn-muted" disabled>Próxima pergunta</button>
         </div>
       </div>
 
       <div id="optionsContainer" class="grid gap-3"></div>
 
-      <div id="feedback" class="text-base font-semibold"></div>
+      <div id="feedback" class="feedback text-base" data-state=""></div>
 
-      <div class="flex items-center justify-between text-sm text-slate-500">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm text-slate-400">
         <span id="studentsRemaining"><?php echo count($questions); ?> estudantes na fila</span>
         <span id="scoreBoard">Acertos: 0 • Erros: 0</span>
       </div>
     </section>
   </div>
 
-  <script>
-    const quizData = <?php echo json_encode($questions, JSON_UNESCAPED_UNICODE); ?>;
-
-    const questionNumberEl = document.getElementById('questionNumber');
-    const questionTextEl = document.getElementById('questionText');
-    const optionsContainer = document.getElementById('optionsContainer');
-    const feedbackEl = document.getElementById('feedback');
-    const nextBtn = document.getElementById('nextQuestion');
-    const lifelineOneBtn = document.getElementById('lifelineOne');
-    const lifelineTwoBtn = document.getElementById('lifelineTwo');
-    const skipQuestionBtn = document.getElementById('skipQuestion');
-    const studentsRemainingEl = document.getElementById('studentsRemaining');
-    const scoreBoardEl = document.getElementById('scoreBoard');
-
-    let currentIndex = 0;
-    let answered = false;
-    let correctCount = 0;
-    let wrongCount = 0;
-
-    function updateStudentsRemaining() {
-      const remaining = Math.max(0, quizData.length - currentIndex);
-      studentsRemainingEl.textContent = `${remaining} estudante${remaining === 1 ? '' : 's'} na fila`;
-    }
-
-    function resetLifelines() {
-      lifelineOneBtn.disabled = false;
-      lifelineTwoBtn.disabled = false;
-      skipQuestionBtn.disabled = false;
-      lifelineOneBtn.classList.remove('opacity-50');
-      lifelineTwoBtn.classList.remove('opacity-50');
-      skipQuestionBtn.classList.remove('opacity-50');
-    }
-
-    function renderQuestion() {
-      const q = quizData[currentIndex];
-      questionNumberEl.textContent = currentIndex + 1;
-      questionTextEl.textContent = q.question;
-      feedbackEl.textContent = '';
-      optionsContainer.innerHTML = '';
-      answered = false;
-      nextBtn.disabled = true;
-      resetLifelines();
-      updateStudentsRemaining();
-
-      q.options.forEach((optionText, idx) => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'option-btn w-full text-left px-4 py-3 rounded-2xl border border-slate-200 bg-slate-100 hover:bg-slate-200 transition text-base';
-        btn.textContent = `${String.fromCharCode(65 + idx)}. ${optionText}`;
-        btn.dataset.correct = idx === q.correctIndex ? 'true' : 'false';
-        btn.addEventListener('click', () => handleAnswer(btn));
-        optionsContainer.appendChild(btn);
-      });
-    }
-
-    function disableOptions() {
-      const buttons = optionsContainer.querySelectorAll('button');
-      buttons.forEach(btn => btn.disabled = true);
-    }
-
-    function handleAnswer(button) {
-      if (answered) return;
-      answered = true;
-      disableOptions();
-      const isCorrect = button.dataset.correct === 'true';
-      if (isCorrect) {
-        button.classList.remove('bg-slate-100', 'border-slate-200');
-        button.classList.add('bg-emerald-100', 'border-emerald-300');
-        feedbackEl.textContent = 'Resposta correta! Parabéns!';
-        feedbackEl.className = 'text-emerald-600 text-base font-semibold';
-        correctCount++;
-      } else {
-        button.classList.remove('bg-slate-100', 'border-slate-200');
-        button.classList.add('bg-rose-100', 'border-rose-300');
-        feedbackEl.textContent = 'Resposta incorreta. Continue estudando!';
-        feedbackEl.className = 'text-rose-600 text-base font-semibold';
-        wrongCount++;
-        const correctBtn = optionsContainer.querySelector('button[data-correct="true"]');
-        if (correctBtn) {
-          correctBtn.classList.remove('bg-slate-100', 'border-slate-200');
-          correctBtn.classList.add('bg-emerald-100', 'border-emerald-300');
-        }
-      }
-      scoreBoardEl.textContent = `Acertos: ${correctCount} • Erros: ${wrongCount}`;
-      nextBtn.disabled = currentIndex >= quizData.length - 1;
-      lifelineOneBtn.disabled = true;
-      lifelineTwoBtn.disabled = true;
-      skipQuestionBtn.disabled = true;
-      lifelineOneBtn.classList.add('opacity-50');
-      lifelineTwoBtn.classList.add('opacity-50');
-      skipQuestionBtn.classList.add('opacity-50');
-    }
-
-    function eliminateOptions(amount) {
-      const buttons = Array.from(optionsContainer.querySelectorAll('button'));
-      const wrongButtons = buttons.filter(btn => btn.dataset.correct !== 'true' && btn.style.visibility !== 'hidden' && !btn.disabled);
-      if (wrongButtons.length === 0) return;
-      const toRemove = Math.min(amount, wrongButtons.length);
-      for (let i = 0; i < toRemove; i++) {
-        const idx = Math.floor(Math.random() * wrongButtons.length);
-        const btn = wrongButtons.splice(idx, 1)[0];
-        btn.style.visibility = 'hidden';
-      }
-    }
-
-    lifelineOneBtn.addEventListener('click', () => {
-      eliminateOptions(1);
-      lifelineOneBtn.disabled = true;
-      lifelineOneBtn.classList.add('opacity-50');
-    });
-
-    lifelineTwoBtn.addEventListener('click', () => {
-      eliminateOptions(2);
-      lifelineTwoBtn.disabled = true;
-      lifelineTwoBtn.classList.add('opacity-50');
-    });
-
-    skipQuestionBtn.addEventListener('click', () => {
-      if (answered) return;
-      answered = true;
-      disableOptions();
-      const correctBtn = optionsContainer.querySelector('button[data-correct="true"]');
-      if (correctBtn) {
-        correctBtn.classList.remove('bg-slate-100', 'border-slate-200');
-        correctBtn.classList.add('bg-emerald-100', 'border-emerald-300');
-      }
-      feedbackEl.textContent = 'Pergunta pulada! Veja a resposta correta e siga em frente.';
-      feedbackEl.className = 'text-slate-600 text-base font-semibold';
-      nextBtn.disabled = currentIndex >= quizData.length - 1;
-      lifelineOneBtn.disabled = true;
-      lifelineTwoBtn.disabled = true;
-      skipQuestionBtn.disabled = true;
-      lifelineOneBtn.classList.add('opacity-50');
-      lifelineTwoBtn.classList.add('opacity-50');
-      skipQuestionBtn.classList.add('opacity-50');
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (currentIndex < quizData.length - 1) {
-        currentIndex++;
-        renderQuestion();
-      }
-    });
-
-    renderQuestion();
-  </script>
+  <script id="quiz-data" type="application/json"><?php echo json_encode($questions, JSON_UNESCAPED_UNICODE); ?></script>
+  <script type="module" src="assets/js/quiz.js"></script>
 </body>
 </html>
