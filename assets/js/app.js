@@ -282,30 +282,72 @@ function setupHeaderMenu() {
   const controls = document.getElementById('headerControls');
   if (!toggleBtn || !controls) return;
 
-  controls.dataset.mobileOpen = 'false';
-  toggleBtn.setAttribute('aria-expanded', 'false');
-
   const mq = window.matchMedia('(min-width: 1024px)');
+  controls.dataset.mobileOpen = mq.matches ? 'true' : 'false';
+  toggleBtn.setAttribute('aria-expanded', mq.matches ? 'true' : 'false');
+
+  const openMenu = () => {
+    if (mq.matches) return;
+    controls.dataset.mobileOpen = 'true';
+    controls.classList.remove('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  };
+
+  const closeMenu = () => {
+    if (mq.matches) return;
+    controls.dataset.mobileOpen = 'false';
+    controls.classList.add('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  };
 
   const syncVisibility = () => {
     if (mq.matches) {
+      controls.dataset.mobileOpen = 'true';
+      controls.classList.remove('hidden');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    } else if (controls.dataset.mobileOpen === 'true') {
       controls.classList.remove('hidden');
       toggleBtn.setAttribute('aria-expanded', 'true');
     } else {
-      const open = controls.dataset.mobileOpen === 'true';
-      controls.classList.toggle('hidden', !open);
-      toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      controls.classList.add('hidden');
+      toggleBtn.setAttribute('aria-expanded', 'false');
     }
   };
 
-  toggleBtn.addEventListener('click', () => {
-    const isHidden = controls.classList.toggle('hidden');
-    const open = !isHidden;
-    controls.dataset.mobileOpen = open ? 'true' : 'false';
-    toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  toggleBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (mq.matches) return;
+    const open = controls.dataset.mobileOpen === 'true';
+    if (open) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
-  mq.addEventListener('change', syncVisibility);
+  controls.addEventListener('click', (event) => {
+    if (mq.matches) return;
+    event.stopPropagation();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (mq.matches) return;
+    if (controls.dataset.mobileOpen !== 'true') return;
+    if (event.target.closest('#headerControls') || event.target.closest('#toggleHeaderMenu')) return;
+    closeMenu();
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && controls.dataset.mobileOpen === 'true') {
+      closeMenu();
+    }
+  });
+
+  mq.addEventListener('change', (e) => {
+    controls.dataset.mobileOpen = e.matches ? 'true' : 'false';
+    syncVisibility();
+  });
+
   syncVisibility();
 }
 
