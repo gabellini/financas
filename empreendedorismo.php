@@ -725,10 +725,10 @@
       const detail = document.createElement('div');
       detail.className = 'flex-1 rounded-2xl border border-emerald-800/50 bg-slate-900/70 p-4 lg:p-5 shadow-inner overflow-y-auto';
 
-      const renderDetail = (idx) => {
-        const question = questions[idx];
-        const state = states[idx];
-        detail.innerHTML = '';
+        const renderDetail = (idx) => {
+          const question = questions[idx];
+          const state = states[idx];
+          detail.innerHTML = '';
 
         const header = document.createElement('div');
         header.className = 'flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between';
@@ -738,7 +738,18 @@
         const status = document.createElement('span');
         status.className = `text-[11px] px-3 py-1 rounded-full border ${state.answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-950/70'}`;
         status.textContent = state.answered ? `Respondida por ${state.vencedor} · ${state.correta}` : 'Em aberto';
-        header.append(title, status);
+
+        const actions = document.createElement('div');
+        actions.className = 'flex flex-wrap items-center gap-2';
+        const releaseBtn = document.createElement('button');
+        releaseBtn.type = 'button';
+        releaseBtn.className = 'text-xs px-3 py-2 rounded-lg border border-emerald-400 text-emerald-100 hover:bg-emerald-500 hover:text-slate-900 transition disabled:opacity-50 disabled:cursor-not-allowed';
+        releaseBtn.textContent = '📡 Liberar esta pergunta';
+        releaseBtn.disabled = state.answered;
+        releaseBtn.addEventListener('click', () => liberarPerguntaNosCelulares(idx));
+        actions.append(status, releaseBtn);
+
+        header.append(title, actions);
 
         const statement = document.createElement('p');
         statement.className = 'text-base text-slate-200 leading-relaxed';
@@ -854,6 +865,12 @@
         if (response.ok) {
           placar = {};
           questionStates = {};
+          await fetch(liveQuizEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'close' })
+          });
+          setLiveStatus('Ranking e estado ao vivo zerados. Pronto para liberar novamente.');
         }
       } catch (err) {
         console.error('Erro ao zerar ranking', err);
