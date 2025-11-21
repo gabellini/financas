@@ -50,12 +50,15 @@ function get_state(string $stateFile): array
     $defaults = [
         'status' => 'waiting',
         'questionId' => null,
+        'questionText' => '',
         'options' => [],
         'correctIndex' => null,
         'winner' => null,
         'releasedAt' => null,
         'closedAt' => null,
-        'attempts' => []
+        'attempts' => [],
+        'slideTitle' => '',
+        'questionLabel' => ''
     ];
 
     $state = load_json($stateFile);
@@ -70,17 +73,28 @@ function save_state(string $stateFile, array $state): void
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $state = get_state($stateFile);
 
+$sanitize_options = static function ($options): array {
+    if (!is_array($options)) {
+        return [];
+    }
+
+    $clean = array_values(array_filter(array_map(static function ($option) {
+        return is_string($option) ? trim($option) : '';
+    }, $options), static fn($value) => $value !== ''));
+
+    return array_values(array_unique($clean));
+};
+
 if ($method === 'GET') {
     $question = null;
-    if ($state['status'] === 'active' && $state['questionId'] !== null) {
-        $questionData = get_question((int) $state['questionId'], $questions);
-        if ($questionData) {
-            $question = [
-                'id' => $state['questionId'],
-                'text' => $questionData['question'],
-                'options' => $state['options']
-            ];
-        }
+    if ($state['status'] === 'active' && ($state['questionId'] !== null || $state['questionText'])) {
+        $question = [
+            'id' => $state['questionId'],
+            'text' => $state['questionText'],
+            'options' => $state['options'],
+            'slideTitle' => $state['slideTitle'],
+            'questionLabel' => $state['questionLabel']
+        ];
     }
 
     json_response([
@@ -112,25 +126,49 @@ if ($action === 'register') {
 }
 
 if ($action === 'release') {
-    $questionId = isset($input['questionId']) ? (int) $input['questionId'] : null;
-    $questionData = $questionId !== null ? get_question($questionId, $questions) : null;
+    $questionId = $input['questionId'] ?? null;
+    $questionText = trim((string) ($input['questionText'] ?? ''));
+    $optionsFromRequest = $sanitize_options($input['options'] ?? []);
+    $correctOption = isset($input['correctOption']) ? trim((string) $input['correctOption']) : null;
+    $slideTitle = isset($input['slideTitle']) ? trim((string) $input['slideTitle']) : '';
+    $questionLabel = isset($input['questionLabel']) ? trim((string) $input['questionLabel']) : '';
 
-    if (!$questionData) {
-        json_response(['error' => 'Pergunta não encontrada.'], 404);
+    $questionData = null;
+    if ($questionId !== null && $questionId !== '') {
+        $questionIndex = (int) $questionId;
+        $questionData = get_question($questionIndex, $questions);
+        $questionId = $questionIndex;
     }
 
-    $options = array_merge([$questionData['correct']], $questionData['alternatives']);
-    shuffle($options);
+    if ($questionData) {
+        $options = array_merge([$questionData['correct']], $questionData['alternatives']);
+        shuffle($options);
+        $questionText = $questionData['question'];
+        $correctOption = $questionData['correct'];
+    } else {
+        $options = $optionsFromRequest;
+        if ($questionText === '' || empty($options) || $correctOption === null) {
+            json_response(['error' => 'Dados incompletos para liberar a pergunta.'], 400);
+        }
+    }
+
+    $correctIndex = array_search($correctOption, $options, true);
+    if ($correctIndex === false) {
+        json_response(['error' => 'A alternativa correta precisa estar entre as opções enviadas.'], 400);
+    }
 
     $state = [
         'status' => 'active',
         'questionId' => $questionId,
+        'questionText' => $questionText,
         'options' => $options,
-        'correctIndex' => array_search($questionData['correct'], $options, true),
+        'correctIndex' => $correctIndex,
         'winner' => null,
         'releasedAt' => time(),
         'closedAt' => null,
-        'attempts' => []
+        'attempts' => [],
+        'slideTitle' => $slideTitle,
+        'questionLabel' => $questionLabel
     ];
 
     save_state($stateFile, $state);
@@ -140,12 +178,15 @@ if ($action === 'release') {
 if ($action === 'close') {
     $state['status'] = 'waiting';
     $state['questionId'] = null;
+    $state['questionText'] = '';
     $state['options'] = [];
     $state['correctIndex'] = null;
     $state['winner'] = null;
     $state['releasedAt'] = null;
     $state['closedAt'] = time();
     $state['attempts'] = [];
+    $state['slideTitle'] = '';
+    $state['questionLabel'] = '';
     save_state($stateFile, $state);
 
     json_response(['ok' => true, 'state' => $state]);

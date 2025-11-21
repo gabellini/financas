@@ -71,9 +71,11 @@
                   </div>
                   <div class="flex flex-wrap items-center gap-2">
                     <span class="text-[11px] text-emerald-200 bg-emerald-900/40 border border-emerald-500/30 px-3 py-1 rounded-full">Pontos acumulam na apresentação</span>
+                    <button id="releaseQuestion" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-emerald-400 text-emerald-100 text-sm hover:bg-emerald-500 hover:text-slate-900 transition">📡 Liberar para celulares</button>
                     <button id="openQuestions" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Abrir perguntas</button>
                   </div>
                 </div>
+                <p id="liveStatus" class="text-xs text-slate-400">Perguntas liberadas aparecem para quem estiver no "Responder".</p>
                 <div id="questionsList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
               </div>
 
@@ -450,6 +452,8 @@
     const leaderboardList = document.getElementById('leaderboardList');
     const resetRankingBtn = document.getElementById('resetRanking');
     const openQuestionsBtn = document.getElementById('openQuestions');
+    const releaseQuestionBtn = document.getElementById('releaseQuestion');
+    const liveStatus = document.getElementById('liveStatus');
     const questionModal = document.getElementById('questionModal');
     const closeModal = document.getElementById('closeModal');
     const modalQuestions = document.getElementById('modalQuestions');
@@ -461,6 +465,7 @@
     const cancelNameBtn = document.getElementById('cancelName');
 
     const rankingEndpoint = 'ranking.php';
+    const liveQuizEndpoint = 'live-quiz.php';
     let current = 0;
     let placar = {};
     let questionStates = {};
@@ -562,6 +567,60 @@
         alert('Não foi possível salvar o ponto agora.');
       }
       updateLeaderboard();
+    };
+
+    const setLiveStatus = (message, highlight = false) => {
+      if (!liveStatus) return;
+      liveStatus.textContent = message;
+      liveStatus.classList.toggle('text-emerald-300', highlight);
+    };
+
+    const escolherPerguntaParaLiberar = () => {
+      const questions = slides[current].perguntas || [];
+      if (!questions.length) return null;
+      const states = ensureQuestionState(current);
+      const pendingIndex = states.findIndex((item) => !item.answered);
+      const targetIndex = pendingIndex >= 0 ? pendingIndex : 0;
+
+      return { question: questions[targetIndex], index: targetIndex };
+    };
+
+    const liberarPerguntaNosCelulares = async () => {
+      const alvo = escolherPerguntaParaLiberar();
+      if (!alvo) {
+        setLiveStatus('Não há perguntas neste slide para liberar.');
+        return;
+      }
+
+      setLiveStatus('Liberando pergunta para os celulares...');
+      const payload = {
+        action: 'release',
+        questionId: current * 10 + alvo.index,
+        questionText: alvo.question.enunciado,
+        options: alvo.question.opcoes,
+        correctOption: alvo.question.correta,
+        slideTitle: slides[current].titulo,
+        questionLabel: `Slide ${current + 1} — Pergunta ${alvo.index + 1}`
+      };
+
+      try {
+        const response = await fetch(liveQuizEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (!response.ok || data.error) {
+          setLiveStatus(data.error || 'Não foi possível liberar a pergunta agora.');
+          return;
+        }
+
+        setLiveStatus(`Pergunta ${alvo.index + 1} liberada para quem está no celular.`, true);
+      } catch (error) {
+        console.error('Erro ao liberar pergunta', error);
+        setLiveStatus('Erro ao liberar a pergunta. Confira a conexão.');
+      }
     };
 
     const ensureQuestionState = (index) => {
@@ -742,10 +801,12 @@
       statusInfo.textContent = current === 0 ? 'Você está no início da trilha.' : current + 1 === slides.length ? 'Último slide, hora de executar!' : 'Continue avançando, cada slide é um passo.';
       ensureQuestionState(current);
       renderQuestionSummary();
+      setLiveStatus('Pronto para liberar a próxima pergunta deste slide.');
     };
 
     prevSlide.addEventListener('click', () => renderSlide(current - 1));
     nextSlide.addEventListener('click', () => renderSlide(current + 1));
+    releaseQuestionBtn.addEventListener('click', liberarPerguntaNosCelulares);
     openQuestionsBtn.addEventListener('click', () => {
       expandedQuestion = null;
       renderModalQuestions();
