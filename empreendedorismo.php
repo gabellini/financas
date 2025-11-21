@@ -12,38 +12,14 @@
 </head>
 <body class="text-slate-100">
   <div class="max-w-5xl mx-auto px-4 py-4 xl:px-8 space-y-5">
-    <header class="glass-panel px-3 py-3 lg:px-5 lg:py-3 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
-      <div class="header-brand flex items-center gap-3 w-full lg:w-auto">
-        <div class="header-brand__badge">AF</div>
-        <div class="min-w-0">
-          <h1 class="header-title text-lg sm:text-xl font-extrabold text-slate-100">Aula especial: Empreendedorismo</h1>
-          <p class="header-subtitle text-xs sm:text-sm text-slate-400">Conteúdo pensado para jovens de 17 anos, com exemplos reais e linguagem prática.</p>
-        </div>
-      </div>
-      <nav class="header-controls" aria-label="Navegação secundária">
-        <div class="header-controls__surface">
-          <div class="header-controls__group header-controls__group--stack">
-            <a href="index.php" class="btn btn-header">
-              <span class="btn-header__icon" aria-hidden="true">🏠</span>
-              <span class="btn-header__label">Voltar à linha do tempo</span>
-            </a>
-            <a href="quizz.php" class="btn btn-header">
-              <span class="btn-header__icon" aria-hidden="true">🎯</span>
-              <span class="btn-header__label">Quiz interativo</span>
-            </a>
-          </div>
-        </div>
-      </nav>
-    </header>
-
     <section class="glass-panel p-5 lg:p-7 space-y-5">
-      <div class="flex flex-wrap gap-3 items-center justify-between">
+      <div class="flex flex-col gap-3">
         <div>
           <p class="text-xs uppercase tracking-[0.18em] text-emerald-300 font-semibold">Trilha guiada</p>
-          <h2 class="text-3xl font-black tracking-tight">Slides interativos de empreendedorismo</h2>
+          <h1 class="text-3xl font-black tracking-tight">Slides interativos de empreendedorismo</h1>
           <p class="text-slate-300 text-sm mt-1">Passeie pelos 10 slides: ao abrir, você já está no primeiro. Cada um tem ação rápida para tirar a ideia do papel.</p>
         </div>
-        <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-400">
+        <div class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-400">
           <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-900/50 border border-emerald-500/30 text-emerald-100 font-semibold">🔥 Dinâmico</span>
           <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-900/70 border border-slate-700 text-slate-200">10+ slides</span>
         </div>
@@ -76,53 +52,50 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4">
-          <article class="p-5 border border-slate-800/80 rounded-2xl bg-slate-900/60 space-y-4 shadow-lg shadow-emerald-900/20">
-            <header class="space-y-1">
-              <p id="slideTag" class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Ação</p>
-              <h3 id="slideTitle" class="text-2xl font-bold">Título do slide</h3>
-              <p id="slideSummary" class="text-slate-300 text-sm leading-relaxed">Resumo do slide aparece aqui.</p>
-            </header>
-            <div>
-              <h4 class="text-sm font-semibold text-slate-200 uppercase tracking-[0.08em]">Pontos-chave</h4>
-              <ul id="slideBullets" class="mt-2 space-y-2 list-disc ml-5 text-slate-300 text-sm"></ul>
-            </div>
-            <div class="p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/30 space-y-3">
-              <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Rodada relâmpago</p>
-                  <p class="text-sm text-slate-200 font-semibold">Perguntas em tela cheia com controle de quem acertou</p>
-                </div>
-                <div class="flex flex-wrap items-center gap-2">
-                  <span class="text-[11px] text-emerald-200 bg-emerald-900/40 border border-emerald-500/30 px-3 py-1 rounded-full">Pontos acumulam na apresentação</span>
-                  <button id="openQuestions" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Abrir perguntas</button>
-                </div>
+        <article class="p-5 border border-slate-800/80 rounded-2xl bg-slate-900/60 space-y-4 shadow-lg shadow-emerald-900/20">
+          <header class="space-y-1">
+            <p id="slideTag" class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Ação</p>
+            <h3 id="slideTitle" class="text-2xl font-bold">Título do slide</h3>
+            <p id="slideSummary" class="text-slate-300 text-sm leading-relaxed">Resumo do slide aparece aqui.</p>
+          </header>
+          <div>
+            <h4 class="text-sm font-semibold text-slate-200 uppercase tracking-[0.08em]">Pontos-chave</h4>
+            <ul id="slideBullets" class="mt-2 space-y-2 list-disc ml-5 text-slate-300 text-sm"></ul>
+          </div>
+          <div class="p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/30 space-y-3">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Rodada relâmpago</p>
+                <p class="text-sm text-slate-200 font-semibold">Perguntas em tela cheia com controle de quem acertou</p>
               </div>
-              <div id="questionsList" class="space-y-3"></div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[11px] text-emerald-200 bg-emerald-900/40 border border-emerald-500/30 px-3 py-1 rounded-full">Pontos acumulam na apresentação</span>
+                <button id="openQuestions" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Abrir perguntas</button>
+              </div>
             </div>
-          </article>
+            <div id="questionsList" class="space-y-3"></div>
+          </div>
 
-          <aside class="p-4 border border-slate-800/80 rounded-2xl bg-slate-900/60 space-y-4">
-            <div class="flex items-center justify-between">
-              <h4 class="text-sm font-semibold uppercase tracking-[0.1em] text-slate-200">Navegação</h4>
-              <div class="flex items-center gap-2">
-                <button id="prevSlide" class="px-3 py-2 rounded-lg border border-slate-700 text-slate-200 hover:border-emerald-400 hover:text-emerald-100 transition text-sm">Anterior</button>
-                <button id="nextSlide" class="px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Próximo</button>
-              </div>
-            </div>
-            <div class="space-y-3 text-sm text-slate-300">
-              <p class="text-slate-200 font-semibold">Dicas para aproveitar</p>
-              <ul class="list-disc ml-5 space-y-2">
-                <li>Cada slide traz uma ação que você consegue testar em menos de 15 minutos.</li>
-                <li>Linguagem direta para quem está terminando o ensino médio e quer começar já.</li>
-                <li>Exemplos reais como a BetaLabs para mostrar como ideias viram produto.</li>
-              </ul>
-            </div>
+          <div class="flex flex-col gap-3 text-sm text-slate-300">
+            <p class="text-slate-200 font-semibold">Dicas para aproveitar</p>
+            <ul class="list-disc ml-5 space-y-2">
+              <li>Cada slide traz uma ação que você consegue testar em menos de 15 minutos.</li>
+              <li>Linguagem direta para quem está terminando o ensino médio e quer começar já.</li>
+              <li>Exemplos reais como a BetaLabs para mostrar como ideias viram produto.</li>
+            </ul>
             <div class="p-3 rounded-xl border border-emerald-500/25 bg-emerald-950/30">
               <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Status</p>
               <p id="statusInfo" class="text-sm text-slate-100 mt-1">Você está no início da trilha.</p>
             </div>
-          </aside>
+          </div>
+        </article>
+
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-t border-slate-800 pt-4">
+          <div class="text-xs uppercase tracking-[0.14em] text-slate-400">Navegação</div>
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <button id="prevSlide" class="flex-1 sm:flex-none px-3 py-2 rounded-lg border border-slate-700 text-slate-200 hover:border-emerald-400 hover:text-emerald-100 transition text-sm">Anterior</button>
+            <button id="nextSlide" class="flex-1 sm:flex-none px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Próximo</button>
+          </div>
         </div>
       </div>
     </section>
@@ -467,6 +440,7 @@
     let current = 0;
     let placar = {};
     const questionStates = {};
+    let expandedQuestion = null;
 
     const saveScores = () => localStorage.setItem('empreendedorismo-placar', JSON.stringify(placar));
 
@@ -581,54 +555,72 @@
       modalQuestions.innerHTML = '';
 
       questions.forEach((question, idx) => {
+        const isOpen = expandedQuestion === idx;
         const wrapper = document.createElement('div');
         wrapper.className = 'border border-emerald-800/40 bg-slate-900/70 rounded-xl p-4 space-y-3';
 
-        const header = document.createElement('div');
-        header.className = 'flex items-start justify-between gap-3';
+        const header = document.createElement('button');
+        header.type = 'button';
+        header.className = 'w-full flex items-start justify-between gap-3 text-left';
+        const info = document.createElement('div');
         const title = document.createElement('p');
         title.className = 'text-base font-semibold text-slate-100';
         title.textContent = `Pergunta ${idx + 1}: ${question.enunciado}`;
+        const hint = document.createElement('p');
+        hint.className = 'text-xs text-slate-400';
+        hint.textContent = isOpen ? 'Escolha uma opção abaixo' : 'Clique para abrir esta pergunta';
+        info.append(title, hint);
+
         const status = document.createElement('span');
         status.className = `text-[11px] px-2 py-1 rounded-full border ${states[idx].answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-900/70'}`;
         status.textContent = states[idx].answered ? `Respondida por ${states[idx].vencedor}` : 'Aguardando resposta';
-        header.append(title, status);
+        header.append(info, status);
 
-        const optionsWrapper = document.createElement('div');
-        optionsWrapper.className = 'grid grid-cols-1 sm:grid-cols-3 gap-2';
-
-        question.opcoes.forEach((option) => {
-          const btn = document.createElement('button');
-          btn.textContent = option;
-          btn.className = 'w-full text-left px-3 py-2 rounded-lg border border-slate-700 bg-slate-950 hover:border-emerald-500 hover:text-emerald-100 text-sm transition';
-
-          if (states[idx].answered) {
-            btn.disabled = true;
-            btn.classList.add('opacity-60');
-            if (option === question.correta) {
-              btn.classList.add('border-emerald-400', 'text-emerald-200');
-            }
-          }
-
-          btn.addEventListener('click', () => {
-            if (states[idx].answered) return;
-            if (option === question.correta) {
-              const nome = solicitarNome();
-              if (!nome) return;
-              states[idx] = { answered: true, vencedor: nome };
-              registrarPonto(nome);
-              renderQuestionSummary();
-              renderModalQuestions();
-            } else {
-              btn.disabled = true;
-              btn.classList.add('line-through', 'opacity-50', 'border-amber-400', 'text-amber-200');
-            }
-          });
-
-          optionsWrapper.appendChild(btn);
+        header.addEventListener('click', () => {
+          expandedQuestion = isOpen ? null : idx;
+          renderModalQuestions();
         });
 
-        wrapper.append(header, optionsWrapper);
+        wrapper.appendChild(header);
+
+        if (isOpen) {
+          const optionsWrapper = document.createElement('div');
+          optionsWrapper.className = 'grid grid-cols-1 sm:grid-cols-3 gap-2';
+
+          question.opcoes.forEach((option) => {
+            const btn = document.createElement('button');
+            btn.textContent = option;
+            btn.className = 'w-full text-left px-3 py-2 rounded-lg border border-slate-700 bg-slate-950 hover:border-emerald-500 hover:text-emerald-100 text-sm transition';
+
+            if (states[idx].answered) {
+              btn.disabled = true;
+              btn.classList.add('opacity-60');
+              if (option === question.correta) {
+                btn.classList.add('border-emerald-400', 'text-emerald-200');
+              }
+            }
+
+            btn.addEventListener('click', () => {
+              if (states[idx].answered) return;
+              if (option === question.correta) {
+                const nome = solicitarNome();
+                if (!nome) return;
+                states[idx] = { answered: true, vencedor: nome };
+                registrarPonto(nome);
+                renderQuestionSummary();
+                renderModalQuestions();
+              } else {
+                btn.disabled = true;
+                btn.classList.add('line-through', 'opacity-50', 'border-amber-400', 'text-amber-200');
+              }
+            });
+
+            optionsWrapper.appendChild(btn);
+          });
+
+          wrapper.appendChild(optionsWrapper);
+        }
+
         modalQuestions.appendChild(wrapper);
       });
     };
@@ -657,6 +649,7 @@
     prevSlide.addEventListener('click', () => renderSlide(current - 1));
     nextSlide.addEventListener('click', () => renderSlide(current + 1));
     openQuestionsBtn.addEventListener('click', () => {
+      expandedQuestion = null;
       renderModalQuestions();
       questionModal.classList.remove('hidden');
       document.body.classList.add('overflow-hidden');
