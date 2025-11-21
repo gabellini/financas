@@ -77,21 +77,6 @@
                 <div id="questionsList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
               </div>
 
-              <div class="p-3 rounded-xl border border-emerald-500/25 bg-emerald-950/30 space-y-2">
-                <div class="flex items-center justify-between gap-2">
-                  <p class="text-sm font-semibold text-slate-200">Dicas para aproveitar</p>
-                  <span class="text-[10px] px-2 py-1 rounded-full border border-slate-700 bg-slate-900/70 text-slate-300">Modo apresentação</span>
-                </div>
-                <ul class="list-disc ml-5 space-y-2 text-sm text-slate-300">
-                  <li>Cada slide traz uma ação que você consegue testar em menos de 15 minutos.</li>
-                  <li>Linguagem direta para quem está terminando o ensino médio e quer começar já.</li>
-                  <li>Exemplos reais de produto e serviço simples para mostrar como ideias viram solução.</li>
-                </ul>
-                <div class="p-3 rounded-lg border border-emerald-500/20 bg-emerald-950/40">
-                  <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Status</p>
-                  <p id="statusInfo" class="text-sm text-slate-100 mt-1">Você está no início da trilha.</p>
-                </div>
-              </div>
             </div>
           </div>
         </article>
