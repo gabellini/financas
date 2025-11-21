@@ -11,7 +11,11 @@ const elements = {
   lifelineTwo: document.getElementById('lifelineTwo'),
   skip: document.getElementById('skipQuestion'),
   studentsRemaining: document.getElementById('studentsRemaining'),
-  scoreBoard: document.getElementById('scoreBoard')
+  scoreBoard: document.getElementById('scoreBoard'),
+  broadcast: document.getElementById('broadcastQuestion'),
+  closeLive: document.getElementById('closeLive'),
+  syncLive: document.getElementById('syncLive'),
+  liveStatus: document.getElementById('liveStatus')
 };
 
 const state = {
@@ -20,6 +24,11 @@ const state = {
   correct: 0,
   wrong: 0
 };
+
+function setLiveStatus(message, isHighlight = false) {
+  elements.liveStatus.textContent = message;
+  elements.liveStatus.classList.toggle('text-emerald-300', isHighlight);
+}
 
 function updateStudentsRemaining() {
   const remaining = Math.max(0, quizData.length - state.currentIndex);
@@ -59,6 +68,69 @@ function renderQuestion() {
     const button = createOptionButton(optionText, idx, idx === question.correctIndex);
     elements.options.appendChild(button);
   });
+}
+
+async function syncLiveState() {
+  try {
+    const response = await fetch('live-quiz.php');
+    const data = await response.json();
+
+    if (data.status === 'active' && data.question) {
+      setLiveStatus(`Pergunta ${data.question.id + 1} liberada para os alunos.`, true);
+    } else if (data.winner && data.winner.name) {
+      setLiveStatus(`Pergunta encerrada. Vencedor: ${data.winner.name}.`);
+    } else {
+      setLiveStatus('Nenhuma pergunta liberada no momento.');
+    }
+  } catch (error) {
+    setLiveStatus('Não foi possível sincronizar o status agora.');
+  }
+}
+
+async function broadcastQuestion() {
+  const currentQuestion = quizData[state.currentIndex];
+  if (!currentQuestion) {
+    setLiveStatus('Nenhuma pergunta selecionada.');
+    return;
+  }
+
+  try {
+    const response = await fetch('live-quiz.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'release', questionId: currentQuestion.id })
+    });
+
+    const data = await response.json();
+    if (!response.ok || data.error) {
+      setLiveStatus(data.error || 'Não foi possível liberar a pergunta.');
+      return;
+    }
+
+    setLiveStatus(`Pergunta ${currentQuestion.id + 1} liberada para os alunos.`, true);
+  } catch (error) {
+    setLiveStatus('Erro ao liberar a pergunta.');
+  }
+}
+
+async function closeLiveQuestion() {
+  try {
+    const response = await fetch('live-quiz.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'close' })
+    });
+
+    const data = await response.json();
+    if (!response.ok || data.error) {
+      setLiveStatus(data.error || 'Não foi possível encerrar.');
+      return;
+    }
+
+    setLiveStatus('Pergunta encerrada para respostas.');
+  } catch (error) {
+    setLiveStatus('Erro ao encerrar as respostas.');
+  }
 }
 
 function disableOptions() {
@@ -146,4 +218,9 @@ elements.next.addEventListener('click', () => {
   }
 });
 
+elements.broadcast.addEventListener('click', broadcastQuestion);
+elements.closeLive.addEventListener('click', closeLiveQuestion);
+elements.syncLive.addEventListener('click', syncLiveState);
+
+syncLiveState();
 renderQuestion();
