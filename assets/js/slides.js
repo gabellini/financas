@@ -1,387 +1,211 @@
 export const slides = [
   {
-    titulo: "1) Roteiro da aula 🌐",
+    titulo: "1) Boas-vindas: por que empreender? 🚀",
     conteudo: `
       <div class="space-y-4">
-        <p>Vamos decifrar <strong>o que é dinheiro</strong>, entender como <strong>inflação e juros</strong> afetam a sua vida e montar a base para falar de <strong>investimentos e empreendedorismo</strong>.</p>
+        <p>Empreender é usar criatividade para resolver problemas e gerar valor. Não é só abrir empresa: é construir soluções que alguém paga porque facilitam a vida.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li>Origem do dinheiro e por que ele ainda manda no jogo.</li>
-          <li>Como proteger o poder de compra em um país de inflação.</li>
-          <li>Transformar tempo, estudo e investimento em renda crescente.</li>
+          <li><strong>Autonomia:</strong> você decide prioridades e ritmo.</li>
+          <li><strong>Impacto:</strong> cada entrega muda a vida de clientes reais.</li>
+          <li><strong>Recompensa:</strong> captura financeira, aprendizado acelerado e legado.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> quanto antes você entende as regras do capitalismo, mais rápido consegue jogar bem.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> escreva em 1 frase qual problema você mais gostaria de resolver hoje.</p>
       </div>
     `
   },
   {
-    titulo: "2) Linha do tempo 1994 → 2025 ⏱️",
+    titulo: "2) Mindset empreendedor 🧠",
     conteudo: `
       <div class="space-y-4">
+        <p>Antes de qualquer plano, vem a mentalidade. Grandes negócios começam com curiosidade e disposição para testar rápido.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li><strong>1994:</strong> Plano Real acaba com a hiperinflação dos pais e avós.</li>
-          <li><strong>2000-2010:</strong> crédito bombando, consumo em alta, empregos formais crescendo.</li>
-          <li><strong>2014-2016:</strong> recessão dura, inflação passa dos 10%.</li>
-          <li><strong>2020-2022:</strong> pandemia: preços de comida e tecnologia disparam.</li>
-          <li><strong>2023-2025:</strong> esforço para estabilizar inflação e recuperar renda.</li>
+          <li><strong>Curiosidade:</strong> observar dores do dia a dia e perguntar "por que ainda é assim?".</li>
+          <li><strong>Responsabilidade:</strong> dono do problema, dono do resultado.</li>
+          <li><strong>Resiliência:</strong> errar, ajustar e seguir sem perder o ritmo.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> entender o passado recente ajuda a interpretar os gráficos e escolher atitudes inteligentes para o futuro.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> liste 3 aprendizados recentes que vieram de erros.</p>
       </div>
     `
   },
   {
-    titulo: "3) Como o dinheiro nasceu? 🪙",
+    titulo: "3) Propósito e tese do problema 🎯",
     conteudo: `
       <div class="space-y-4">
+        <p>Negócios fortes nascem de um problema específico, não de uma ideia solta.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li><strong>Escambo:</strong> trocar objetos direto era difícil (como pagar com uma vaca?).</li>
-          <li><strong>Metais e moedas:</strong> itens raros e aceitos por todos simplificaram as trocas.</li>
-          <li><strong>Papel-moeda e bancos:</strong> recibos representando valor guardado com segurança.</li>
-          <li><strong>Era digital:</strong> cartões, Pix, cripto e saldo em apps.</li>
+          <li>Qual dor real você resolve? (tempo, dinheiro, status, segurança)</li>
+          <li>Quem sente essa dor hoje e com que frequência?</li>
+          <li>O que já tentaram fazer para resolver e por que falhou?</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> dinheiro é uma tecnologia social criada para facilitar acordos — e pode mudar de formato sempre que surgir algo mais eficiente.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> descreva a dor em 140 caracteres e peça feedback de 2 pessoas.</p>
       </div>
     `
   },
   {
-    titulo: "4) Dinheiro = acordo coletivo 💬",
+    titulo: "4) Proposta de valor clara 💡",
     conteudo: `
       <div class="space-y-4">
-        <p>O real vale porque <strong>todos confiam</strong> que ele será aceito amanhã.</p>
+        <p>Clientes compram resultado. Sua proposta precisa caber em uma frase simples.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li><strong>Instituições:</strong> Banco Central, Tesouro e bancos privados garantem o fluxo.</li>
-          <li><strong>Regras:</strong> leis e contratos protegem quem guarda ou investe.</li>
-          <li><strong>Digitalização:</strong> hoje você paga com QR Code — mas a lógica do acordo permanece.</li>
+          <li><strong>Formulação:</strong> "Ajudamos [persona] a [resultado] sem [barreira]".</li>
+          <li><strong>Diferencial:</strong> o que faz você ser a escolha óbvia?</li>
+          <li><strong>Prova:</strong> evidências, protótipos ou casos reais.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> se o valor depende da confiança coletiva, seu comportamento como consumidor, investidor e cidadão influencia o sistema.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> escreva sua frase de valor e leia em voz alta em 20 segundos.</p>
       </div>
     `
   },
   {
-    titulo: "5) Para que serve o dinheiro? 💵",
+    titulo: "5) Cliente ideal e jornada 🧭",
     conteudo: `
       <div class="space-y-4">
+        <p>Definir quem você atende evita desperdício de tempo e verba.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li><strong>Meio de troca:</strong> você compra comida, game pass ou passagem sem negociar toda vez.</li>
-          <li><strong>Unidade de conta:</strong> preços e salários são comparáveis em reais.</li>
-          <li><strong>Reserva de valor:</strong> guardar para realizar sonhos (faculdade, intercâmbio, empreendimento).</li>
+          <li><strong>ICP:</strong> perfil, poder de decisão, orçamento e canal favorito.</li>
+          <li><strong>Momento de compra:</strong> gatilhos que fazem a dor doer mais.</li>
+          <li><strong>Jornada:</strong> descoberta → consideração → decisão → retenção.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> trate cada gasto como uma decisão entre o agora e oportunidades futuras que o dinheiro pode comprar.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> mapeie 3 perguntas que seu cliente faz antes de decidir.</p>
       </div>
     `
   },
   {
-    titulo: "6) Dinheiro compra tempo de vida ⏳",
+    titulo: "6) Execução: sair do papel ⚒️",
     conteudo: `
       <div class="space-y-4">
-        <p>Quando você recebe salário ou paga por um serviço, está trocando <strong>horas de vida</strong>.</p>
+        <p>Velocidade com disciplina. O primeiro objetivo é colocar algo utilizável na frente do cliente.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li><strong>Salário:</strong> preço da sua hora, definido por habilidades e demanda.</li>
-          <li><strong>Consumo:</strong> cada compra gasta horas de trabalho que você precisou para juntar aquele dinheiro.</li>
-          <li><strong>Investimento:</strong> faz o dinheiro trabalhar por você para comprar tempo livre no futuro.</li>
+          <li><strong>MVP:</strong> menor entrega que gera valor real (mesmo que manual).</li>
+          <li><strong>Sprints semanais:</strong> planejar, executar, revisar e aprender.</li>
+          <li><strong>Checklist de entrega:</strong> problema, solução, como medir, quem valida.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> calcule quantas horas de trabalho cada sonho custa — fica mais fácil priorizar o que importa.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> defina o que pode ser entregue em 7 dias e qual métrica prova valor.</p>
       </div>
     `
   },
   {
-    titulo: "7) Mais-valia e venda do tempo 💼",
+    titulo: "7) Organização de processos 📋",
     conteudo: `
       <div class="space-y-4">
-        <p>Nas empresas, o valor produzido é maior que o salário pago. A diferença é a <strong>mais-valia</strong>, que financia lucros, reinvestimentos e riscos.</p>
+        <p>Processos simples evitam caos quando as coisas começam a dar certo.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li><strong>Como empregado:</strong> busque bônus, participação nos resultados e reputação para capturar parte desse valor.</li>
-          <li><strong>Como futuro empreendedor:</strong> entender custos e trabalho ajuda a montar preços justos.</li>
-          <li><strong>Como cidadão:</strong> consciência de classe e negociação coletiva influenciam salários.</li>
+          <li>Documente o "jeito certo" em checklists curtos.</li>
+          <li>Crie cadência: reunião semanal de produto, pipeline de vendas atualizado, fechamento financeiro mensal.</li>
+          <li>Automatize o que é repetitivo: propostas, onboarding, suporte.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> dominar a lógica da mais-valia permite decidir se você quer vender tempo, participar dos lucros ou criar o próprio negócio.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> escolha 1 processo crítico e desenhe as 5 etapas principais.</p>
       </div>
     `
   },
   {
-    titulo: "8) Inflação na vida real 📈",
+    titulo: "8) Organização financeira 💰",
     conteudo: `
       <div class="space-y-4">
-        <p>Inflação é o aumento contínuo dos preços. Você sente no lanche, na passagem de ônibus e na mensalidade do cursinho.</p>
+        <p>Fluxo de caixa manda no jogo. Crescer sem quebrar exige controle.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li><strong>IPCA:</strong> pesquisa do IBGE que mede a média dos aumentos.</li>
-          <li><strong>Perda de poder de compra:</strong> com a mesma mesada você leva menos coisas.</li>
-          <li><strong>Dados reais:</strong> o Big Mac saiu de ~R$ 3 (2000) para ~R$ 28 (2025) — 9 Big Macs viraram 1.</li>
+          <li><strong>Separação:</strong> contas pessoais ≠ contas da empresa.</li>
+          <li><strong>Reserva:</strong> caixa para 6 meses de operação crítica.</li>
+          <li><strong>Unidade econômica:</strong> CAC, LTV, ticket médio, margem.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> acompanhar inflação ensina a ajustar metas: sonhos custam mais a cada ano se você não se proteger.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> simule um mês de gastos fixos e receitas esperadas; sobra ou falta?</p>
       </div>
     `
   },
   {
-    titulo: "9) Choques inflacionários recentes 🔥",
+    titulo: "9) Organização comercial e marketing 📣",
     conteudo: `
       <div class="space-y-4">
+        <p>Venda é processo, não sorte. Consistência transforma curiosos em clientes.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li><strong>1999:</strong> câmbio liberado faz o dólar disparar.</li>
-          <li><strong>2002:</strong> incerteza eleitoral leva o IPCA a 12,5%.</li>
-          <li><strong>2015:</strong> crise política e energética pressionam preços.</li>
-          <li><strong>2020:</strong> pandemia bagunça cadeias globais e encarece alimentos.</li>
-          <li><strong>2021-2022:</strong> guerra, energia e commodities em alta.</li>
+          <li><strong>Pipeline simples:</strong> lista de leads, diagnóstico, proposta, follow-up.</li>
+          <li><strong>Mensagem:</strong> fale de resultados e casos reais.</li>
+          <li><strong>Canal:</strong> escolha 1 canal principal para dominar antes de diversificar.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> a inflação responde a choques internos e externos — ninguém controla sozinho, mas dá para reagir rápido.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> escreva 3 perguntas de diagnóstico que revelam se o lead é ideal.</p>
       </div>
     `
   },
   {
-    titulo: "10) Como o IPCA é calculado? 📊",
+    titulo: "10) Resiliência na prática 🧗",
     conteudo: `
       <div class="space-y-4">
+        <p>Você vai ouvir "não" muitas vezes. Resiliência é continuar ajustando a rota sem perder o ânimo.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li>Cesta de bens e serviços com mais de 400 itens.</li>
-          <li>Pesquisadores visitam lojas, mercados, escolas e hospitais.</li>
-          <li>Pesos diferentes para cada item (aluguel pesa mais que streaming).</li>
-          <li>Divulgação mensal com variação acumulada no ano.</li>
+          <li><strong>Micro-vitórias:</strong> celebre pequenos avanços para manter energia.</li>
+          <li><strong>Rotina de feedback:</strong> clientes, time e mentores apontam cegueiras.</li>
+          <li><strong>Saúde:</strong> sono, exercício e apoio emocional são combustível.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> acompanhar o IPCA ajuda a negociar reajustes e planejar investimentos indexados à inflação.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> anote um tropeço recente e como você transformou em aprendizado.</p>
       </div>
     `
   },
   {
-    titulo: "11) Inflação corrói poder de compra 💸",
+    titulo: "11) Equipe e liderança 🤝",
     conteudo: `
       <div class="space-y-4">
-        <p>Se a inflação é maior que o aumento do salário, você perde poder de compra.</p>
+        <p>Negócios duradouros são construídos com gente boa e alinhada.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li>Mesmo com aumento nominal, dá para levar menos produtos para casa.</li>
-          <li>Cesta básica e Big Mac mostram a inflação do dia a dia.</li>
-          <li>Saber disso te obriga a buscar rendas extras ou investimentos que superem o IPCA.</li>
+          <li>Contrate por valores e aprendizado rápido, não só por currículo.</li>
+          <li>Estabeleça rituais de comunicação: metas visíveis, 1:1 quinzenal.</li>
+          <li>Reconheça publicamente e corrija em particular.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> proteger o poder de compra é o primeiro passo para enriquecer.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> defina qual valor é inegociável no seu time e como medir se ele é vivido.</p>
       </div>
     `
   },
   {
-    titulo: "12) Salário mínimo ao longo do tempo 💼",
+    titulo: "12) Métricas que importam 📊",
     conteudo: `
       <div class="space-y-4">
+        <p>Olhe poucas métricas, mas olhe sempre. Elas orientam decisões e dão foco.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li>Ganho real entre 2003 e 2014 elevou o padrão de consumo.</li>
-          <li>Crises reduziram o crescimento entre 2015 e 2022.</li>
-          <li>Reajustes recentes tentam recuperar a renda do trabalho.</li>
+          <li><strong>Aquisição:</strong> CAC, conversão por canal.</li>
+          <li><strong>Produto:</strong> ativação inicial, retenção, NPS.</li>
+          <li><strong>Financeiro:</strong> margem bruta, receita recorrente, burn rate.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> salário é base, mas quem só depende dele fica vulnerável às crises.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> escolha 1 métrica para acompanhar semanalmente e defina uma meta realista.</p>
       </div>
     `
   },
   {
-    titulo: "13) Por que guardar dinheiro? 💾",
+    titulo: "13) Riscos e experimentos rápidos ⚡",
     conteudo: `
       <div class="space-y-4">
+        <p>Todo negócio tem riscos: mercado, produto, canal, pessoas. Reduza-os com testes curtos.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li>Emergências acontecem (saúde, demissão, conserto).</li>
-          <li>Chance de aproveitar oportunidades (curso, viagem, negócio).</li>
-          <li>Menos ansiedade: controle financeiro dá segurança.</li>
+          <li>Liste os 3 maiores riscos e associe um experimento de 1 semana para cada.</li>
+          <li>Registre hipótese, custo, resultado esperado e o que fazer se der errado.</li>
+          <li>Mate ideias que não mostram sinal de vida — rápido.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> guardar é dizer "sim" para o seu futuro e "não" para dívidas caras.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> planeje o próximo experimento e marque a data de revisão.</p>
       </div>
     `
   },
   {
-    titulo: "14) Reserva de emergência 🚑",
+    titulo: "14) História de vendas e storytelling 🗣️",
     conteudo: `
       <div class="space-y-4">
+        <p>Pessoas lembram de histórias, não de bullet points. Storytelling aumenta conversão.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li>Monte 3 a 6 meses de gastos essenciais.</li>
-          <li>Use aplicações com liquidez diária (Tesouro Selic, CDB).</li>
-          <li>Reponha depois de usar.</li>
+          <li>Comece com o problema vivido por um cliente.</li>
+          <li>Mostre o antes e depois com dados simples.</li>
+          <li>Convide para a ação: teste, demo ou assinatura.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> emergência vira incômodo, não desastre, quando você tem reserva.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> escreva um mini-caso em 5 linhas para usar na próxima ligação.</p>
       </div>
     `
   },
   {
-    titulo: "15) Juros compostos: seu melhor amigo ⏳",
+    titulo: "15) Plano 30-60-90 e próximo passo 🏁",
     conteudo: `
       <div class="space-y-4">
-        <p>Juros compostos fazem o dinheiro render sobre ele mesmo.</p>
+        <p>Saia com um plano simples e datas marcadas. O movimento cria clareza.</p>
         <ul class="list-disc ml-5 space-y-2">
-          <li>R$ 1.000 a 10% ao ano vira R$ 1.610 em 5 anos.</li>
-          <li>Quanto mais tempo investido, maior o efeito bola de neve.</li>
-          <li>Disciplina vence "golpe" milagroso.</li>
+          <li><strong>30 dias:</strong> validar problema e proposta de valor com 10 conversas.</li>
+          <li><strong>60 dias:</strong> MVP no ar + primeiros pagamentos ou cartas de intenção.</li>
+          <li><strong>90 dias:</strong> processo de vendas repetível e métrica semanal definida.</li>
         </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> constância + tempo = liberdade financeira.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "16) Conheça os riscos antes de investir ⚠️",
-    conteudo: `
-      <div class="space-y-4">
-        <div class="grid gap-3 md:grid-cols-2">
-          <div class="rounded-xl bg-slate-800/60 p-4">
-            <h3 class="font-semibold">Principais riscos</h3>
-            <ul class="list-disc ml-5 space-y-1">
-              <li>Mercado: preço sobe e desce o tempo todo.</li>
-              <li>Crédito: quem pegou seu dinheiro pode não pagar.</li>
-              <li>Liquidez: dificuldade de resgatar rápido.</li>
-            </ul>
-          </div>
-          <div class="rounded-xl bg-slate-800/60 p-4">
-            <h3 class="font-semibold">Como lidar</h3>
-            <ul class="list-disc ml-5 space-y-1">
-              <li>Diversifique ativos e prazos.</li>
-              <li>Tenha reserva para emergências.</li>
-              <li>Escolha investimentos que combinem com seu objetivo.</li>
-            </ul>
-          </div>
-        </div>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> aceitar um risco só faz sentido quando o retorno esperado conecta com o seu projeto de vida.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "17) Dinheiro trabalhando em conjunto 🧺",
-    conteudo: `
-      <div class="space-y-4">
-        <p>Exemplo de carteira equilibrada para jovens que querem crescer sem se expor demais:</p>
-        <ul class="list-disc ml-5 space-y-2">
-          <li>40% em reserva líquida (Tesouro Selic, CDB de liquidez diária).</li>
-          <li>30% em ativos indexados à inflação (Tesouro IPCA+, debêntures incentivadas).</li>
-          <li>20% em ações brasileiras e FIIs para renda e aprendizado.</li>
-          <li>10% em ETFs globais ou dólar para ver o mundo além das fronteiras.</li>
-        </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> diversificar cedo reduz medo de oscilações e cria repertório para empreender com dados.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "18) Trabalho bem feito chama oportunidade 💡",
-    conteudo: `
-      <div class="space-y-4">
-        <p>Mesmo ganhando pouco no início, entregar excelência aumenta a chance de promoções e convites melhores.</p>
-        <ul class="list-disc ml-5 space-y-2">
-          <li><strong>Reputação:</strong> quem cumpre promessa vira referência rápida.</li>
-          <li><strong>Portfólio:</strong> projetos bem feitos contam sua história profissional.</li>
-          <li><strong>Aprendizado contínuo:</strong> erros viram upgrade quando você analisa o que podia melhorar.</li>
-        </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> trabalhar mal porque paga pouco te prende no mesmo lugar; trabalhar bem te coloca no radar de quem paga melhor.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "19) Como aumentar o valor da sua hora 🧑‍🏭",
-    conteudo: `
-      <div class="space-y-4">
-        <ul class="list-disc ml-5 space-y-2">
-          <li><strong>Exclusividade:</strong> desenvolva habilidades raras (ex.: programação, design 3D, idiomas).</li>
-          <li><strong>Combinação única:</strong> junte paixões (finanças + audiovisual = conteúdo valioso).</li>
-          <li><strong>Rede de contatos:</strong> quanto mais gente sabe o que você faz, mais oportunidades aparecem.</li>
-        </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> preço alto não vem do acaso, mas da sua capacidade de resolver problemas que poucos resolvem.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "20) Da renda ao investimento e ao negócio 🚀",
-    conteudo: `
-      <div class="space-y-4">
-        <p>Usar bem o salário é a ponte para investir e, mais tarde, empreender.</p>
-        <ul class="list-disc ml-5 space-y-2">
-          <li><strong>Organize-se:</strong> orçamento mostra quanto sobra para investir todo mês.</li>
-          <li><strong>Capital semente:</strong> reserve parte dos investimentos para testar ideias.</li>
-          <li><strong>Reinvestimento:</strong> lucros do negócio voltam para crescer ou diversificar.</li>
-        </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> empreendedorismo começa quando você decide que uma parte da renda bancará seus próprios projetos.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "21) Educação financeira é liberdade 🗝️",
-    conteudo: `
-      <div class="space-y-4">
-        <ul class="list-disc ml-5 space-y-2">
-          <li><strong>Controle:</strong> saiba para onde vai cada real.</li>
-          <li><strong>Planejamento:</strong> defina metas de curto, médio e longo prazo.</li>
-          <li><strong>Curiosidade:</strong> aprenda produtos financeiros novos, mesmo que não use agora.</li>
-        </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> conhecimento vira liberdade porque você não depende de dicas aleatórias para tomar decisões.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "22) Plano de ação em 4 passos ✅",
-    conteudo: `
-      <div class="space-y-4">
-        <ol class="list-decimal ml-5 space-y-2">
-          <li><strong>Diagnóstico:</strong> liste receitas, gastos e dívidas.</li>
-          <li><strong>Fundação:</strong> monte reserva de emergência e quite dívidas caras.</li>
-          <li><strong>Construção:</strong> invista com metas claras (IPCA+, renda variável, dólar).</li>
-          <li><strong>Escala:</strong> transforme conhecimento em novas fontes de renda (freelas, negócios, sociedade).</li>
-        </ol>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> revisar esse plano a cada semestre mantém você no controle da própria evolução.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "23) Caso real: Felipe Cataldi e Luan Gabellini 🚀",
-    conteudo: `
-      <div class="space-y-4">
-        <p>Dois colegas da Administração na FGV transformaram freelas e jobs paralelos em uma empresa de tecnologia, aparecendo em matérias sobre jovens empreendedores e na lista "30 abaixo de 30".</p>
-        <ul class="list-disc ml-5 space-y-2">
-          <li><strong>2009-2010:</strong> freelas de sistemas e e-commerce revelam uma dor comum: falta de backoffice integrado.</li>
-          <li><strong>2010:</strong> nasce a <strong>BetaLabs</strong> para resolver o problema com software próprio.</li>
-          <li><strong>2014:</strong> marca presença na mídia e amplia carteira de clientes, com equipe crescendo para dar conta da demanda.</li>
-        </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> começar simples, ouvindo o cliente, pode virar referência nacional em poucos anos.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "24) Linha do tempo da jornada 🗺️",
-    conteudo: `
-      <div class="space-y-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="rounded-xl bg-slate-800/60 p-4 space-y-2">
-            <h3 class="font-semibold">Começo</h3>
-            <ul class="list-disc ml-5 space-y-1">
-              <li>Prototipagem rápida ainda na faculdade.</li>
-              <li>Primeiros clientes vindos da rede de contatos e indicação.</li>
-              <li>Trabalho em paralelo (freelas) enquanto validavam o produto.</li>
-            </ul>
-          </div>
-          <div class="rounded-xl bg-slate-800/60 p-4 space-y-2">
-            <h3 class="font-semibold">Escala</h3>
-            <ul class="list-disc ml-5 space-y-1">
-              <li>Formalização da empresa e rotina de reuniões semanais de produto.</li>
-              <li>Contratações planejadas para suportar crescimento e suporte.</li>
-              <li>Metas de faturamento claras, compartilhadas com a equipe.</li>
-            </ul>
-          </div>
-        </div>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> alternar entre vender e construir é essencial para não travar o fluxo de caixa.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "25) Lições práticas da BetaLabs 📌",
-    conteudo: `
-      <div class="space-y-4">
-        <ul class="list-disc ml-5 space-y-2">
-          <li><strong>Metas e transparência:</strong> compartilhar objetivos semanais manteve a equipe alinhada.</li>
-          <li><strong>Produto = rotina:</strong> releases curtos resolveram bugs e pediram feedback constante.</li>
-          <li><strong>Contratação sob demanda:</strong> cada nova venda justificava ampliar o time de suporte e engenharia.</li>
-          <li><strong>Reinvestimento:</strong> lucro voltou para marketing e tecnologia, sem depender de capital externo no início.</li>
-        </ul>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> disciplina financeira e de processos sustenta o crescimento mais do que manchetes.</p>
-      </div>
-    `
-  },
-  {
-    titulo: "26) Como repetir esse caminho? 🧭",
-    conteudo: `
-      <div class="space-y-4">
-        <ol class="list-decimal ml-5 space-y-2">
-          <li><strong>Encontre a dor:</strong> liste frustrações reais que você ou seus amigos têm (ex.: operação confusa no e-commerce).</li>
-          <li><strong>Protótipo e cobre:</strong> entregue uma solução mínima e peça pagamento desde o começo.</li>
-          <li><strong>Processo de vendas:</strong> defina ICP, roteiro e follow-up; o ciclo repetível financia o produto.</li>
-          <li><strong>Time enxuto:</strong> contrate quando o faturamento sustentar; treinamento evita perder qualidade.</li>
-          <li><strong>Aprenda com clientes:</strong> reúna feedback semanal e priorize o que destrava tempo ou receita para eles.</li>
-        </ol>
-        <p class="text-sm text-slate-400"><strong>Insight:</strong> qualquer área (tecnologia, serviços, criativo) pode seguir essa lógica de validação rápida + melhoria contínua.</p>
+        <p class="text-sm text-slate-400"><strong>Interativo:</strong> escreva no celular o próximo passo em 24h e peça a alguém para cobrar você.</p>
       </div>
     `
   }
