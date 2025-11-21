@@ -38,6 +38,7 @@
               <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
                 <div id="slideProgress" class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
               </div>
+              <p id="statusInfo" class="text-[11px] sm:text-xs text-slate-300">Você está no início da trilha.</p>
               <div class="text-[11px] sm:text-xs text-slate-300 flex items-center gap-2 bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">Rodada vale 1 ponto para o acerto mais rápido.</div>
             </div>
             <div class="p-3 rounded-xl border border-emerald-500/30 bg-emerald-950/40 h-full">
