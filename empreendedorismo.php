@@ -87,25 +87,16 @@
               <h4 class="text-sm font-semibold text-slate-200 uppercase tracking-[0.08em]">Pontos-chave</h4>
               <ul id="slideBullets" class="mt-2 space-y-2 list-disc ml-5 text-slate-300 text-sm"></ul>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div class="p-3 rounded-xl border border-emerald-500/25 bg-emerald-950/40">
-                <div class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Desafio rápido</div>
-                <p id="slideAction" class="text-sm text-slate-100 mt-1">Ação prática do slide.</p>
-                <button id="actionButton" class="mt-3 inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Marcar como concluído</button>
-              </div>
-              <div class="p-3 rounded-xl border border-slate-700 bg-slate-950/40 space-y-2">
-                <div class="text-xs uppercase tracking-[0.14em] text-cyan-300 font-semibold">Guarda-ideias</div>
-                <label for="anotacoes" class="text-xs text-slate-400">Anote insights e tarefas. O texto fica salvo enquanto você estiver aqui.</label>
-                <textarea id="anotacoes" class="w-full mt-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-100 text-sm p-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" rows="4" placeholder="Escreva o que não quer esquecer"></textarea>
-              </div>
-            </div>
             <div class="p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/30 space-y-3">
-              <div class="flex items-center justify-between gap-2">
+              <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Rodada relâmpago</p>
-                  <p class="text-sm text-slate-200 font-semibold">3 perguntas rápidas para somar pontos</p>
+                  <p class="text-sm text-slate-200 font-semibold">Perguntas em tela cheia com controle de quem acertou</p>
                 </div>
-                <span class="text-[11px] text-emerald-200 bg-emerald-900/40 border border-emerald-500/30 px-3 py-1 rounded-full">Quem acerta primeiro leva 1 ponto</span>
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-[11px] text-emerald-200 bg-emerald-900/40 border border-emerald-500/30 px-3 py-1 rounded-full">Pontos acumulam na apresentação</span>
+                  <button id="openQuestions" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Abrir perguntas</button>
+                </div>
               </div>
               <div id="questionsList" class="space-y-3"></div>
             </div>
@@ -135,6 +126,19 @@
         </div>
       </div>
     </section>
+  </div>
+
+  <div id="questionModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-lg hidden z-40">
+    <div class="max-w-5xl mx-auto p-4 h-full flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div>
+          <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Perguntas em tela cheia</p>
+          <h4 id="modalSlideLabel" class="text-lg font-bold">Slide</h4>
+        </div>
+        <button id="closeModal" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-700 text-slate-200 hover:border-emerald-400 hover:text-emerald-100 transition text-sm">Fechar</button>
+      </div>
+      <div id="modalQuestions" class="overflow-y-auto mt-4 space-y-4 flex-1 pr-1"></div>
+    </div>
   </div>
 
   <script>
@@ -447,25 +451,22 @@
     const slideLabel = document.getElementById('slideLabel');
     const slideProgress = document.getElementById('slideProgress');
     const slideTag = document.getElementById('slideTag');
-    const slideAction = document.getElementById('slideAction');
     const slideMood = document.getElementById('slideMood');
     const statusInfo = document.getElementById('statusInfo');
-    const actionButton = document.getElementById('actionButton');
     const prevSlide = document.getElementById('prevSlide');
     const nextSlide = document.getElementById('nextSlide');
-    const anotacoes = document.getElementById('anotacoes');
     const questionsList = document.getElementById('questionsList');
     const leaderboardList = document.getElementById('leaderboardList');
     const studentNameInput = document.getElementById('studentName');
+    const openQuestionsBtn = document.getElementById('openQuestions');
+    const questionModal = document.getElementById('questionModal');
+    const closeModal = document.getElementById('closeModal');
+    const modalQuestions = document.getElementById('modalQuestions');
+    const modalSlideLabel = document.getElementById('modalSlideLabel');
 
     let current = 0;
     let placar = {};
-
-    const saveNotes = () => localStorage.setItem('empreendedorismo-notes', anotacoes.value);
-    const loadNotes = () => {
-      const saved = localStorage.getItem('empreendedorismo-notes');
-      if (saved) anotacoes.value = saved;
-    };
+    const questionStates = {};
 
     const saveScores = () => localStorage.setItem('empreendedorismo-placar', JSON.stringify(placar));
 
@@ -505,11 +506,15 @@
       updateLeaderboard();
     };
 
-    const registrarPonto = () => {
-      let nome = studentNameInput.value.trim();
-      if (!nome) {
-        nome = (prompt('Digite o nome de quem acertou primeiro:') || '').trim();
-      }
+    const solicitarNome = () => {
+      const sugestao = studentNameInput.value.trim();
+      const nome = (prompt('Digite o nome de quem acertou:', sugestao || '') || '').trim();
+      if (!nome) return null;
+      studentNameInput.value = nome;
+      return nome;
+    };
+
+    const registrarPonto = (nome) => {
       if (!nome) return;
       const chave = nome.toLowerCase();
       if (!placar[chave]) {
@@ -517,57 +522,114 @@
       }
       if (!placar[chave].nome) placar[chave].nome = nome;
       placar[chave].pontos += 1;
-      studentNameInput.value = nome;
       saveScores();
       updateLeaderboard();
     };
 
-    const renderQuestions = (questions) => {
+    const ensureQuestionState = (index) => {
+      if (!questionStates[index]) {
+        questionStates[index] = (slides[index].perguntas || []).map(() => ({ answered: false, vencedor: '' }));
+      }
+      return questionStates[index];
+    };
+
+    const renderQuestionSummary = () => {
+      const questions = slides[current].perguntas || [];
+      const states = ensureQuestionState(current);
       questionsList.innerHTML = '';
+
+      if (!questions.length) {
+        const p = document.createElement('p');
+        p.textContent = 'Este slide não possui perguntas.';
+        p.className = 'text-sm text-slate-400';
+        questionsList.appendChild(p);
+        return;
+      }
+
       questions.forEach((question, idx) => {
         const card = document.createElement('div');
-        card.className = 'border border-emerald-800/40 bg-slate-900/70 rounded-xl p-3 space-y-2';
+        card.className = 'flex items-start justify-between gap-3 rounded-lg border border-emerald-900/40 bg-slate-900/60 px-3 py-2';
+        const info = document.createElement('div');
         const title = document.createElement('p');
         title.className = 'text-sm font-semibold text-slate-100';
         title.textContent = `Pergunta ${idx + 1}: ${question.enunciado}`;
         const status = document.createElement('p');
         status.className = 'text-xs text-slate-400';
-        status.textContent = 'Acerte primeiro para ganhar 1 ponto.';
+
+        if (states[idx].answered) {
+          status.textContent = `Respondida por ${states[idx].vencedor}.`;
+          status.classList.add('text-emerald-300', 'font-semibold');
+        } else {
+          status.textContent = 'Em aberto — responda na tela cheia.';
+        }
+        info.append(title, status);
+
+        const badge = document.createElement('span');
+        badge.className = `text-[11px] px-2 py-1 rounded-full border ${states[idx].answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-900/70'}`;
+        badge.textContent = states[idx].answered ? 'Respondida' : 'Pendente';
+
+        card.append(info, badge);
+        questionsList.appendChild(card);
+      });
+    };
+
+    const renderModalQuestions = () => {
+      const slide = slides[current];
+      const questions = slide.perguntas || [];
+      const states = ensureQuestionState(current);
+      modalSlideLabel.textContent = `${slide.titulo} — ${questions.length} pergunta${questions.length === 1 ? '' : 's'}`;
+      modalQuestions.innerHTML = '';
+
+      questions.forEach((question, idx) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'border border-emerald-800/40 bg-slate-900/70 rounded-xl p-4 space-y-3';
+
+        const header = document.createElement('div');
+        header.className = 'flex items-start justify-between gap-3';
+        const title = document.createElement('p');
+        title.className = 'text-base font-semibold text-slate-100';
+        title.textContent = `Pergunta ${idx + 1}: ${question.enunciado}`;
+        const status = document.createElement('span');
+        status.className = `text-[11px] px-2 py-1 rounded-full border ${states[idx].answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-900/70'}`;
+        status.textContent = states[idx].answered ? `Respondida por ${states[idx].vencedor}` : 'Aguardando resposta';
+        header.append(title, status);
 
         const optionsWrapper = document.createElement('div');
         optionsWrapper.className = 'grid grid-cols-1 sm:grid-cols-3 gap-2';
-        let respondida = false;
 
         question.opcoes.forEach((option) => {
           const btn = document.createElement('button');
           btn.textContent = option;
           btn.className = 'w-full text-left px-3 py-2 rounded-lg border border-slate-700 bg-slate-950 hover:border-emerald-500 hover:text-emerald-100 text-sm transition';
-          btn.addEventListener('click', () => {
-            if (respondida) return;
+
+          if (states[idx].answered) {
+            btn.disabled = true;
+            btn.classList.add('opacity-60');
             if (option === question.correta) {
-              respondida = true;
-              status.textContent = 'Acertou! +1 ponto registrado para quem respondeu.';
-              status.className = 'text-xs text-emerald-300 font-semibold';
-              registrarPonto();
-              optionsWrapper.querySelectorAll('button').forEach((button) => {
-                button.disabled = true;
-                button.classList.add('opacity-60');
-                if (button.textContent === option) {
-                  button.classList.add('border-emerald-400', 'text-emerald-200');
-                }
-              });
+              btn.classList.add('border-emerald-400', 'text-emerald-200');
+            }
+          }
+
+          btn.addEventListener('click', () => {
+            if (states[idx].answered) return;
+            if (option === question.correta) {
+              const nome = solicitarNome();
+              if (!nome) return;
+              states[idx] = { answered: true, vencedor: nome };
+              registrarPonto(nome);
+              renderQuestionSummary();
+              renderModalQuestions();
             } else {
               btn.disabled = true;
               btn.classList.add('line-through', 'opacity-50', 'border-amber-400', 'text-amber-200');
-              status.textContent = 'Resposta eliminada, outra pessoa pode tentar!';
-              status.className = 'text-xs text-amber-300 font-semibold';
             }
           });
+
           optionsWrapper.appendChild(btn);
         });
 
-        card.append(title, optionsWrapper, status);
-        questionsList.appendChild(card);
+        wrapper.append(header, optionsWrapper);
+        modalQuestions.appendChild(wrapper);
       });
     };
 
@@ -577,7 +639,6 @@
       slideTitle.textContent = slide.titulo;
       slideSummary.textContent = slide.resumo;
       slideTag.textContent = slide.tag;
-      slideAction.textContent = slide.acao;
       slideMood.textContent = slide.humor;
       slideBullets.innerHTML = '';
       slide.bullets.forEach((item) => {
@@ -588,26 +649,23 @@
       slideLabel.textContent = `Slide ${current + 1} de ${slides.length}`;
       const pct = (current / (slides.length - 1)) * 100;
       slideProgress.style.width = `${pct}%`;
-      statusInfo.textContent = current === 0 ? 'Você está no início da trilha.' : current + 1 === slides.length ? 'Último slide: hora de executar!' : 'Continue avançando, cada slide é um passo.';
-      actionButton.textContent = slide.botao;
-      actionButton.dataset.done = 'false';
-      actionButton.classList.remove('bg-emerald-700');
-      actionButton.classList.add('bg-emerald-500');
-      renderQuestions(slide.perguntas || []);
+      statusInfo.textContent = current === 0 ? 'Você está no início da trilha.' : current + 1 === slides.length ? 'Último slide, hora de executar!' : 'Continue avançando, cada slide é um passo.';
+      ensureQuestionState(current);
+      renderQuestionSummary();
     };
-
-    actionButton.addEventListener('click', () => {
-      const done = actionButton.dataset.done === 'true';
-      actionButton.dataset.done = (!done).toString();
-      actionButton.textContent = done ? slides[current].botao : 'Concluído! ✅';
-      actionButton.classList.toggle('bg-emerald-700');
-    });
 
     prevSlide.addEventListener('click', () => renderSlide(current - 1));
     nextSlide.addEventListener('click', () => renderSlide(current + 1));
-    anotacoes.addEventListener('input', saveNotes);
+    openQuestionsBtn.addEventListener('click', () => {
+      renderModalQuestions();
+      questionModal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    });
+    closeModal.addEventListener('click', () => {
+      questionModal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    });
 
-    loadNotes();
     loadScores();
     renderSlide(0);
   </script>
