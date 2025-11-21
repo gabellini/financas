@@ -34,7 +34,7 @@ $totalQuestions = count($questions);
     <main class="glass-panel p-4 sm:p-6 space-y-5">
       <section class="space-y-3">
         <h2 class="text-lg font-semibold">1) Cadastre-se uma vez</h2>
-        <p class="text-sm text-slate-400">Digite seu nome para participar. Salvamos no seu dispositivo.</p>
+        <p class="text-sm text-slate-400">Digite seu nome para participar. Salvamos no seu dispositivo e não dá para alterar depois.</p>
         <form id="registerForm" class="flex flex-col sm:flex-row gap-3">
           <input id="inputName" class="flex-1 rounded-xl px-4 py-3 bg-slate-900 border border-slate-800 focus:border-emerald-500 focus:outline-none" placeholder="Seu nome" />
           <button type="submit" class="btn btn-emerald">Salvar</button>
