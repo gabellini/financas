@@ -43,6 +43,27 @@
         <p class="text-slate-300 text-lg leading-relaxed">Comecei empreendendo por necessidade: freelas de design aos 17 anos, agência digital aos 21, e depois uma plataforma SaaS B2B focada em dados de mercado. Cresci bootstrapped, reinvestindo lucro, errando em planejamento de produto e aprendendo a vender. O que deu certo: ouvir clientes toda semana, criar um processo comercial repetível e manter caixa de 12 meses para suportar ciclos longos.</p>
       </div>
 
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 border border-slate-800/80 rounded-2xl bg-slate-900/60 space-y-3">
+          <h3 class="font-semibold text-lg">Linha do tempo BetaLabs</h3>
+          <ul class="list-disc ml-5 text-sm text-slate-300 space-y-2">
+            <li><strong>2010:</strong> fundação ainda na faculdade, depois de freelas de sistemas e e-commerce.</li>
+            <li><strong>2011-2013:</strong> primeiras integrações, foco em resolver o backoffice para lojistas.</li>
+            <li><strong>2014:</strong> equipe cresce para atender novos contratos, empresa aparece na mídia e em listas de jovens empreendedores.</li>
+          </ul>
+          <p class="text-xs text-slate-400">Recortes das matérias anexadas mostram a dupla Felipe Cataldi e Luan Gabellini recebendo destaque nacional e contratando para acompanhar a demanda.</p>
+        </div>
+        <div class="p-4 border border-slate-800/80 rounded-2xl bg-slate-900/60 space-y-3">
+          <h3 class="font-semibold text-lg">O que sustentou o crescimento</h3>
+          <ul class="list-disc ml-5 text-sm text-slate-300 space-y-2">
+            <li>Metas claras e compartilhadas com o time.</li>
+            <li>Releases curtos e feedback constante dos clientes.</li>
+            <li>Contratações alinhadas à entrada de receita.</li>
+            <li>Reinvestimento dos lucros em marketing e produto.</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="metric-card p-4 space-y-2">
           <div class="kpi">Primeiro salto</div>
