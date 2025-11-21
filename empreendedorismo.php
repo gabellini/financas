@@ -469,6 +469,7 @@
     let current = 0;
     let placar = {};
     let questionStates = {};
+    let liveStateInterval = null;
     let expandedQuestion = null;
     let resolveNamePromise = null;
 
@@ -575,27 +576,43 @@
       liveStatus.classList.toggle('text-emerald-300', highlight);
     };
 
-    const escolherPerguntaParaLiberar = () => {
+    const buildQuestionId = (slideIndex, questionIndex) => slideIndex * 100 + questionIndex;
+
+    const escolherPerguntaParaLiberar = (customIndex = null) => {
       const questions = slides[current].perguntas || [];
       if (!questions.length) return null;
       const states = ensureQuestionState(current);
       const pendingIndex = states.findIndex((item) => !item.answered);
-      const targetIndex = pendingIndex >= 0 ? pendingIndex : 0;
+      const targetIndex = customIndex !== null ? customIndex : pendingIndex >= 0 ? pendingIndex : 0;
 
       return { question: questions[targetIndex], index: targetIndex };
     };
 
-    const liberarPerguntaNosCelulares = async () => {
-      const alvo = escolherPerguntaParaLiberar();
+    const marcarComoRespondida = (slideIndex, questionIndex, vencedor) => {
+      const questions = slides[slideIndex]?.perguntas || [];
+      const question = questions[questionIndex];
+      const states = ensureQuestionState(slideIndex);
+      if (!question) return;
+
+      states[questionIndex] = { answered: true, vencedor: vencedor || '—', correta: question.correta };
+
+      if (slideIndex === current) {
+        renderQuestionSummary();
+        renderModalQuestions();
+      }
+    };
+
+    const liberarPerguntaNosCelulares = async (targetIndex = null) => {
+      const alvo = escolherPerguntaParaLiberar(targetIndex);
       if (!alvo) {
         setLiveStatus('Não há perguntas neste slide para liberar.');
         return;
       }
 
-      setLiveStatus('Liberando pergunta para os celulares...');
+        setLiveStatus('Liberando pergunta para os celulares...');
       const payload = {
         action: 'release',
-        questionId: current * 10 + alvo.index,
+        questionId: buildQuestionId(current, alvo.index),
         questionText: alvo.question.enunciado,
         options: alvo.question.opcoes,
         correctOption: alvo.question.correta,
@@ -625,7 +642,7 @@
 
     const ensureQuestionState = (index) => {
       if (!questionStates[index]) {
-        questionStates[index] = (slides[index].perguntas || []).map(() => ({ answered: false, vencedor: '' }));
+        questionStates[index] = (slides[index].perguntas || []).map(() => ({ answered: false, vencedor: '', correta: '' }));
       }
       return questionStates[index];
     };
@@ -654,7 +671,7 @@
         status.className = 'text-xs text-slate-400';
 
         if (states[idx].answered) {
-          status.textContent = `Respondida por ${states[idx].vencedor}.`;
+          status.textContent = `Respondida por ${states[idx].vencedor}. Acerto: ${states[idx].correta}`;
           status.classList.add('text-emerald-300', 'font-semibold');
         } else {
           status.textContent = 'Em aberto';
@@ -665,7 +682,19 @@
         badge.className = `text-[11px] px-2 py-1 rounded-full border ${states[idx].answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-900/70'}`;
         badge.textContent = states[idx].answered ? 'Respondida' : 'Pendente';
 
-        card.append(info, badge);
+        const actions = document.createElement('div');
+        actions.className = 'flex items-center gap-2';
+
+        const releaseBtn = document.createElement('button');
+        releaseBtn.type = 'button';
+        releaseBtn.textContent = 'Liberar';
+        releaseBtn.className = 'text-xs px-3 py-1 rounded-lg border border-emerald-500 text-emerald-100 hover:bg-emerald-500 hover:text-slate-900 transition disabled:opacity-50 disabled:cursor-not-allowed';
+        releaseBtn.disabled = states[idx].answered;
+        releaseBtn.addEventListener('click', () => liberarPerguntaNosCelulares(idx));
+
+        actions.append(badge, releaseBtn);
+
+        card.append(info, actions);
         questionsList.appendChild(card);
       });
     };
@@ -708,7 +737,7 @@
         title.textContent = `Pergunta ${idx + 1}`;
         const status = document.createElement('span');
         status.className = `text-[11px] px-3 py-1 rounded-full border ${state.answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-950/70'}`;
-        status.textContent = state.answered ? `Respondida por ${state.vencedor}` : 'Em aberto';
+        status.textContent = state.answered ? `Respondida por ${state.vencedor} · ${state.correta}` : 'Em aberto';
         header.append(title, status);
 
         const statement = document.createElement('p');
@@ -736,7 +765,7 @@
             if (option === question.correta) {
               const nome = await solicitarNome();
               if (!nome) return;
-              states[idx] = { answered: true, vencedor: nome };
+              states[idx] = { answered: true, vencedor: nome, correta: question.correta };
               await registrarPonto(nome);
               renderQuestionSummary();
               renderModalQuestions();
@@ -835,7 +864,34 @@
       updateLeaderboard();
     });
 
-    loadScores().then(() => renderSlide(0));
+    const sincronizarPerguntaAoVivo = async () => {
+      try {
+        const response = await fetch(liveQuizEndpoint);
+        const data = await response.json();
+
+        if (data.status === 'closed' && data.winner && data.closedQuestion) {
+          const slideIndex = Math.floor((data.closedQuestion.id ?? 0) / 100);
+          const questionIndex = (data.closedQuestion.id ?? 0) % 100;
+          marcarComoRespondida(slideIndex, questionIndex, data.winner.name || data.winner);
+          setLiveStatus(`Pergunta encerrada. Vencedor: ${data.winner.name || data.winner}.`, true);
+        }
+      } catch (error) {
+        console.error('Erro ao sincronizar pergunta ao vivo', error);
+      }
+    };
+
+    const iniciarAtualizacoesAoVivo = () => {
+      if (liveStateInterval) clearInterval(liveStateInterval);
+      liveStateInterval = setInterval(() => {
+        loadScores();
+        sincronizarPerguntaAoVivo();
+      }, 4000);
+    };
+
+    loadScores().then(() => {
+      renderSlide(0);
+      iniciarAtualizacoesAoVivo();
+    });
   </script>
 </body>
 </html>
