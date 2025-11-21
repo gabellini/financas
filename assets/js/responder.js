@@ -15,6 +15,7 @@ const elements = {
 };
 
 let cachedName = localStorage.getItem(nameKey) || '';
+let nameLocked = Boolean(cachedName);
 let currentQuestionId = null;
 let alreadyAnswered = false;
 
@@ -25,7 +26,22 @@ function setFeedback(message, success = true) {
   elements.registerFeedback.classList.toggle('text-amber-400', !success);
 }
 
+function updateNameLockUI() {
+  elements.nameInput.value = cachedName;
+  elements.nameInput.disabled = nameLocked;
+  elements.nameInput.classList.toggle('opacity-70', nameLocked);
+  elements.form.querySelector('button[type="submit"]').disabled = nameLocked;
+  elements.form.querySelector('button[type="submit"]').textContent = nameLocked ? 'Nome salvo' : 'Salvar';
+  elements.refresh.disabled = !nameLocked;
+
+  if (nameLocked && cachedName) {
+    setFeedback(`Você está respondendo como "${cachedName}".`, true);
+  }
+}
+
 async function registerName(name) {
+  if (nameLocked) return;
+
   const response = await fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -45,11 +61,16 @@ async function registerName(name) {
 
   cachedName = data.player?.nome || name;
   localStorage.setItem(nameKey, cachedName);
-  setFeedback(`Nome salvo como "${cachedName}".`);
+  nameLocked = true;
+  updateNameLockUI();
+  setFeedback(`Nome salvo como "${cachedName}".`, true);
+  fetchQuestion();
 }
 
 function showWaitingState() {
-  elements.questionStatus.textContent = 'Nenhuma pergunta liberada no momento. Aguarde o apresentador.';
+  elements.questionStatus.textContent = nameLocked
+    ? 'Nenhuma pergunta liberada no momento. Aguarde o apresentador.'
+    : 'Salve seu nome antes de ver as perguntas liberadas.';
   elements.questionContent.classList.add('hidden');
   elements.optionsList.innerHTML = '';
   elements.answerFeedback.textContent = '';
@@ -86,6 +107,11 @@ function renderQuestion(question) {
 }
 
 async function fetchQuestion() {
+  if (!nameLocked || !cachedName) {
+    showWaitingState();
+    return;
+  }
+
   elements.answerFeedback.textContent = '';
   try {
     const response = await fetch(API_URL);
@@ -152,14 +178,18 @@ async function submitAnswer(optionIndex) {
 
 function syncNameField() {
   if (cachedName) {
-    elements.nameInput.value = cachedName;
     setFeedback(`Você está respondendo como "${cachedName}".`);
   }
+  updateNameLockUI();
 }
 
 function setupEvents() {
   elements.form.addEventListener('submit', (event) => {
     event.preventDefault();
+    if (nameLocked) {
+      setFeedback(`O nome "${cachedName}" já está salvo neste dispositivo.`, true);
+      return;
+    }
     const name = elements.nameInput.value.trim();
     if (!name) {
       setFeedback('Digite um nome para participar.', false);

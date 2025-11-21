@@ -71,11 +71,10 @@
                   </div>
                   <div class="flex flex-wrap items-center gap-2">
                     <span class="text-[11px] text-emerald-200 bg-emerald-900/40 border border-emerald-500/30 px-3 py-1 rounded-full">Pontos acumulam na apresentação</span>
-                    <button id="releaseQuestion" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-emerald-400 text-emerald-100 text-sm hover:bg-emerald-500 hover:text-slate-900 transition">📡 Liberar para celulares</button>
                     <button id="openQuestions" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Abrir perguntas</button>
                   </div>
                 </div>
-                <p id="liveStatus" class="text-xs text-slate-400">Perguntas liberadas aparecem para quem estiver no "Responder".</p>
+                <p id="liveStatus" class="text-xs text-slate-400">Escolha a pergunta para liberar individualmente.</p>
                 <div id="questionsList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
               </div>
 
@@ -452,7 +451,6 @@
     const leaderboardList = document.getElementById('leaderboardList');
     const resetRankingBtn = document.getElementById('resetRanking');
     const openQuestionsBtn = document.getElementById('openQuestions');
-    const releaseQuestionBtn = document.getElementById('releaseQuestion');
     const liveStatus = document.getElementById('liveStatus');
     const questionModal = document.getElementById('questionModal');
     const closeModal = document.getElementById('closeModal');
@@ -472,6 +470,7 @@
     let liveStateInterval = null;
     let expandedQuestion = null;
     let resolveNamePromise = null;
+    let releasingQuestion = false;
 
     const populateSavedNames = () => {
       const entries = Object.values(placar).sort((a, b) => a.nome.localeCompare(b.nome));
@@ -594,7 +593,11 @@
       const states = ensureQuestionState(slideIndex);
       if (!question) return;
 
-      states[questionIndex] = { answered: true, vencedor: vencedor || '—', correta: question.correta };
+      states.forEach((state, idx) => {
+        states[idx] = { ...state, liberada: false };
+      });
+
+      states[questionIndex] = { answered: true, vencedor: vencedor || '—', correta: question.correta, liberada: false };
 
       if (slideIndex === current) {
         renderQuestionSummary();
@@ -603,13 +606,23 @@
     };
 
     const liberarPerguntaNosCelulares = async (targetIndex = null) => {
+      if (releasingQuestion) return;
+
       const alvo = escolherPerguntaParaLiberar(targetIndex);
       if (!alvo) {
         setLiveStatus('Não há perguntas neste slide para liberar.');
         return;
       }
 
-        setLiveStatus('Liberando pergunta para os celulares...');
+      const states = ensureQuestionState(current);
+      states.forEach((state, idx) => {
+        if (idx !== alvo.index) {
+          states[idx] = { ...state, liberada: false };
+        }
+      });
+
+      releasingQuestion = true;
+      setLiveStatus('Liberando pergunta para os celulares...');
       const payload = {
         action: 'release',
         questionId: buildQuestionId(current, alvo.index),
@@ -633,17 +646,28 @@
           return;
         }
 
+        states[alvo.index] = { ...states[alvo.index], liberada: true };
         setLiveStatus(`Pergunta ${alvo.index + 1} liberada para quem está no celular.`, true);
+        renderQuestionSummary();
+        renderModalQuestions();
       } catch (error) {
         console.error('Erro ao liberar pergunta', error);
         setLiveStatus('Erro ao liberar a pergunta. Confira a conexão.');
+      } finally {
+        releasingQuestion = false;
       }
     };
 
     const ensureQuestionState = (index) => {
-      if (!questionStates[index]) {
-        questionStates[index] = (slides[index].perguntas || []).map(() => ({ answered: false, vencedor: '', correta: '' }));
-      }
+      const defaults = { answered: false, vencedor: '', correta: '', liberada: false };
+      const base = questionStates[index] || [];
+      const questions = slides[index].perguntas || [];
+
+      questionStates[index] = questions.map((_, idx) => ({
+        ...defaults,
+        ...(base[idx] || {})
+      }));
+
       return questionStates[index];
     };
 
@@ -673,14 +697,17 @@
         if (states[idx].answered) {
           status.textContent = `Respondida por ${states[idx].vencedor}. Acerto: ${states[idx].correta}`;
           status.classList.add('text-emerald-300', 'font-semibold');
+        } else if (states[idx].liberada) {
+          status.textContent = 'Liberada para os alunos neste momento';
+          status.classList.add('text-emerald-200');
         } else {
           status.textContent = 'Em aberto';
         }
         info.append(title, status);
 
         const badge = document.createElement('span');
-        badge.className = `text-[11px] px-2 py-1 rounded-full border ${states[idx].answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-900/70'}`;
-        badge.textContent = states[idx].answered ? 'Respondida' : 'Pendente';
+        badge.className = `text-[11px] px-2 py-1 rounded-full border ${states[idx].answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : states[idx].liberada ? 'border-cyan-400 text-cyan-100 bg-cyan-900/40' : 'border-slate-700 text-slate-300 bg-slate-900/70'}`;
+        badge.textContent = states[idx].answered ? 'Respondida' : states[idx].liberada ? 'Liberada' : 'Pendente';
 
         const actions = document.createElement('div');
         actions.className = 'flex items-center gap-2';
@@ -689,7 +716,7 @@
         releaseBtn.type = 'button';
         releaseBtn.textContent = 'Liberar';
         releaseBtn.className = 'text-xs px-3 py-1 rounded-lg border border-emerald-500 text-emerald-100 hover:bg-emerald-500 hover:text-slate-900 transition disabled:opacity-50 disabled:cursor-not-allowed';
-        releaseBtn.disabled = states[idx].answered;
+        releaseBtn.disabled = states[idx].answered || states[idx].liberada;
         releaseBtn.addEventListener('click', () => liberarPerguntaNosCelulares(idx));
 
         actions.append(badge, releaseBtn);
@@ -736,16 +763,27 @@
         title.className = 'text-lg font-bold text-slate-100';
         title.textContent = `Pergunta ${idx + 1}`;
         const status = document.createElement('span');
-        status.className = `text-[11px] px-3 py-1 rounded-full border ${state.answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-950/70'}`;
-        status.textContent = state.answered ? `Respondida por ${state.vencedor} · ${state.correta}` : 'Em aberto';
+        let statusLabel = 'Em aberto';
+        let statusClasses = 'border-slate-700 text-slate-300 bg-slate-950/70';
+
+        if (state.answered) {
+          statusLabel = `Respondida por ${state.vencedor} · ${state.correta}`;
+          statusClasses = 'border-emerald-400 text-emerald-200 bg-emerald-900/50';
+        } else if (state.liberada) {
+          statusLabel = 'Liberada para os alunos';
+          statusClasses = 'border-cyan-400 text-cyan-100 bg-cyan-900/40';
+        }
+
+        status.className = `text-[11px] px-3 py-1 rounded-full border ${statusClasses}`;
+        status.textContent = statusLabel;
 
         const actions = document.createElement('div');
         actions.className = 'flex flex-wrap items-center gap-2';
         const releaseBtn = document.createElement('button');
         releaseBtn.type = 'button';
         releaseBtn.className = 'text-xs px-3 py-2 rounded-lg border border-emerald-400 text-emerald-100 hover:bg-emerald-500 hover:text-slate-900 transition disabled:opacity-50 disabled:cursor-not-allowed';
-        releaseBtn.textContent = '📡 Liberar esta pergunta';
-        releaseBtn.disabled = state.answered;
+        releaseBtn.textContent = state.liberada ? '📡 Liberada' : '📡 Liberar esta pergunta';
+        releaseBtn.disabled = state.answered || state.liberada;
         releaseBtn.addEventListener('click', () => liberarPerguntaNosCelulares(idx));
         actions.append(status, releaseBtn);
 
@@ -804,8 +842,19 @@
         summary.className = 'text-xs text-slate-400 leading-snug';
         summary.textContent = question.enunciado;
         const chip = document.createElement('span');
-        chip.className = `mt-1 text-[11px] px-2 py-1 rounded-full border w-fit ${state.answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-900/70'}`;
-        chip.textContent = state.answered ? `Respondida por ${state.vencedor}` : 'Aguardando';
+        let chipLabel = 'Aguardando';
+        let chipClasses = 'border-slate-700 text-slate-300 bg-slate-900/70';
+
+        if (state.answered) {
+          chipLabel = `Respondida por ${state.vencedor}`;
+          chipClasses = 'border-emerald-400 text-emerald-200 bg-emerald-900/50';
+        } else if (state.liberada) {
+          chipLabel = 'Liberada agora';
+          chipClasses = 'border-cyan-400 text-cyan-100 bg-cyan-900/40';
+        }
+
+        chip.className = `mt-1 text-[11px] px-2 py-1 rounded-full border w-fit ${chipClasses}`;
+        chip.textContent = chipLabel;
 
         btn.append(label, summary, chip);
 
@@ -841,12 +890,11 @@
       statusInfo.textContent = current === 0 ? 'Você está no início da trilha.' : current + 1 === slides.length ? 'Último slide, hora de executar!' : 'Continue avançando, cada slide é um passo.';
       ensureQuestionState(current);
       renderQuestionSummary();
-      setLiveStatus('Pronto para liberar a próxima pergunta deste slide.');
+      setLiveStatus('Selecione uma pergunta deste slide para liberar individualmente.');
     };
 
     prevSlide.addEventListener('click', () => renderSlide(current - 1));
     nextSlide.addEventListener('click', () => renderSlide(current + 1));
-    releaseQuestionBtn.addEventListener('click', liberarPerguntaNosCelulares);
     openQuestionsBtn.addEventListener('click', () => {
       expandedQuestion = null;
       renderModalQuestions();
@@ -885,6 +933,31 @@
       try {
         const response = await fetch(liveQuizEndpoint);
         const data = await response.json();
+
+        if (data.status === 'active' && data.question && typeof data.question.id === 'number') {
+          const slideIndex = Math.floor((data.question.id ?? 0) / 100);
+          const questionIndex = (data.question.id ?? 0) % 100;
+          const states = ensureQuestionState(slideIndex);
+          if (states[questionIndex]) {
+            states.forEach((state, idx) => {
+              states[idx] = { ...state, liberada: idx === questionIndex };
+            });
+            if (slideIndex === current) {
+              renderQuestionSummary();
+              renderModalQuestions();
+              setLiveStatus(`Pergunta ${questionIndex + 1} está liberada para os alunos.`, true);
+            }
+          }
+        }
+        
+        if (data.status === 'waiting') {
+          Object.keys(questionStates).forEach((key) => {
+            questionStates[key] = ensureQuestionState(Number(key)).map((state) => ({ ...state, liberada: false }));
+          });
+
+          renderQuestionSummary();
+          renderModalQuestions();
+        }
 
         if (data.status === 'closed' && data.winner && data.closedQuestion) {
           const slideIndex = Math.floor((data.closedQuestion.id ?? 0) / 100);
