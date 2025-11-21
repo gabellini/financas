@@ -133,6 +133,22 @@
     </div>
   </div>
 
+  <div id="correctAnswerModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-lg hidden z-50 flex items-center justify-center px-4">
+    <div class="max-w-lg w-full rounded-2xl border border-emerald-700 bg-slate-900/90 shadow-2xl shadow-emerald-900/30 p-6 space-y-4">
+      <div class="flex items-start gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/20 border border-emerald-400/60 text-emerald-200 text-xl">✅</div>
+        <div class="space-y-1">
+          <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Resposta registrada</p>
+          <h4 class="text-xl font-bold text-slate-100" id="correctAnswerTitle">Alguém acertou!</h4>
+          <p class="text-sm text-slate-300" id="correctAnswerDescription"></p>
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <button id="closeCorrectAnswer" type="button" class="px-4 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const slides = [
       {
@@ -461,6 +477,10 @@
     const newNameInput = document.getElementById('newName');
     const confirmNameBtn = document.getElementById('confirmName');
     const cancelNameBtn = document.getElementById('cancelName');
+    const correctAnswerModal = document.getElementById('correctAnswerModal');
+    const correctAnswerTitle = document.getElementById('correctAnswerTitle');
+    const correctAnswerDescription = document.getElementById('correctAnswerDescription');
+    const closeCorrectAnswer = document.getElementById('closeCorrectAnswer');
 
     const rankingEndpoint = 'ranking.php';
     const liveQuizEndpoint = 'live-quiz.php';
@@ -471,6 +491,20 @@
     let expandedQuestion = null;
     let resolveNamePromise = null;
     let releasingQuestion = false;
+
+    const exibirModalAcerto = (nome, enunciado) => {
+      correctAnswerTitle.textContent = `${nome} acertou!`;
+      correctAnswerDescription.textContent = `A pergunta foi marcada como respondida por ${nome}.${enunciado ? `\n\nPergunta: ${enunciado}` : ''}`;
+      correctAnswerModal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    };
+
+    const fecharModalAcerto = () => {
+      correctAnswerModal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    };
+
+    closeCorrectAnswer.addEventListener('click', fecharModalAcerto);
 
     const populateSavedNames = () => {
       const entries = Object.values(placar).sort((a, b) => a.nome.localeCompare(b.nome));
@@ -602,6 +636,10 @@
       if (slideIndex === current) {
         renderQuestionSummary();
         renderModalQuestions();
+      }
+
+      if (vencedor) {
+        exibirModalAcerto(vencedor, question.enunciado);
       }
     };
 
@@ -818,6 +856,7 @@
               await registrarPonto(nome);
               renderQuestionSummary();
               renderModalQuestions();
+              exibirModalAcerto(nome, question.enunciado);
             } else {
               btn.disabled = true;
               btn.classList.add('line-through', 'opacity-50', 'border-amber-400', 'text-amber-200');
