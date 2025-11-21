@@ -315,5 +315,74 @@ export const slides = [
         <p class="text-sm text-slate-400"><strong>Insight:</strong> revisar esse plano a cada semestre mantém você no controle da própria evolução.</p>
       </div>
     `
+  },
+  {
+    titulo: "23) Caso real: Felipe Cataldi e Luan Gabellini 🚀",
+    conteudo: `
+      <div class="space-y-4">
+        <p>Dois colegas da Administração na FGV transformaram freelas e jobs paralelos em uma empresa de tecnologia, aparecendo em matérias sobre jovens empreendedores e na lista "30 abaixo de 30".</p>
+        <ul class="list-disc ml-5 space-y-2">
+          <li><strong>2009-2010:</strong> freelas de sistemas e e-commerce revelam uma dor comum: falta de backoffice integrado.</li>
+          <li><strong>2010:</strong> nasce a <strong>BetaLabs</strong> para resolver o problema com software próprio.</li>
+          <li><strong>2014:</strong> marca presença na mídia e amplia carteira de clientes, com equipe crescendo para dar conta da demanda.</li>
+        </ul>
+        <p class="text-sm text-slate-400"><strong>Insight:</strong> começar simples, ouvindo o cliente, pode virar referência nacional em poucos anos.</p>
+      </div>
+    `
+  },
+  {
+    titulo: "24) Linha do tempo da jornada 🗺️",
+    conteudo: `
+      <div class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="rounded-xl bg-slate-800/60 p-4 space-y-2">
+            <h3 class="font-semibold">Começo</h3>
+            <ul class="list-disc ml-5 space-y-1">
+              <li>Prototipagem rápida ainda na faculdade.</li>
+              <li>Primeiros clientes vindos da rede de contatos e indicação.</li>
+              <li>Trabalho em paralelo (freelas) enquanto validavam o produto.</li>
+            </ul>
+          </div>
+          <div class="rounded-xl bg-slate-800/60 p-4 space-y-2">
+            <h3 class="font-semibold">Escala</h3>
+            <ul class="list-disc ml-5 space-y-1">
+              <li>Formalização da empresa e rotina de reuniões semanais de produto.</li>
+              <li>Contratações planejadas para suportar crescimento e suporte.</li>
+              <li>Metas de faturamento claras, compartilhadas com a equipe.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-sm text-slate-400"><strong>Insight:</strong> alternar entre vender e construir é essencial para não travar o fluxo de caixa.</p>
+      </div>
+    `
+  },
+  {
+    titulo: "25) Lições práticas da BetaLabs 📌",
+    conteudo: `
+      <div class="space-y-4">
+        <ul class="list-disc ml-5 space-y-2">
+          <li><strong>Metas e transparência:</strong> compartilhar objetivos semanais manteve a equipe alinhada.</li>
+          <li><strong>Produto = rotina:</strong> releases curtos resolveram bugs e pediram feedback constante.</li>
+          <li><strong>Contratação sob demanda:</strong> cada nova venda justificava ampliar o time de suporte e engenharia.</li>
+          <li><strong>Reinvestimento:</strong> lucro voltou para marketing e tecnologia, sem depender de capital externo no início.</li>
+        </ul>
+        <p class="text-sm text-slate-400"><strong>Insight:</strong> disciplina financeira e de processos sustenta o crescimento mais do que manchetes.</p>
+      </div>
+    `
+  },
+  {
+    titulo: "26) Como repetir esse caminho? 🧭",
+    conteudo: `
+      <div class="space-y-4">
+        <ol class="list-decimal ml-5 space-y-2">
+          <li><strong>Encontre a dor:</strong> liste frustrações reais que você ou seus amigos têm (ex.: operação confusa no e-commerce).</li>
+          <li><strong>Protótipo e cobre:</strong> entregue uma solução mínima e peça pagamento desde o começo.</li>
+          <li><strong>Processo de vendas:</strong> defina ICP, roteiro e follow-up; o ciclo repetível financia o produto.</li>
+          <li><strong>Time enxuto:</strong> contrate quando o faturamento sustentar; treinamento evita perder qualidade.</li>
+          <li><strong>Aprenda com clientes:</strong> reúna feedback semanal e priorize o que destrava tempo ou receita para eles.</li>
+        </ol>
+        <p class="text-sm text-slate-400"><strong>Insight:</strong> qualquer área (tecnologia, serviços, criativo) pode seguir essa lógica de validação rápida + melhoria contínua.</p>
+      </div>
+    `
   }
 ];
