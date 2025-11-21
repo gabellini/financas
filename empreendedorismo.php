@@ -121,6 +121,12 @@
     </div>
   </div>
 
+  <div id="answerToast" class="fixed top-4 right-4 z-50 hidden opacity-0 transition-opacity duration-300">
+    <div class="px-4 py-3 rounded-xl border border-emerald-500/40 bg-emerald-900/70 text-emerald-50 shadow-lg shadow-emerald-900/40 text-sm font-semibold">
+      Resposta registrada!
+    </div>
+  </div>
+
   <div id="questionModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-lg hidden z-40">
     <div class="max-w-6xl mx-auto p-4 h-full flex flex-col">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -151,6 +157,7 @@
   </div>
 
   <script>
+    (() => {
     const slides = [
       {
         titulo: '1) O que é empreender de verdade 🚀',
@@ -482,6 +489,44 @@
     const correctAnswerTitle = document.getElementById('correctAnswerTitle');
     const correctAnswerDescription = document.getElementById('correctAnswerDescription');
     const closeCorrectAnswer = document.getElementById('closeCorrectAnswer');
+    const answerToast = document.getElementById('answerToast');
+
+    const requiredElements = [
+      slideTitle,
+      slideSummary,
+      slideBullets,
+      slideLabel,
+      slideProgress,
+      slideTag,
+      slideMood,
+      statusInfo,
+      prevSlide,
+      nextSlide,
+      questionsList,
+      leaderboardList,
+      resetRankingBtn,
+      openQuestionsBtn,
+      liveStatus,
+      questionModal,
+      closeModal,
+      modalQuestions,
+      modalSlideLabel,
+      nameModal,
+      savedNamesSelect,
+      newNameInput,
+      confirmNameBtn,
+      cancelNameBtn,
+      correctAnswerModal,
+      correctAnswerTitle,
+      correctAnswerDescription,
+      closeCorrectAnswer
+    ];
+
+    const missingElements = requiredElements.some((item) => !item);
+    if (missingElements) {
+      console.error('Elementos essenciais da interface não foram encontrados no DOM.');
+      return;
+    }
 
     const rankingEndpoint = 'ranking.php';
     const liveQuizEndpoint = 'live-quiz.php';
@@ -494,11 +539,29 @@
     let releasingQuestion = false;
     let ultimoAnuncioRemoto = '';
 
+    let toastTimeout = null;
+
+    const mostrarAlertaResposta = (mensagem) => {
+      if (!answerToast) return;
+      const toastText = answerToast.querySelector('div');
+      if (toastText) {
+        toastText.textContent = mensagem;
+      }
+      answerToast.classList.remove('hidden', 'opacity-0');
+      answerToast.classList.add('opacity-100');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        answerToast.classList.add('opacity-0');
+        toastTimeout = setTimeout(() => answerToast.classList.add('hidden'), 300);
+      }, 3200);
+    };
+
     const exibirModalAcerto = (nome, enunciado) => {
       correctAnswerTitle.textContent = `${nome} acertou!`;
       correctAnswerDescription.textContent = `A pergunta foi marcada como respondida por ${nome}.${enunciado ? `\n\nPergunta: ${enunciado}` : ''}`;
       correctAnswerModal.classList.remove('hidden');
       document.body.classList.add('overflow-hidden');
+      mostrarAlertaResposta(`Resposta registrada para ${nome}!`);
     };
 
     const fecharModalAcerto = () => {
@@ -737,7 +800,7 @@
         const info = document.createElement('div');
         const title = document.createElement('p');
         title.className = 'text-sm font-semibold text-slate-100';
-        title.textContent = `Pergunta ${idx + 1}: ${question.enunciado}`;
+        title.textContent = `Pergunta ${idx + 1}`;
         const status = document.createElement('p');
         status.className = 'text-xs text-slate-400';
 
@@ -1036,6 +1099,7 @@
       renderSlide(0);
       iniciarAtualizacoesAoVivo();
     });
+    })();
   </script>
 </body>
 </html>
