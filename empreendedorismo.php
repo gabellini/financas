@@ -11,8 +11,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="text-slate-100">
-  <div class="max-w-5xl mx-auto px-4 py-4 xl:px-8 space-y-5">
-    <section class="glass-panel p-5 lg:p-7 space-y-5">
+  <div class="max-w-6xl mx-auto px-4 py-4 xl:px-8 space-y-4">
+    <section class="glass-panel p-5 lg:p-7 space-y-4">
       <div class="flex flex-col gap-3">
         <div>
           <p class="text-xs uppercase tracking-[0.18em] text-emerald-300 font-semibold">Trilha guiada</p>
@@ -20,25 +20,25 @@
         </div>
       </div>
 
-      <div class="space-y-4">
+      <div class="space-y-3">
         <div class="w-full bg-slate-900/60 border border-slate-800 rounded-2xl p-3">
-          <div class="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between text-xs sm:text-sm text-slate-300">
-            <div class="flex items-center gap-3">
+          <div class="grid gap-3 lg:grid-cols-[1.1fr_0.9fr] lg:items-center text-xs sm:text-sm text-slate-300">
+            <div class="flex items-center gap-3 flex-wrap">
               <span id="slideLabel" class="font-semibold text-sm">Slide 1 de 10</span>
               <span class="hidden sm:inline text-slate-500">|</span>
               <span id="slideMood" class="text-emerald-300 font-semibold">Começando agora</span>
             </div>
-            <div class="text-[11px] sm:text-xs text-slate-400 text-right">
-              <p class="font-semibold text-emerald-200">Nome é solicitado após o acerto.</p>
-              <p>Escolha alguém do ranking ou cadastre um novo na hora.</p>
+            <div class="flex flex-wrap items-center gap-2 justify-start lg:justify-end text-[11px] sm:text-xs text-slate-300">
+              <span class="px-3 py-1 rounded-full border border-emerald-500/40 bg-emerald-950/40 text-emerald-200">Pontuação soma em cada acerto</span>
+              <span class="px-3 py-1 rounded-full border border-slate-700 bg-slate-950/50">Ranking ao vivo ao lado</span>
             </div>
           </div>
           <div class="mt-2 h-1 bg-slate-800 rounded-full overflow-hidden">
             <div id="slideProgress" class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
           </div>
-          <div class="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div class="text-[11px] sm:text-xs text-slate-400">Valendo 1 ponto para quem acertar primeiro cada pergunta.</div>
-            <div class="w-full sm:w-auto">
+          <div class="mt-3 grid gap-3 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+            <div class="text-[11px] sm:text-xs text-slate-300 flex items-center gap-2 bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">Rodada vale 1 ponto para o acerto mais rápido.</div>
+            <div class="w-full">
               <div class="p-2 rounded-xl border border-emerald-500/30 bg-emerald-950/40">
                 <div class="text-[10px] uppercase tracking-[0.18em] text-emerald-300 font-semibold">Ranking rápido</div>
                 <ol id="leaderboardList" class="mt-1 space-y-1 text-xs text-slate-100"></ol>
@@ -69,7 +69,7 @@
                 <button id="openQuestions" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Abrir perguntas</button>
               </div>
             </div>
-            <div id="questionsList" class="space-y-3"></div>
+            <div id="questionsList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
           </div>
 
           <div class="flex flex-col gap-3 text-sm text-slate-300">
@@ -125,7 +125,7 @@
   </div>
 
   <div id="questionModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-lg hidden z-40">
-    <div class="max-w-5xl mx-auto p-4 h-full flex flex-col">
+    <div class="max-w-6xl mx-auto p-4 h-full flex flex-col">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div>
           <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Perguntas em tela cheia</p>
@@ -133,7 +133,7 @@
         </div>
         <button id="closeModal" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-700 text-slate-200 hover:border-emerald-400 hover:text-emerald-100 transition text-sm">Fechar</button>
       </div>
-      <div id="modalQuestions" class="overflow-y-auto mt-4 space-y-4 flex-1 pr-1"></div>
+      <div id="modalQuestions" class="mt-4 flex-1 overflow-hidden"></div>
     </div>
   </div>
 
@@ -603,7 +603,7 @@
           status.textContent = `Respondida por ${states[idx].vencedor}.`;
           status.classList.add('text-emerald-300', 'font-semibold');
         } else {
-          status.textContent = 'Em aberto — responda na tela cheia.';
+          status.textContent = 'Em aberto';
         }
         info.append(title, status);
 
@@ -623,75 +623,109 @@
       modalSlideLabel.textContent = `${slide.titulo} — ${questions.length} pergunta${questions.length === 1 ? '' : 's'}`;
       modalQuestions.innerHTML = '';
 
-      questions.forEach((question, idx) => {
-        const isOpen = expandedQuestion === idx;
-        const wrapper = document.createElement('div');
-        wrapper.className = 'border border-emerald-800/40 bg-slate-900/70 rounded-xl p-4 space-y-3';
+      if (!questions.length) {
+        const empty = document.createElement('p');
+        empty.textContent = 'Este slide não possui perguntas.';
+        empty.className = 'text-sm text-slate-400';
+        modalQuestions.appendChild(empty);
+        return;
+      }
 
-        const header = document.createElement('button');
-        header.type = 'button';
-        header.className = 'w-full flex items-start justify-between gap-3 text-left';
-        const info = document.createElement('div');
-        const title = document.createElement('p');
-        title.className = 'text-base font-semibold text-slate-100';
-        title.textContent = `Pergunta ${idx + 1}: ${question.enunciado}`;
-        const hint = document.createElement('p');
-        hint.className = 'text-xs text-slate-400';
-        hint.textContent = isOpen ? 'Escolha uma opção abaixo' : 'Clique para abrir esta pergunta';
-        info.append(title, hint);
+      expandedQuestion = Math.min(Math.max(expandedQuestion ?? 0, 0), questions.length - 1);
 
+      const layout = document.createElement('div');
+      layout.className = 'flex flex-col lg:flex-row gap-4 h-full';
+
+      const list = document.createElement('div');
+      list.className = 'lg:w-[36%] space-y-2 overflow-y-auto pr-1';
+
+      const detail = document.createElement('div');
+      detail.className = 'flex-1 rounded-2xl border border-emerald-800/50 bg-slate-900/70 p-4 lg:p-5 shadow-inner overflow-y-auto';
+
+      const renderDetail = (idx) => {
+        const question = questions[idx];
+        const state = states[idx];
+        detail.innerHTML = '';
+
+        const header = document.createElement('div');
+        header.className = 'flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between';
+        const title = document.createElement('h5');
+        title.className = 'text-lg font-bold text-slate-100';
+        title.textContent = `Pergunta ${idx + 1}`;
         const status = document.createElement('span');
-        status.className = `text-[11px] px-2 py-1 rounded-full border ${states[idx].answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-900/70'}`;
-        status.textContent = states[idx].answered ? `Respondida por ${states[idx].vencedor}` : 'Aguardando resposta';
-        header.append(info, status);
+        status.className = `text-[11px] px-3 py-1 rounded-full border ${state.answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-950/70'}`;
+        status.textContent = state.answered ? `Respondida por ${state.vencedor}` : 'Em aberto';
+        header.append(title, status);
 
-        header.addEventListener('click', () => {
-          expandedQuestion = isOpen ? null : idx;
+        const statement = document.createElement('p');
+        statement.className = 'text-base text-slate-200 leading-relaxed';
+        statement.textContent = question.enunciado;
+
+        const optionsWrapper = document.createElement('div');
+        optionsWrapper.className = 'grid grid-cols-1 md:grid-cols-2 gap-3 mt-4';
+
+        question.opcoes.forEach((option) => {
+          const btn = document.createElement('button');
+          btn.textContent = option;
+          btn.className = 'w-full text-left px-4 py-3 rounded-xl border border-slate-700 bg-slate-950 hover:border-emerald-500 hover:text-emerald-100 text-sm transition shadow-sm';
+
+          if (state.answered) {
+            btn.disabled = true;
+            btn.classList.add('opacity-60');
+            if (option === question.correta) {
+              btn.classList.add('border-emerald-400', 'text-emerald-200', 'bg-emerald-900/40');
+            }
+          }
+
+          btn.addEventListener('click', async () => {
+            if (state.answered) return;
+            if (option === question.correta) {
+              const nome = await solicitarNome();
+              if (!nome) return;
+              states[idx] = { answered: true, vencedor: nome };
+              await registrarPonto(nome);
+              renderQuestionSummary();
+              renderModalQuestions();
+            } else {
+              btn.disabled = true;
+              btn.classList.add('line-through', 'opacity-50', 'border-amber-400', 'text-amber-200');
+            }
+          });
+
+          optionsWrapper.appendChild(btn);
+        });
+
+        detail.append(header, statement, optionsWrapper);
+      };
+
+      questions.forEach((question, idx) => {
+        const state = states[idx];
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `w-full text-left px-3 py-2 rounded-xl border ${expandedQuestion === idx ? 'border-emerald-400 bg-emerald-950/60 shadow-lg' : 'border-slate-800 bg-slate-950/70 hover:border-emerald-500'} transition flex flex-col gap-1`;
+        const label = document.createElement('span');
+        label.className = 'text-sm font-semibold text-slate-100';
+        label.textContent = `Pergunta ${idx + 1}`;
+        const summary = document.createElement('span');
+        summary.className = 'text-xs text-slate-400 leading-snug';
+        summary.textContent = question.enunciado;
+        const chip = document.createElement('span');
+        chip.className = `mt-1 text-[11px] px-2 py-1 rounded-full border w-fit ${state.answered ? 'border-emerald-400 text-emerald-200 bg-emerald-900/50' : 'border-slate-700 text-slate-300 bg-slate-900/70'}`;
+        chip.textContent = state.answered ? `Respondida por ${state.vencedor}` : 'Aguardando';
+
+        btn.append(label, summary, chip);
+
+        btn.addEventListener('click', () => {
+          expandedQuestion = idx;
           renderModalQuestions();
         });
 
-        wrapper.appendChild(header);
-
-        if (isOpen) {
-          const optionsWrapper = document.createElement('div');
-          optionsWrapper.className = 'grid grid-cols-1 sm:grid-cols-3 gap-2';
-
-          question.opcoes.forEach((option) => {
-            const btn = document.createElement('button');
-            btn.textContent = option;
-            btn.className = 'w-full text-left px-3 py-2 rounded-lg border border-slate-700 bg-slate-950 hover:border-emerald-500 hover:text-emerald-100 text-sm transition';
-
-            if (states[idx].answered) {
-              btn.disabled = true;
-              btn.classList.add('opacity-60');
-              if (option === question.correta) {
-                btn.classList.add('border-emerald-400', 'text-emerald-200');
-              }
-            }
-
-            btn.addEventListener('click', async () => {
-              if (states[idx].answered) return;
-              if (option === question.correta) {
-                const nome = await solicitarNome();
-                if (!nome) return;
-                states[idx] = { answered: true, vencedor: nome };
-                await registrarPonto(nome);
-                renderQuestionSummary();
-                renderModalQuestions();
-              } else {
-                btn.disabled = true;
-                btn.classList.add('line-through', 'opacity-50', 'border-amber-400', 'text-amber-200');
-              }
-            });
-
-            optionsWrapper.appendChild(btn);
-          });
-
-          wrapper.appendChild(optionsWrapper);
-        }
-
-        modalQuestions.appendChild(wrapper);
+        list.appendChild(btn);
       });
+
+      layout.append(list, detail);
+      modalQuestions.appendChild(layout);
+      renderDetail(expandedQuestion);
     };
 
     const renderSlide = (index) => {
