@@ -491,6 +491,7 @@
     let expandedQuestion = null;
     let resolveNamePromise = null;
     let releasingQuestion = false;
+    let ultimoAnuncioRemoto = '';
 
     const exibirModalAcerto = (nome, enunciado) => {
       correctAnswerTitle.textContent = `${nome} acertou!`;
@@ -641,6 +642,13 @@
       if (vencedor) {
         exibirModalAcerto(vencedor, question.enunciado);
       }
+    };
+
+    const registrarVencedorRemoto = (slideIndex, questionIndex, vencedor) => {
+      const key = `${slideIndex}-${questionIndex}-${vencedor}`;
+      if (!vencedor || key === ultimoAnuncioRemoto) return;
+      ultimoAnuncioRemoto = key;
+      marcarComoRespondida(slideIndex, questionIndex, vencedor);
     };
 
     const liberarPerguntaNosCelulares = async (targetIndex = null) => {
@@ -1001,8 +1009,14 @@
         if (data.status === 'closed' && data.winner && data.closedQuestion) {
           const slideIndex = Math.floor((data.closedQuestion.id ?? 0) / 100);
           const questionIndex = (data.closedQuestion.id ?? 0) % 100;
-          marcarComoRespondida(slideIndex, questionIndex, data.winner.name || data.winner);
+          registrarVencedorRemoto(slideIndex, questionIndex, data.winner.name || data.winner);
           setLiveStatus(`Pergunta encerrada. Vencedor: ${data.winner.name || data.winner}.`, true);
+        }
+
+        if (data.winner && data.closedQuestion && typeof data.closedQuestion.id !== 'undefined') {
+          const slideIndex = Math.floor((data.closedQuestion.id ?? 0) / 100);
+          const questionIndex = (data.closedQuestion.id ?? 0) % 100;
+          registrarVencedorRemoto(slideIndex, questionIndex, data.winner.name || data.winner);
         }
       } catch (error) {
         console.error('Erro ao sincronizar pergunta ao vivo', error);
