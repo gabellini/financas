@@ -6,12 +6,33 @@ require __DIR__ . '/quiz-data.php';
 $storageDir = __DIR__ . '/assets/data';
 $stateFile = $storageDir . '/live_quiz_state.json';
 $playersFile = $storageDir . '/live_quiz_players.json';
+$rankingFile = $storageDir . '/ranking.txt';
 
 if (!is_dir($storageDir)) {
     mkdir($storageDir, 0755, true);
 }
 
 $questions = load_quiz_questions();
+
+function load_scores(string $file): array
+{
+    if (!file_exists($file)) {
+        return [];
+    }
+
+    $contents = trim((string) file_get_contents($file));
+    if ($contents === '') {
+        return [];
+    }
+
+    $data = json_decode($contents, true);
+    return is_array($data) ? $data : [];
+}
+
+function save_scores(string $file, array $scores): void
+{
+    file_put_contents($file, json_encode($scores, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+}
 
 function load_json(string $file): array
 {
@@ -70,6 +91,27 @@ function save_state(string $stateFile, array $state): void
     save_json($stateFile, $state);
 }
 
+function registrar_ponto(string $nome, string $arquivo): void
+{
+    if ($nome === '') {
+        return;
+    }
+
+    $scores = load_scores($arquivo);
+    $key = mb_strtolower($nome, 'UTF-8');
+
+    if (!isset($scores[$key])) {
+        $scores[$key] = ['nome' => $nome, 'pontos' => 0];
+    }
+
+    if (empty($scores[$key]['nome'])) {
+        $scores[$key]['nome'] = $nome;
+    }
+
+    $scores[$key]['pontos'] += 1;
+    save_scores($arquivo, $scores);
+}
+
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $state = get_state($stateFile);
 
@@ -87,6 +129,7 @@ $sanitize_options = static function ($options): array {
 
 if ($method === 'GET') {
     $question = null;
+    $closedQuestion = null;
     if ($state['status'] === 'active' && ($state['questionId'] !== null || $state['questionText'])) {
         $question = [
             'id' => $state['questionId'],
@@ -97,9 +140,20 @@ if ($method === 'GET') {
         ];
     }
 
+    if ($state['status'] === 'closed' && ($state['questionId'] !== null || $state['questionText'])) {
+        $closedQuestion = [
+            'id' => $state['questionId'],
+            'questionLabel' => $state['questionLabel'],
+            'slideTitle' => $state['slideTitle'],
+            'options' => $state['options'],
+            'correctIndex' => $state['correctIndex']
+        ];
+    }
+
     json_response([
         'status' => $state['status'],
         'question' => $question,
+        'closedQuestion' => $closedQuestion,
         'winner' => $state['winner'],
         'releasedAt' => $state['releasedAt'],
         'closedAt' => $state['closedAt']
@@ -134,10 +188,12 @@ if ($action === 'release') {
     $questionLabel = isset($input['questionLabel']) ? trim((string) $input['questionLabel']) : '';
 
     $questionData = null;
-    if ($questionId !== null && $questionId !== '') {
-        $questionIndex = (int) $questionId;
-        $questionData = get_question($questionIndex, $questions);
-        $questionId = $questionIndex;
+    if ($questionText === '' || empty($optionsFromRequest) || $correctOption === null) {
+        if ($questionId !== null && $questionId !== '') {
+            $questionIndex = (int) $questionId;
+            $questionData = get_question($questionIndex, $questions);
+            $questionId = $questionIndex;
+        }
     }
 
     if ($questionData) {
@@ -230,6 +286,7 @@ if ($action === 'answer') {
         $state['winner'] = ['name' => $name, 'answeredAt' => time()];
         $state['status'] = 'closed';
         $state['closedAt'] = time();
+        registrar_ponto($name, $rankingFile);
     }
 
     save_state($stateFile, $state);
