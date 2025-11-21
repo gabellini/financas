@@ -70,9 +70,14 @@ function renderOptions(question) {
 }
 
 function renderQuestion(question) {
-  elements.questionStatus.textContent = 'Pergunta liberada! Responda rápido.';
+  const labelFromApi = question.questionLabel || null;
+  const number = typeof question.id === 'number' && Number.isFinite(question.id) ? question.id + 1 : '';
+  const label = labelFromApi || (number ? `Pergunta ${number}` : 'Pergunta liberada');
+  const slideText = question.slideTitle ? ` do slide "${question.slideTitle}"` : '';
+
+  elements.questionStatus.textContent = `Pergunta${slideText} liberada! Responda rápido.`;
   elements.questionContent.classList.remove('hidden');
-  elements.questionNumber.textContent = (question.id ?? 0) + 1;
+  elements.questionNumber.textContent = label;
   elements.questionText.textContent = question.text;
   elements.answerFeedback.textContent = '';
   alreadyAnswered = false;
