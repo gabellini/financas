@@ -66,6 +66,10 @@
                   <span class="btn-header__icon" aria-hidden="true">🎯</span>
                   <span class="btn-header__label">Quiz</span>
                 </a>
+                <a href="empreendedorismo.php" class="btn btn-header">
+                  <span class="btn-header__icon" aria-hidden="true">🚀</span>
+                  <span class="btn-header__label">Aula de empreendedorismo</span>
+                </a>
                 <button id="btnHideHeader" class="btn btn-header" title="Ocultar cabeçalho">
                   <span class="btn-header__icon" aria-hidden="true">⬆</span>
                   <span class="btn-header__label">Ocultar</span>
