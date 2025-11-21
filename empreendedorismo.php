@@ -17,11 +17,6 @@
         <div>
           <p class="text-xs uppercase tracking-[0.18em] text-emerald-300 font-semibold">Trilha guiada</p>
           <h1 class="text-3xl font-black tracking-tight">Slides interativos de empreendedorismo</h1>
-          <p class="text-slate-300 text-sm mt-1">Passeie pelos 10 slides: ao abrir, você já está no primeiro. Cada um tem ação rápida para tirar a ideia do papel.</p>
-        </div>
-        <div class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-400">
-          <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-900/50 border border-emerald-500/30 text-emerald-100 font-semibold">🔥 Dinâmico</span>
-          <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-900/70 border border-slate-700 text-slate-200">10+ slides</span>
         </div>
       </div>
 
@@ -33,9 +28,9 @@
               <span class="hidden sm:inline text-slate-500">|</span>
               <span id="slideMood" class="text-emerald-300 font-semibold">Começando agora</span>
             </div>
-            <div class="flex items-center gap-2 text-[11px] sm:text-xs text-slate-400">
-              <span class="font-semibold text-emerald-200">Nome de quem acertou:</span>
-              <input id="studentName" type="text" class="px-2 py-1 rounded-md bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 w-40" placeholder="Digite aqui" />
+            <div class="text-[11px] sm:text-xs text-slate-400 text-right">
+              <p class="font-semibold text-emerald-200">Nome é solicitado após o acerto.</p>
+              <p>Escolha alguém do ranking ou cadastre um novo na hora.</p>
             </div>
           </div>
           <div class="mt-2 h-1 bg-slate-800 rounded-full overflow-hidden">
@@ -47,6 +42,7 @@
               <div class="p-2 rounded-xl border border-emerald-500/30 bg-emerald-950/40">
                 <div class="text-[10px] uppercase tracking-[0.18em] text-emerald-300 font-semibold">Ranking rápido</div>
                 <ol id="leaderboardList" class="mt-1 space-y-1 text-xs text-slate-100"></ol>
+                <button id="resetRanking" type="button" class="mt-2 w-full text-xs px-3 py-2 rounded-lg border border-amber-400/60 text-amber-100 hover:bg-amber-500 hover:text-slate-950 transition">Zerar ranking</button>
               </div>
             </div>
           </div>
@@ -99,6 +95,33 @@
         </div>
       </div>
     </section>
+  </div>
+
+  <div id="nameModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-lg hidden z-50">
+    <div class="max-w-md mx-auto mt-16 p-4">
+      <div class="rounded-2xl border border-slate-800 bg-slate-900/90 shadow-xl shadow-emerald-900/30 p-5 space-y-4">
+        <div class="space-y-1">
+          <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Quem acertou?</p>
+          <h4 class="text-lg font-bold text-slate-100">Selecione um nome ou cadastre um novo</h4>
+          <p class="text-sm text-slate-400">Os nomes já usados aparecem abaixo. Você também pode digitar outro.</p>
+        </div>
+        <div class="space-y-3">
+          <label class="block text-xs text-slate-300" for="savedNames">Usar nome salvo</label>
+          <select id="savedNames" class="w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-950 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <option value="">Selecione do ranking</option>
+          </select>
+          <div class="text-center text-[11px] text-slate-500">ou</div>
+          <div class="space-y-1">
+            <label class="block text-xs text-slate-300" for="newName">Cadastrar nome novo</label>
+            <input id="newName" type="text" class="w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-950 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Digite um nome" />
+          </div>
+        </div>
+        <div class="flex justify-end gap-2">
+          <button id="cancelName" type="button" class="px-3 py-2 rounded-lg border border-slate-700 text-slate-200 hover:border-emerald-400 hover:text-emerald-100 text-sm">Cancelar</button>
+          <button id="confirmName" type="button" class="px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400">Confirmar</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="questionModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-lg hidden z-40">
@@ -430,19 +453,64 @@
     const nextSlide = document.getElementById('nextSlide');
     const questionsList = document.getElementById('questionsList');
     const leaderboardList = document.getElementById('leaderboardList');
-    const studentNameInput = document.getElementById('studentName');
+    const resetRankingBtn = document.getElementById('resetRanking');
     const openQuestionsBtn = document.getElementById('openQuestions');
     const questionModal = document.getElementById('questionModal');
     const closeModal = document.getElementById('closeModal');
     const modalQuestions = document.getElementById('modalQuestions');
     const modalSlideLabel = document.getElementById('modalSlideLabel');
+    const nameModal = document.getElementById('nameModal');
+    const savedNamesSelect = document.getElementById('savedNames');
+    const newNameInput = document.getElementById('newName');
+    const confirmNameBtn = document.getElementById('confirmName');
+    const cancelNameBtn = document.getElementById('cancelName');
 
+    const rankingEndpoint = 'ranking.php';
     let current = 0;
     let placar = {};
-    const questionStates = {};
+    let questionStates = {};
     let expandedQuestion = null;
+    let resolveNamePromise = null;
 
-    const saveScores = () => localStorage.setItem('empreendedorismo-placar', JSON.stringify(placar));
+    const populateSavedNames = () => {
+      const entries = Object.values(placar).sort((a, b) => a.nome.localeCompare(b.nome));
+      savedNamesSelect.innerHTML = '<option value="">Selecione do ranking</option>';
+      entries.forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.nome;
+        option.textContent = item.nome;
+        savedNamesSelect.appendChild(option);
+      });
+    };
+
+    const closeNameModal = () => {
+      nameModal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      newNameInput.value = '';
+      savedNamesSelect.value = '';
+      resolveNamePromise = null;
+    };
+
+    const solicitarNome = () => new Promise((resolve) => {
+      resolveNamePromise = resolve;
+      populateSavedNames();
+      nameModal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+      newNameInput.focus();
+    });
+
+    confirmNameBtn.addEventListener('click', () => {
+      if (!resolveNamePromise) return;
+      const chosen = savedNamesSelect.value || newNameInput.value.trim();
+      if (!chosen) return;
+      resolveNamePromise(chosen);
+      closeNameModal();
+    });
+
+    cancelNameBtn.addEventListener('click', () => {
+      if (resolveNamePromise) resolveNamePromise(null);
+      closeNameModal();
+    });
 
     const updateLeaderboard = () => {
       const entries = Object.values(placar).sort((a, b) => b.pontos - a.pontos).slice(0, 5);
@@ -466,37 +534,38 @@
         li.append(name, score);
         leaderboardList.appendChild(li);
       });
+      populateSavedNames();
     };
 
-    const loadScores = () => {
-      const stored = localStorage.getItem('empreendedorismo-placar');
-      if (stored) {
-        try {
-          placar = JSON.parse(stored);
-        } catch (err) {
-          placar = {};
+    const loadScores = async () => {
+      try {
+        const response = await fetch(rankingEndpoint);
+        if (response.ok) {
+          const data = await response.json();
+          placar = data.placar || {};
         }
+      } catch (err) {
+        console.error('Erro ao carregar ranking', err);
       }
       updateLeaderboard();
     };
 
-    const solicitarNome = () => {
-      const sugestao = studentNameInput.value.trim();
-      const nome = (prompt('Digite o nome de quem acertou:', sugestao || '') || '').trim();
-      if (!nome) return null;
-      studentNameInput.value = nome;
-      return nome;
-    };
-
-    const registrarPonto = (nome) => {
+    const registrarPonto = async (nome) => {
       if (!nome) return;
-      const chave = nome.toLowerCase();
-      if (!placar[chave]) {
-        placar[chave] = { nome, pontos: 0 };
+      try {
+        const response = await fetch(rankingEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome })
+        });
+        if (response.ok) {
+          const data = await response.json();
+          placar = data.placar || placar;
+        }
+      } catch (err) {
+        console.error('Erro ao salvar ponto', err);
+        alert('Não foi possível salvar o ponto agora.');
       }
-      if (!placar[chave].nome) placar[chave].nome = nome;
-      placar[chave].pontos += 1;
-      saveScores();
       updateLeaderboard();
     };
 
@@ -600,13 +669,13 @@
               }
             }
 
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', async () => {
               if (states[idx].answered) return;
               if (option === question.correta) {
-                const nome = solicitarNome();
+                const nome = await solicitarNome();
                 if (!nome) return;
                 states[idx] = { answered: true, vencedor: nome };
-                registrarPonto(nome);
+                await registrarPonto(nome);
                 renderQuestionSummary();
                 renderModalQuestions();
               } else {
@@ -659,8 +728,24 @@
       document.body.classList.remove('overflow-hidden');
     });
 
-    loadScores();
-    renderSlide(0);
+    resetRankingBtn.addEventListener('click', async () => {
+      if (!confirm('Deseja zerar o ranking e limpar os pontos?')) return;
+      try {
+        const response = await fetch(rankingEndpoint, { method: 'DELETE' });
+        if (response.ok) {
+          placar = {};
+          questionStates = {};
+        }
+      } catch (err) {
+        console.error('Erro ao zerar ranking', err);
+        alert('Não foi possível zerar o ranking agora.');
+      }
+      renderQuestionSummary();
+      renderModalQuestions();
+      updateLeaderboard();
+    });
+
+    loadScores().then(() => renderSlide(0));
   </script>
 </body>
 </html>
