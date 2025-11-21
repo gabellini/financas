@@ -77,7 +77,7 @@
             <ul class="list-disc ml-5 space-y-2">
               <li>Cada slide traz uma ação que você consegue testar em menos de 15 minutos.</li>
               <li>Linguagem direta para quem está terminando o ensino médio e quer começar já.</li>
-              <li>Exemplos reais como a BetaLabs para mostrar como ideias viram produto.</li>
+              <li>Exemplos reais de produto e serviço simples para mostrar como ideias viram solução.</li>
             </ul>
             <div class="p-3 rounded-xl border border-emerald-500/25 bg-emerald-950/30">
               <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Status</p>
@@ -140,302 +140,302 @@
   <script>
     const slides = [
       {
-        titulo: '1) Bem-vindo ao jogo do empreendedorismo 🚀',
-        resumo: 'Empreender é resolver problemas reais com criatividade. Nada de papo difícil: é usar o que você sabe hoje para gerar valor.',
+        titulo: '1) O que é empreender de verdade 🚀',
+        resumo: 'Empreender é resolver uma dor concreta com produto ou serviço que entrega valor rápido.',
         tag: 'Comece agora',
-        humor: 'Slide inicial ativado',
+        humor: 'Modo executando',
         bullets: [
-          'Você já empreende quando vende um serviço, organiza um evento ou faz um freela.',
-          'Ideia só vale quando alguém topa usar ou pagar.',
-          'Gente de 17 anos já criou apps, brechós online e bots de estudo — por que não você?'
+          'Empreender ≠ abrir CNPJ: é entregar solução que alguém usa ou paga.',
+          'Valor pode ser digital (app, planilha) ou físico (aula, reparo, entrega).',
+          'Comece com o que sabe e com os recursos que já tem à mão.'
         ],
-        acao: 'Escreva uma frase sobre qual problema do seu dia a dia você quer resolver.',
-        botao: 'Anote minha missão',
+        acao: 'Escreva em uma linha: qual dor real você quer resolver primeiro?',
+        botao: 'Anotar minha dor',
         perguntas: [
           {
-            enunciado: 'Empreender, segundo o slide, é principalmente sobre o quê?',
-            opcoes: ['Resolver problemas reais', 'Ter a ideia mais brilhante', 'Esperar o momento perfeito'],
-            correta: 'Resolver problemas reais'
+            enunciado: 'Segundo o slide, empreender é principalmente…',
+            opcoes: ['Resolver uma dor concreta', 'Abrir empresa antes de tudo', 'Esperar investimento chegar', 'Ter a ideia mais rara do mundo'],
+            correta: 'Resolver uma dor concreta'
           },
           {
-            enunciado: 'Qual exemplo mostra que você já empreende?',
-            opcoes: ['Organizar um evento ou freela', 'Guardar uma ideia no caderno', 'Esperar ter 25 anos'],
-            correta: 'Organizar um evento ou freela'
+            enunciado: 'Que tipo de entrega vale como empreendedorismo?',
+            opcoes: ['Produto digital ou serviço físico que gere valor', 'Somente um app complexo', 'Só vale franquia', 'Apenas quando há escritório próprio'],
+            correta: 'Produto digital ou serviço físico que gere valor'
           },
           {
-            enunciado: 'Qual é o recado para quem tem 17 anos?',
-            opcoes: ['Pode começar com o que sabe hoje', 'Precisa de muito capital antes', 'Deve focar só em teoria'],
-            correta: 'Pode começar com o que sabe hoje'
+            enunciado: 'Qual ponto de partida recomendado?',
+            opcoes: ['Usar o que já sabe e possui', 'Esperar formar uma grande equipe', 'Comprar equipamentos caros primeiro', 'Viajar para pesquisar tendências'],
+            correta: 'Usar o que já sabe e possui'
           }
         ]
       },
       {
-        titulo: '2) Problema real > ideia brilhante 🔍',
-        resumo: 'Foque numa dor concreta de pessoas reais. Quanto mais específica, mais fácil testar.',
+        titulo: '2) Como encontrar uma boa ideia (problema → solução) 🔍',
+        resumo: 'Ideia boa nasce de dor observada, não de chute. Olhe o cotidiano e ouça as pessoas.',
         tag: 'Foco na dor',
-        humor: 'Detectando problemas',
+        humor: 'Radar ligado',
         bullets: [
-          'Procure o que irrita amigos: filas, burocracia, falta de grana, falta de tempo.',
-          'Pergunte: a pessoa pagaria por isso ou trocaria algo para resolver? ',
-          'Teste no colégio, no bairro ou online: feedback rápido é ouro.'
+          'Mapeie frustrações: tempo perdido, filas, dúvidas, serviços ruins, falta de opção.',
+          'Converse e pergunte: como resolvem hoje? pagariam por algo melhor? quanto? ',
+          'Escolha a dor mais frequente e com maior urgência de pagar ou usar.'
         ],
-        acao: 'Liste 3 dores reais de colegas e escolha a mais urgente.',
+        acao: 'Liste 3 dores de pessoas próximas e marque a que mais gera incômodo e pagamento.',
         botao: 'Escolher a dor principal',
         perguntas: [
           {
-            enunciado: 'Qual é o foco ao escolher uma ideia?',
-            opcoes: ['Uma dor concreta', 'Uma tendência aleatória', 'O que já existe no mercado'],
-            correta: 'Uma dor concreta'
+            enunciado: 'De onde deve surgir a boa ideia?',
+            opcoes: ['De uma dor observada', 'De um palpite aleatório', 'De copiar um app famoso', 'De esperar inspiração mágica'],
+            correta: 'De uma dor observada'
           },
           {
-            enunciado: 'Qual pergunta ajuda a validar a dor?',
-            opcoes: ['A pessoa pagaria por isso?', 'Quantos likes vai dar?', 'Preciso de um investidor?'],
-            correta: 'A pessoa pagaria por isso?'
+            enunciado: 'Que pergunta ajuda a validar a dor?',
+            opcoes: ['Pagaria por algo melhor?', 'Qual cor do logo?', 'Preciso de um investidor agora?', 'Qual será o nome do domínio?'],
+            correta: 'Pagaria por algo melhor?'
           },
           {
-            enunciado: 'Onde testar rápido?',
-            opcoes: ['No colégio, bairro ou online', 'Esperar um evento grande', 'Somente após lançar um app'],
-            correta: 'No colégio, bairro ou online'
+            enunciado: 'Que dor priorizar?',
+            opcoes: ['A mais frequente e urgente', 'A mais rara e curiosa', 'A que só você entende', 'A que exige tecnologia cara'],
+            correta: 'A mais frequente e urgente'
           }
         ]
       },
       {
-        titulo: '3) Exemplo BetaLabs: da dupla ao SaaS ⚡',
-        resumo: 'A BetaLabs começou com dois amigos resolvendo o caos das lojas virtuais e virou uma plataforma com time e clientes recorrentes.',
-        tag: 'Caso real',
-        humor: 'História inspiradora',
-        bullets: [
-          'Primeiros projetos: freelas para e-commerces pequenos.',
-          'Virada: perceberam que todas as lojas sofriam com o backoffice → criaram um sistema.',
-          'Crescimento: entregas rápidas, ouvir clientes toda semana e cobrar desde o MVP.'
-        ],
-        acao: 'Anote qual parte dessa história você copiaria no seu projeto.',
-        botao: 'Registrar inspiração',
-        perguntas: [
-          {
-            enunciado: 'Com o que a BetaLabs começou?',
-            opcoes: ['Freelas para e-commerces', 'Aplicativo de delivery', 'Evento de marketing'],
-            correta: 'Freelas para e-commerces'
-          },
-          {
-            enunciado: 'Qual foi a virada na história?',
-            opcoes: ['Perceber dor comum no backoffice', 'Ganhar um prêmio', 'Trocar de mercado'],
-            correta: 'Perceber dor comum no backoffice'
-          },
-          {
-            enunciado: 'O que manteve o crescimento?',
-            opcoes: ['Ouvir clientes e cobrar desde o MVP', 'Ficar sem feedback', 'Parar de iterar'],
-            correta: 'Ouvir clientes e cobrar desde o MVP'
-          }
-        ]
-      },
-      {
-        titulo: '4) MVP relâmpago ⚙️',
-        resumo: 'Construa o mínimo que entrega resultado. Pode ser formulário, vídeo-demo ou planilha com automação.',
+        titulo: '3) Testar antes de gastar (MVP de verdade) ⚙️',
+        resumo: 'Valide rápido com versões simples: formulário, vídeo-demo, protótipo no Figma ou serviço manual.',
         tag: 'Mão na massa',
         humor: 'Prototipando',
         bullets: [
-          'Defina o resultado: o que a pessoa consegue depois de usar seu MVP?',
-          'Monte em 7 dias: vale usar ferramentas no-code, templates e ajuda de IA.',
-          'Cobre algo simbólico (R$ 10) para validar que as pessoas enxergam valor.'
+          'Formule a hipótese: quem é o cliente, que dor sente e qual promessa você faz.',
+          'Use ferramentas simples: landing, grupo no WhatsApp, planilha automatizada, kit de serviço.',
+          'Meça interesse: clique, resposta, pré-inscrição ou pagamento simbólico.'
         ],
-        acao: 'Escreva qual entrega você consegue colocar no ar esta semana.',
-        botao: 'Planejar o MVP',
+        acao: 'Desenhe seu MVP que cabe em 7 dias e qual sinal de interesse vai medir.',
+        botao: 'Planejar meu MVP',
         perguntas: [
           {
-            enunciado: 'Qual é o foco do MVP?',
-            opcoes: ['Entregar resultado mínimo', 'Ser perfeito e completo', 'Evitar cobrar'],
-            correta: 'Entregar resultado mínimo'
+            enunciado: 'O que vem antes de gastar em produção?',
+            opcoes: ['Um MVP simples', 'Comprar estoque grande', 'Contratar time completo', 'Abrir escritório'],
+            correta: 'Um MVP simples'
           },
           {
-            enunciado: 'Qual prazo sugerido para montar o MVP?',
-            opcoes: ['7 dias', '3 meses', '1 ano'],
-            correta: '7 dias'
+            enunciado: 'Qual ferramenta vale como MVP?',
+            opcoes: ['Landing page ou formulário', 'Aplicativo perfeito sem teste', 'Máquina industrial cara', 'Somente propaganda'],
+            correta: 'Landing page ou formulário'
           },
           {
-            enunciado: 'Por que cobrar algo simbólico?',
-            opcoes: ['Para validar valor percebido', 'Para pagar anúncios', 'Para aumentar burocracia'],
-            correta: 'Para validar valor percebido'
+            enunciado: 'Como medir interesse rapidamente?',
+            opcoes: ['Cliques, respostas ou pagamento simbólico', 'Esperar meses para feedback', 'Olhar apenas curtidas', 'Ignorar qualquer dado'],
+            correta: 'Cliques, respostas ou pagamento simbólico'
           }
         ]
       },
       {
-        titulo: '5) Teste com gente de verdade 🗣️',
-        resumo: 'Mostre o MVP para 5 pessoas, peça opinião sincera e ajuste sem apego.',
-        tag: 'Feedback rápido',
-        humor: 'Hora do teste',
-        bullets: [
-          'Faça perguntas curtas: o que foi confuso? o que fariam diferente?',
-          'Grave as respostas (com permissão) para não esquecer detalhes.',
-          'Atualize o MVP no mesmo dia: velocidade impressiona.'
-        ],
-        acao: 'Convide 2 colegas hoje para testar e marcar horário.',
-        botao: 'Agendar testes',
-        perguntas: [
-          {
-            enunciado: 'Quantas pessoas iniciais são sugeridas para testar?',
-            opcoes: ['5 pessoas', '50 pessoas', 'Apenas 1 pessoa'],
-            correta: '5 pessoas'
-          },
-          {
-            enunciado: 'Que tipo de perguntas fazer?',
-            opcoes: ['Curtas e objetivas', 'Somente perguntas abertas longas', 'Nenhuma pergunta'],
-            correta: 'Curtas e objetivas'
-          },
-          {
-            enunciado: 'Quando ajustar o MVP?',
-            opcoes: ['No mesmo dia', 'Depois de um ano', 'Somente após lançar'],
-            correta: 'No mesmo dia'
-          }
-        ]
-      },
-      {
-        titulo: '6) Dinheiro sem medo 💰',
-        resumo: 'Preço é teste, não sentença. Comece simples e transparente.',
+        titulo: '4) Como cobrar e como ganhar dinheiro 💰',
+        resumo: 'Preço simples e claro, baseado em valor entregue. Conta precisa fechar para produto e serviço.',
         tag: 'Modelo de grana',
-        humor: 'Contas claras',
+        humor: 'Contas na mesa',
         bullets: [
-          'Cobre pelo resultado, não pelas horas.',
-          'Separe o dinheiro do negócio do seu dinheiro pessoal.',
-          'Regra prática: se o cliente economiza R$ 100, cobrar R$ 20 pode fazer sentido.'
+          'Calcule custo mínimo: ferramentas, tempo, matéria-prima e impostos.',
+          'Preço inicial pode ser pacote ou assinatura; teste com clientes reais.',
+          'Regra prática: se você gera R$ 100 de ganho ou economia, cobrar R$ 20–R$ 30 é justo para validar.'
         ],
-        acao: 'Defina um preço inicial e quanto precisa vender para cobrir custos básicos.',
-        botao: 'Calcular preço',
+        acao: 'Defina seu preço de teste e quantas vendas precisa para cobrir custos do mês.',
+        botao: 'Calcular preço de lançamento',
         perguntas: [
           {
-            enunciado: 'Preço é o quê?',
-            opcoes: ['Um teste', 'Algo fixo para sempre', 'Apenas um chute'],
-            correta: 'Um teste'
+            enunciado: 'Preço deve ser baseado em…',
+            opcoes: ['Valor entregue ao cliente', 'Somente no que a concorrência cobra', 'Um número aleatório', 'Apenas no gosto pessoal'],
+            correta: 'Valor entregue ao cliente'
           },
           {
-            enunciado: 'O que deve ser separado?',
-            opcoes: ['Dinheiro do negócio e pessoal', 'Marketing e produto', 'Tempo de estudo e lazer'],
-            correta: 'Dinheiro do negócio e pessoal'
+            enunciado: 'O que entra no custo mínimo?',
+            opcoes: ['Ferramentas, tempo e matéria-prima', 'Somente anúncios', 'Apenas decoração do escritório', 'Somente impostos de grandes empresas'],
+            correta: 'Ferramentas, tempo e matéria-prima'
           },
           {
-            enunciado: 'Regra prática citada:',
-            opcoes: ['Se o cliente economiza 100, cobrar 20 pode fazer sentido', 'Cobrar sempre 10% do salário', 'Nunca cobrar no MVP'],
-            correta: 'Se o cliente economiza 100, cobrar 20 pode fazer sentido'
+            enunciado: 'Qual regra prática sugerida?',
+            opcoes: ['Se gera R$ 100, cobrar R$ 20–R$ 30 para validar', 'Nunca cobrar em testes', 'Sempre cobrar o dobro do concorrente', 'Cobrar só após um ano de uso'],
+            correta: 'Se gera R$ 100, cobrar R$ 20–R$ 30 para validar'
           }
         ]
       },
       {
-        titulo: '7) Marca e rede social que convertem 📣',
-        resumo: 'Use o que você já domina: stories, TikTok, Discord. Conte a história do problema e do progresso.',
+        titulo: '5) Marketing básico que realmente funciona 📣',
+        resumo: 'Foque no essencial: quem é o cliente, onde ele está e como chamar atenção com prova.',
         tag: 'Comunicação',
-        humor: 'Vibe criativa',
+        humor: 'Megafone ligado',
         bullets: [
-          'Poste bastidores: como você está construindo e o que já aprendeu.',
-          'Mostre provas: prints de feedback, antes/depois, números simples.',
-          'Chamada clara: link para teste, direct ou lista de espera.'
+          'Defina persona simples: idade, rotina, dor principal e quanto pode pagar.',
+          'Encontre o canal ativo: escola, bairro, grupos online, feiras, redes sociais.',
+          'Mostre prova rápida: antes e depois, depoimento, demonstração em vídeo ou amostra do serviço.'
         ],
-        acao: 'Grave um vídeo de 30s explicando a dor que você resolve.',
-        botao: 'Gravar agora',
+        acao: 'Escreva o cliente ideal e o canal principal onde vai falar com ele hoje.',
+        botao: 'Mapear cliente e canal',
         perguntas: [
           {
-            enunciado: 'Que tipo de conteúdo postar?',
-            opcoes: ['Bastidores e aprendizados', 'Somente vídeos perfeitos', 'Apenas memes aleatórios'],
-            correta: 'Bastidores e aprendizados'
+            enunciado: 'Quais são os 3 pilares do marketing básico aqui?',
+            opcoes: ['Quem é o cliente, onde ele está, como chamar atenção', 'Logo, slogan, cor', 'Postar todo dia sem estratégia', 'Comprar anúncios caros primeiro'],
+            correta: 'Quem é o cliente, onde ele está, como chamar atenção'
           },
           {
-            enunciado: 'O que mostrar para provar valor?',
-            opcoes: ['Feedbacks e antes/depois', 'Somente promessas', 'Nada, deixar suspense'],
-            correta: 'Feedbacks e antes/depois'
+            enunciado: 'Como provar valor rapidamente?',
+            opcoes: ['Mostrar depoimento ou antes/depois', 'Usar frases genéricas', 'Prometer sem mostrar nada', 'Esconder resultados'],
+            correta: 'Mostrar depoimento ou antes/depois'
           },
           {
-            enunciado: 'O que não pode faltar na postagem?',
-            opcoes: ['Chamada clara para ação', 'Somente hashtags', 'Texto sem objetivo'],
-            correta: 'Chamada clara para ação'
+            enunciado: 'Onde falar com o cliente?',
+            opcoes: ['No canal em que ele já está', 'Somente em eventos caros', 'Apenas em outdoors', 'Nunca em grupos online'],
+            correta: 'No canal em que ele já está'
           }
         ]
       },
       {
-        titulo: '8) Produto que melhora sempre 🔁',
-        resumo: 'Itere: lançar, ouvir, ajustar. Pequenas melhorias semanais vencem grandes planos parados.',
-        tag: 'Iteração',
-        humor: 'Evoluindo',
+        titulo: '6) Vendas na prática 🎯',
+        resumo: 'Vender é conversar, entender a dor e mostrar como você resolve. Produto ou serviço, a lógica é a mesma.',
+        tag: 'Fechamento',
+        humor: 'Pitch pronto',
         bullets: [
-          'Escolha 1 métrica para acompanhar toda semana (ex.: número de testers ativos).',
-          'Crie um quadro simples: ideias → em teste → aprovado → descartado.',
-          'Libere versões curtas, peça review e publique o que mudou.'
+          'Roteiro simples: ouvir a dor, repetir o problema, apresentar solução e preço.',
+          'Use exemplos reais e prazos claros para reduzir dúvida.',
+          'Peça o sim: teste, pré-venda, sinal ou contrato curto.'
         ],
-        acao: 'Defina qual métrica vai olhar toda sexta e escreva a meta.',
-        botao: 'Fixar métrica',
+        acao: 'Escreva seu pitch de 30 segundos com problema, solução e chamada para ação.',
+        botao: 'Ensaiar pitch',
         perguntas: [
           {
-            enunciado: 'Qual ritmo é defendido?',
-            opcoes: ['Melhorias semanais', 'Lançar uma vez por ano', 'Nunca mexer no produto'],
-            correta: 'Melhorias semanais'
+            enunciado: 'Qual o primeiro passo de uma venda efetiva?',
+            opcoes: ['Ouvir a dor do cliente', 'Falar sem parar', 'Enviar o link sem contexto', 'Discutir concorrência'],
+            correta: 'Ouvir a dor do cliente'
           },
           {
-            enunciado: 'O que acompanhar toda semana?',
-            opcoes: ['Uma métrica clara', 'Todas as métricas possíveis', 'Nenhum número'],
-            correta: 'Uma métrica clara'
+            enunciado: 'O que ajuda a reduzir dúvida?',
+            opcoes: ['Exemplos reais e prazos claros', 'Promessas vagas', 'Evitar detalhes', 'Esconder preço'],
+            correta: 'Exemplos reais e prazos claros'
           },
           {
-            enunciado: 'Como organizar ideias?',
-            opcoes: ['Quadro simples: ideias, teste, aprovado, descartado', 'Guardar tudo na cabeça', 'Esperar inspiração'],
-            correta: 'Quadro simples: ideias, teste, aprovado, descartado'
+            enunciado: 'Como finalizar a conversa?',
+            opcoes: ['Pedindo um passo concreto como teste ou sinal', 'Deixando para depois', 'Mudando de assunto', 'Mandando só o link do site'],
+            correta: 'Pedindo um passo concreto como teste ou sinal'
           }
         ]
       },
       {
-        titulo: '9) Time e colaboração 🤝',
-        resumo: 'Parceria certa acelera tudo. Combine expectativas e responsabilidades.',
-        tag: 'Gente boa',
-        humor: 'Jogo em equipe',
+        titulo: '7) Organização e rotina do empreendedor 📅',
+        resumo: 'Disciplina simples mantém a ideia viva. Agenda curta vale mais que promessa longa.',
+        tag: 'Rotina',
+        humor: 'Checklists ativados',
         bullets: [
-          'Convide quem complementa você: design, código, venda ou organização.',
-          'Acordo simples: quem faz o quê, horário de check-in e como dividir grana.',
-          'Feedback honesto semanal: o que manter, melhorar e eliminar.'
+          'Defina metas semanais: teste de cliente, entrega de versão, postagem-chave.',
+          'Use quadro visual (Kanban) para priorizar: fazer, fazendo, feito.',
+          'Reserve blocos de tempo para vendas, produto e finanças.'
         ],
-        acao: 'Liste 2 pessoas que poderiam colaborar e como elas ajudariam.',
-        botao: 'Montar squad',
+        acao: 'Monte sua lista da semana com 3 tarefas: uma de venda, uma de produto/serviço e uma de caixa.',
+        botao: 'Organizar semana',
         perguntas: [
           {
-            enunciado: 'Quem convidar para o time?',
-            opcoes: ['Quem complementa você', 'Quem pensa igual em tudo', 'Quem não tem interesse'],
-            correta: 'Quem complementa você'
+            enunciado: 'Qual rotina ajuda a manter o projeto vivo?',
+            opcoes: ['Metas semanais curtas', 'Planejar apenas por ano', 'Esperar inspiração', 'Trabalhar sem priorizar'],
+            correta: 'Metas semanais curtas'
           },
           {
-            enunciado: 'O que um acordo simples deve ter?',
-            opcoes: ['Quem faz o quê e como dividir a grana', 'Apenas um logo', 'Somente o nome do projeto'],
-            correta: 'Quem faz o quê e como dividir a grana'
+            enunciado: 'Como visualizar prioridades?',
+            opcoes: ['Usar um quadro Kanban', 'Guardar tudo na memória', 'Escrever apenas no fim do mês', 'Pedir para amigos lembrarem'],
+            correta: 'Usar um quadro Kanban'
           },
           {
-            enunciado: 'Periodicidade do feedback sugerido:',
-            opcoes: ['Semanal', 'Anual', 'Nunca'],
-            correta: 'Semanal'
+            enunciado: 'Quais blocos de tempo separar?',
+            opcoes: ['Vendas, produto/serviço e finanças', 'Somente lazer', 'Apenas redes sociais', 'Nenhuma divisão é necessária'],
+            correta: 'Vendas, produto/serviço e finanças'
           }
         ]
       },
       {
-        titulo: '10) Plano 30-60-90 e próximos passos 🏁',
-        resumo: 'Transforme vontade em calendário. Marque datas curtas para não perder ritmo.',
-        tag: 'Ritmo',
-        humor: 'Checklist final',
+        titulo: '8) Medo, insegurança e síndrome do impostor 🧠',
+        resumo: 'Todo mundo começa inseguro. Mentalidade prática ajuda a seguir testando e aprendendo.',
+        tag: 'Mindset',
+        humor: 'Coragem em construção',
         bullets: [
-          '30 dias: validar problema e ter um MVP testado por 10 pessoas.',
-          '60 dias: cobrar pelo menos um cliente ou carta de intenção assinada.',
-          '90 dias: rotina semanal de produto, marketing e caixa.'
+          'Compare consigo mesmo, não com cases gigantes.',
+          'Pequenas vitórias semanais (primeiro lead, primeiro feedback) reduzem medo.',
+          'Compartilhe progresso com amigos ou comunidade para ganhar apoio.'
         ],
-        acao: 'Escreva o próximo passo para as próximas 24h e compartilhe com alguém.',
-        botao: 'Salvar próximo passo',
+        acao: 'Anote uma pequena vitória da semana e quem pode te cobrar do próximo passo.',
+        botao: 'Celebrar e seguir',
         perguntas: [
           {
-            enunciado: 'O que deve acontecer em 30 dias?',
-            opcoes: ['Validar problema e ter MVP testado', 'Escalar globalmente', 'Parar os testes'],
-            correta: 'Validar problema e ter MVP testado'
+            enunciado: 'Como lidar com a síndrome do impostor?',
+            opcoes: ['Comparando com o próprio progresso', 'Comparando com unicórnios', 'Escondendo resultados', 'Nunca pedindo feedback'],
+            correta: 'Comparando com o próprio progresso'
           },
           {
-            enunciado: 'Meta para 60 dias:',
-            opcoes: ['Cobrar pelo menos um cliente', 'Criar 10 features novas sem teste', 'Focar só em branding'],
-            correta: 'Cobrar pelo menos um cliente'
+            enunciado: 'O que reduz o medo?',
+            opcoes: ['Pequenas vitórias semanais', 'Esperar o cenário perfeito', 'Focar só em teoria', 'Evitar qualquer teste'],
+            correta: 'Pequenas vitórias semanais'
           },
           {
-            enunciado: 'Rotina aos 90 dias deve envolver:',
-            opcoes: ['Produto, marketing e caixa semanalmente', 'Apenas marketing', 'Nenhum acompanhamento'],
-            correta: 'Produto, marketing e caixa semanalmente'
+            enunciado: 'Como ganhar apoio?',
+            opcoes: ['Compartilhando progresso com pessoas de confiança', 'Trabalhando isolado', 'Escondendo erros', 'Postando apenas quando estiver perfeito'],
+            correta: 'Compartilhando progresso com pessoas de confiança'
+          }
+        ]
+      },
+      {
+        titulo: '9) Erros que quebram negócios ❌',
+        resumo: 'Evite tropeços clássicos para manter o ritmo. Melhor prevenir do que tentar salvar depois.',
+        tag: 'Alertas',
+        humor: 'Farol amarelo',
+        bullets: [
+          'Pular validação: construir antes de ouvir clientes gasta tempo e grana.',
+          'Preço errado: cobrar muito baixo ou nunca cobrar mata o caixa.',
+          'Desorganização: sem rotina e registro de custos, o negócio trava.'
+        ],
+        acao: 'Marque qual desses riscos você está correndo e escreva como vai corrigir hoje.',
+        botao: 'Cortar riscos agora',
+        perguntas: [
+          {
+            enunciado: 'Qual erro clássico deve ser evitado primeiro?',
+            opcoes: ['Ignorar validação com clientes', 'Pular direto para o luxo', 'Contratar muitas pessoas no início', 'Comprar escritório'],
+            correta: 'Ignorar validação com clientes'
+          },
+          {
+            enunciado: 'O que acontece com preço errado?',
+            opcoes: ['Mata o caixa e inviabiliza o negócio', 'Garante lucro automático', 'Não muda nada', 'Só afeta marketing'],
+            correta: 'Mata o caixa e inviabiliza o negócio'
+          },
+          {
+            enunciado: 'Por que a organização importa?',
+            opcoes: ['Sem rotina e registro de custos o negócio trava', 'Porque deixa o pitch bonito', 'Para postar mais', 'Para parecer ocupado'],
+            correta: 'Sem rotina e registro de custos o negócio trava'
+          }
+        ]
+      },
+      {
+        titulo: '10) O futuro do trabalho e oportunidades reais 🔮',
+        resumo: 'Novos modelos abrem portas para produto e serviço: assinaturas, economia criativa, IA e micro negócios.',
+        tag: 'Próximos passos',
+        humor: 'Visão de futuro',
+        bullets: [
+          'Assinaturas e comunidade: conteúdo recorrente, manutenção mensal, suporte contínuo.',
+          'Serviços digitais e microtarefas: automação com IA, edição, design, consultoria rápida.',
+          'Mercado local + online: experiências presenciais com venda digital aumentam alcance.'
+        ],
+        acao: 'Escolha uma oportunidade para testar nos próximos 7 dias e escreva o primeiro passo.',
+        botao: 'Escolher caminho',
+        perguntas: [
+          {
+            enunciado: 'Qual modelo citado gera receita recorrente?',
+            opcoes: ['Assinaturas e comunidade', 'Venda única sem contato', 'Apenas eventos anuais', 'Somente doação'],
+            correta: 'Assinaturas e comunidade'
+          },
+          {
+            enunciado: 'Exemplo de serviço digital citado:',
+            opcoes: ['Automação com IA ou edição', 'Somente construção civil', 'Apenas plantio de alimentos', 'Só serviços presenciais'],
+            correta: 'Automação com IA ou edição'
+          },
+          {
+            enunciado: 'Como ampliar alcance de algo local?',
+            opcoes: ['Combinar experiência presencial com venda online', 'Ficar sem presença digital', 'Depender só de panfleto', 'Vender apenas para vizinhos'],
+            correta: 'Combinar experiência presencial com venda online'
           }
         ]
       }
