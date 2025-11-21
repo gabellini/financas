@@ -10,9 +10,9 @@
   <link rel="stylesheet" href="assets/css/theme.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="text-slate-100">
-  <div class="max-w-6xl mx-auto px-4 py-4 xl:px-8 space-y-4">
-    <section class="glass-panel p-5 lg:p-7 space-y-4">
+<body class="min-h-screen bg-slate-950 text-slate-100">
+  <div class="max-w-6xl mx-auto px-4 py-4 xl:px-6 space-y-4 xl:space-y-3">
+    <section class="glass-panel p-5 lg:p-6 xl:p-5 space-y-4 xl:space-y-3">
       <div class="flex flex-col gap-3">
         <div>
           <p class="text-xs uppercase tracking-[0.18em] text-emerald-300 font-semibold">Trilha guiada</p>
@@ -22,71 +22,81 @@
 
       <div class="space-y-3">
         <div class="w-full bg-slate-900/60 border border-slate-800 rounded-2xl p-3">
-          <div class="grid gap-3 lg:grid-cols-[1.1fr_0.9fr] lg:items-center text-xs sm:text-sm text-slate-300">
-            <div class="flex items-center gap-3 flex-wrap">
-              <span id="slideLabel" class="font-semibold text-sm">Slide 1 de 10</span>
-              <span class="hidden sm:inline text-slate-500">|</span>
-              <span id="slideMood" class="text-emerald-300 font-semibold">Começando agora</span>
-            </div>
-            <div class="flex flex-wrap items-center gap-2 justify-start lg:justify-end text-[11px] sm:text-xs text-slate-300">
-              <span class="px-3 py-1 rounded-full border border-emerald-500/40 bg-emerald-950/40 text-emerald-200">Pontuação soma em cada acerto</span>
-              <span class="px-3 py-1 rounded-full border border-slate-700 bg-slate-950/50">Ranking ao vivo ao lado</span>
-            </div>
-          </div>
-          <div class="mt-2 h-1 bg-slate-800 rounded-full overflow-hidden">
-            <div id="slideProgress" class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
-          </div>
-          <div class="mt-3 grid gap-3 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div class="text-[11px] sm:text-xs text-slate-300 flex items-center gap-2 bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">Rodada vale 1 ponto para o acerto mais rápido.</div>
-            <div class="w-full">
-              <div class="p-2 rounded-xl border border-emerald-500/30 bg-emerald-950/40">
-                <div class="text-[10px] uppercase tracking-[0.18em] text-emerald-300 font-semibold">Ranking rápido</div>
-                <ol id="leaderboardList" class="mt-1 space-y-1 text-xs text-slate-100"></ol>
-                <button id="resetRanking" type="button" class="mt-2 w-full text-xs px-3 py-2 rounded-lg border border-amber-400/60 text-amber-100 hover:bg-amber-500 hover:text-slate-950 transition">Zerar ranking</button>
+          <div class="grid xl:grid-cols-[1.45fr_0.95fr] gap-4 xl:items-start">
+            <div class="space-y-2 text-xs sm:text-sm text-slate-300">
+              <div class="grid gap-3 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                <div class="flex items-center gap-3 flex-wrap">
+                  <span id="slideLabel" class="font-semibold text-sm">Slide 1 de 10</span>
+                  <span class="hidden sm:inline text-slate-500">|</span>
+                  <span id="slideMood" class="text-emerald-300 font-semibold">Começando agora</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 justify-start lg:justify-end text-[11px] sm:text-xs text-slate-300">
+                  <span class="px-3 py-1 rounded-full border border-emerald-500/40 bg-emerald-950/40 text-emerald-200">Pontuação soma em cada acerto</span>
+                  <span class="px-3 py-1 rounded-full border border-slate-700 bg-slate-950/50">Ranking ao vivo ao lado</span>
+                </div>
               </div>
+              <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
+                <div id="slideProgress" class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
+              </div>
+              <div class="text-[11px] sm:text-xs text-slate-300 flex items-center gap-2 bg-slate-900/70 border border-slate-800 rounded-xl px-3 py-2">Rodada vale 1 ponto para o acerto mais rápido.</div>
+            </div>
+            <div class="p-3 rounded-xl border border-emerald-500/30 bg-emerald-950/40 h-full">
+              <div class="text-[10px] uppercase tracking-[0.18em] text-emerald-300 font-semibold">Ranking rápido</div>
+              <ol id="leaderboardList" class="mt-2 space-y-1 text-xs text-slate-100"></ol>
+              <button id="resetRanking" type="button" class="mt-3 w-full text-xs px-3 py-2 rounded-lg border border-amber-400/60 text-amber-100 hover:bg-amber-500 hover:text-slate-950 transition">Zerar ranking</button>
             </div>
           </div>
         </div>
 
         <article class="p-5 border border-slate-800/80 rounded-2xl bg-slate-900/60 space-y-4 shadow-lg shadow-emerald-900/20">
-          <header class="space-y-1">
-            <p id="slideTag" class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Ação</p>
-            <h3 id="slideTitle" class="text-2xl font-bold">Título do slide</h3>
-            <p id="slideSummary" class="text-slate-300 text-sm leading-relaxed">Resumo do slide aparece aqui.</p>
-          </header>
-          <div>
-            <h4 class="text-sm font-semibold text-slate-200 uppercase tracking-[0.08em]">Pontos-chave</h4>
-            <ul id="slideBullets" class="mt-2 space-y-2 list-disc ml-5 text-slate-300 text-sm"></ul>
-          </div>
-          <div class="p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/30 space-y-3">
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div class="grid xl:grid-cols-[1.05fr_0.95fr] gap-4 xl:items-start">
+            <div class="space-y-3">
+              <header class="space-y-1">
+                <p id="slideTag" class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Ação</p>
+                <h3 id="slideTitle" class="text-2xl font-bold">Título do slide</h3>
+                <p id="slideSummary" class="text-slate-300 text-sm leading-relaxed">Resumo do slide aparece aqui.</p>
+              </header>
               <div>
-                <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Rodada relâmpago</p>
-                <p class="text-sm text-slate-200 font-semibold">Perguntas em tela cheia com controle de quem acertou</p>
-              </div>
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="text-[11px] text-emerald-200 bg-emerald-900/40 border border-emerald-500/30 px-3 py-1 rounded-full">Pontos acumulam na apresentação</span>
-                <button id="openQuestions" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Abrir perguntas</button>
+                <h4 class="text-sm font-semibold text-slate-200 uppercase tracking-[0.08em]">Pontos-chave</h4>
+                <ul id="slideBullets" class="mt-2 space-y-2 list-disc ml-5 text-slate-300 text-sm"></ul>
               </div>
             </div>
-            <div id="questionsList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
-          </div>
 
-          <div class="flex flex-col gap-3 text-sm text-slate-300">
-            <p class="text-slate-200 font-semibold">Dicas para aproveitar</p>
-            <ul class="list-disc ml-5 space-y-2">
-              <li>Cada slide traz uma ação que você consegue testar em menos de 15 minutos.</li>
-              <li>Linguagem direta para quem está terminando o ensino médio e quer começar já.</li>
-              <li>Exemplos reais de produto e serviço simples para mostrar como ideias viram solução.</li>
-            </ul>
-            <div class="p-3 rounded-xl border border-emerald-500/25 bg-emerald-950/30">
-              <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Status</p>
-              <p id="statusInfo" class="text-sm text-slate-100 mt-1">Você está no início da trilha.</p>
+            <div class="space-y-3">
+              <div class="p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/30 space-y-3">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Rodada relâmpago</p>
+                    <p class="text-sm text-slate-200 font-semibold">Perguntas em tela cheia com controle de quem acertou</p>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-[11px] text-emerald-200 bg-emerald-900/40 border border-emerald-500/30 px-3 py-1 rounded-full">Pontos acumulam na apresentação</span>
+                    <button id="openQuestions" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm hover:bg-emerald-400 transition">Abrir perguntas</button>
+                  </div>
+                </div>
+                <div id="questionsList" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
+              </div>
+
+              <div class="p-3 rounded-xl border border-emerald-500/25 bg-emerald-950/30 space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <p class="text-sm font-semibold text-slate-200">Dicas para aproveitar</p>
+                  <span class="text-[10px] px-2 py-1 rounded-full border border-slate-700 bg-slate-900/70 text-slate-300">Modo apresentação</span>
+                </div>
+                <ul class="list-disc ml-5 space-y-2 text-sm text-slate-300">
+                  <li>Cada slide traz uma ação que você consegue testar em menos de 15 minutos.</li>
+                  <li>Linguagem direta para quem está terminando o ensino médio e quer começar já.</li>
+                  <li>Exemplos reais de produto e serviço simples para mostrar como ideias viram solução.</li>
+                </ul>
+                <div class="p-3 rounded-lg border border-emerald-500/20 bg-emerald-950/40">
+                  <p class="text-xs uppercase tracking-[0.14em] text-emerald-300 font-semibold">Status</p>
+                  <p id="statusInfo" class="text-sm text-slate-100 mt-1">Você está no início da trilha.</p>
+                </div>
+              </div>
             </div>
           </div>
         </article>
 
-        <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-t border-slate-800 pt-4">
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-t border-slate-800 pt-3">
           <div class="text-xs uppercase tracking-[0.14em] text-slate-400">Navegação</div>
           <div class="flex items-center gap-2 w-full sm:w-auto">
             <button id="prevSlide" class="flex-1 sm:flex-none px-3 py-2 rounded-lg border border-slate-700 text-slate-200 hover:border-emerald-400 hover:text-emerald-100 transition text-sm">Anterior</button>
