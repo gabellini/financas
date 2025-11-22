@@ -541,6 +541,15 @@
 
     let toastTimeout = null;
 
+    const shuffleOptions = (question) => {
+      const items = [...(question.opcoes || [])];
+      for (let i = items.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      return items;
+    };
+
     const mostrarAlertaResposta = (mensagem) => {
       if (!answerToast) return;
       const toastText = answerToast.querySelector('div');
@@ -737,7 +746,7 @@
         action: 'release',
         questionId: buildQuestionId(current, alvo.index),
         questionText: alvo.question.enunciado,
-        options: alvo.question.opcoes,
+        options: states[alvo.index].shuffledOptions,
         correctOption: alvo.question.correta,
         slideTitle: slides[current].titulo,
         questionLabel: `Slide ${current + 1} — Pergunta ${alvo.index + 1}`
@@ -769,14 +778,21 @@
     };
 
     const ensureQuestionState = (index) => {
-      const defaults = { answered: false, vencedor: '', correta: '', liberada: false };
+      const defaults = { answered: false, vencedor: '', correta: '', liberada: false, shuffledOptions: [] };
       const base = questionStates[index] || [];
       const questions = slides[index].perguntas || [];
 
-      questionStates[index] = questions.map((_, idx) => ({
-        ...defaults,
-        ...(base[idx] || {})
-      }));
+      questionStates[index] = questions.map((question, idx) => {
+        const existing = base[idx] || {};
+        const hasValidShuffle = Array.isArray(existing.shuffledOptions) && existing.shuffledOptions.length === question.opcoes.length;
+        const shuffledOptions = hasValidShuffle ? existing.shuffledOptions : shuffleOptions(question);
+
+        return {
+          ...defaults,
+          ...existing,
+          shuffledOptions
+        };
+      });
 
       return questionStates[index];
     };
@@ -906,7 +922,7 @@
         const optionsWrapper = document.createElement('div');
         optionsWrapper.className = 'grid grid-cols-1 md:grid-cols-2 gap-3 mt-4';
 
-        question.opcoes.forEach((option) => {
+        state.shuffledOptions.forEach((option) => {
           const btn = document.createElement('button');
           btn.textContent = option;
           btn.className = 'w-full text-left px-4 py-3 rounded-xl border border-slate-700 bg-slate-950 hover:border-emerald-500 hover:text-emerald-100 text-sm transition shadow-sm';
