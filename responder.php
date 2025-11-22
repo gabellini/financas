@@ -26,7 +26,6 @@ $totalQuestions = count($questions);
             <p class="text-sm text-slate-400">Use seu celular para responder rápido. Perguntas liberadas pelo apresentador.</p>
           </div>
         </div>
-        <a href="quizz.php" class="btn">🎯 Ver quiz</a>
       </div>
       <div class="text-xs text-slate-400">Perguntas preparadas: <?php echo $totalQuestions; ?>.</div>
     </header>
