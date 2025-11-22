@@ -14,6 +14,20 @@ if (!is_dir($storageDir)) {
 
 $questions = load_quiz_questions();
 
+function shuffle_options(array $options, string $correctOption): array
+{
+    $shuffled = $options;
+    shuffle($shuffled);
+
+    $correctIndex = array_search($correctOption, $shuffled, true);
+    if ($correctIndex === false) {
+        $shuffled = $options;
+        $correctIndex = array_search($correctOption, $shuffled, true);
+    }
+
+    return [$shuffled, $correctIndex];
+}
+
 function load_scores(string $file): array
 {
     if (!file_exists($file)) {
@@ -198,9 +212,9 @@ if ($action === 'release') {
 
     if ($questionData) {
         $options = array_merge([$questionData['correct']], $questionData['alternatives']);
-        shuffle($options);
         $questionText = $questionData['question'];
         $correctOption = $questionData['correct'];
+        [$options, $correctIndex] = shuffle_options($options, $correctOption);
     } else {
         $options = $optionsFromRequest;
         if ($questionText === '' || empty($options) || $correctOption === null) {
@@ -208,7 +222,9 @@ if ($action === 'release') {
         }
     }
 
-    $correctIndex = array_search($correctOption, $options, true);
+    if (!isset($correctIndex)) {
+        [$options, $correctIndex] = shuffle_options($options, $correctOption);
+    }
     if ($correctIndex === false) {
         json_response(['error' => 'A alternativa correta precisa estar entre as opções enviadas.'], 400);
     }

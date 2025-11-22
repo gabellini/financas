@@ -18,6 +18,16 @@ let cachedName = localStorage.getItem(nameKey) || '';
 let nameLocked = Boolean(cachedName);
 let currentQuestionId = null;
 let alreadyAnswered = false;
+let currentOptions = [];
+
+function shuffleOptions(options) {
+  const mapped = options.map((text, index) => ({ text, index }));
+  for (let i = mapped.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [mapped[i], mapped[j]] = [mapped[j], mapped[i]];
+  }
+  return mapped;
+}
 
 function setFeedback(message, success = true) {
   elements.registerFeedback.textContent = message;
@@ -80,12 +90,13 @@ function showWaitingState() {
 
 function renderOptions(question) {
   elements.optionsList.innerHTML = '';
-  question.options.forEach((option, index) => {
+  currentOptions = shuffleOptions(question.options);
+  currentOptions.forEach((option, displayIndex) => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'option-btn w-full text-left text-base';
-    button.innerHTML = `<span class="font-semibold text-slate-300 mr-2">${String.fromCharCode(65 + index)}.</span>${option}`;
-    button.addEventListener('click', () => submitAnswer(index));
+    button.innerHTML = `<span class="font-semibold text-slate-300 mr-2">${String.fromCharCode(65 + displayIndex)}.</span>${option.text}`;
+    button.addEventListener('click', () => submitAnswer(option.index));
     elements.optionsList.appendChild(button);
   });
 }
